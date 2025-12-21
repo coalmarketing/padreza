@@ -1,45 +1,55 @@
 (() => {
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __commonJS = (cb, mod) => function __require() {
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  };
+
   // src/assets/js/form.js
-  var form1 = document.getElementById("form-1");
-  var form2 = document.getElementById("form-2");
-  if (form1) {
-    form1.addEventListener("submit", (e) => {
-      e.preventDefault();
-      if (!form1.checkValidity()) {
-        form1.reportValidity();
-        return;
-      }
-      const data = Object.fromEntries(new FormData(form1));
-      localStorage.setItem("form1", JSON.stringify(data));
-      window.location.href = "/poptavka/";
-    });
-  } else if (form2) {
-    const data1 = JSON.parse(localStorage.getItem("form1"));
-    if (!data1) window.location.href = "/#objednavka";
-    Object.entries(data1).forEach(([key, value]) => {
-      const input = form2.querySelector(`input[name="${key}"]`);
-      if (input) input.value = value;
-    });
-    const submitBtn = form2.querySelector('button[type="submit"]');
-    const originalBtnText = submitBtn.innerHTML;
-    form2.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      if (form2.dataset.sending === "true") return;
-      form2.dataset.sending = "true";
-      const formData = new FormData(form2);
-      const data = Object.fromEntries(formData.entries());
-      try {
-        await fetch("/.netlify/functions/submit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
+  var require_form = __commonJS({
+    "src/assets/js/form.js"(exports) {
+      var form1 = document.getElementById("form-1");
+      var form2 = document.getElementById("form-2");
+      if (form1) {
+        form1.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (!form1.checkValidity()) {
+            form1.reportValidity();
+            return;
+          }
+          const data = Object.fromEntries(new FormData(form1));
+          localStorage.setItem("form1", JSON.stringify(data));
+          window.location.href = "/poptavka/";
         });
-      } catch (err) {
-        console.error("Chyba submit.js:", err);
+      } else if (form2) {
+        const data1 = JSON.parse(localStorage.getItem("form1"));
+        if (!data1) window.location.href = "/#objednavka";
+        Object.entries(data1).forEach(([key, value]) => {
+          const input = form2.querySelector(`input[name="${key}"]`);
+          if (input) input.value = value;
+        });
+        const submitBtn = form2.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.innerHTML;
+        form2.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (form2.dataset.sending === "true") return;
+          form2.dataset.sending = "true";
+          const formData = new FormData(form2);
+          const data = Object.fromEntries(formData.entries());
+          try {
+            await fetch("/.netlify/functions/submit", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data)
+            });
+          } catch (err) {
+            console.error("Chyba submit.js:", err);
+          }
+          form2.removeEventListener("submit", exports);
+          form2.submit();
+        });
       }
-      form2.removeEventListener("submit", handleSubmit);
-      form2.submit();
-    });
-  }
+    }
+  });
+  require_form();
 })();
 //# sourceMappingURL=form.js.map

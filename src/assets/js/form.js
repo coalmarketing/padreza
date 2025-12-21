@@ -48,7 +48,7 @@ else if (form2) {
             console.error("Chyba submit.js:", err);
         }
 
-        form2.removeEventListener("submit", handleSubmit);
+        form2.removeEventListener("submit", this);
         form2.submit(); // klasický submit -> Netlify Forms zachytí data
     });
 
