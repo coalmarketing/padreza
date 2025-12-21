@@ -1,1 +1,58 @@
-(()=>{var b=(o,e)=>()=>(e||o((e={exports:{}}).exports,e),e.exports);var m=(o,e,i)=>new Promise((s,a)=>{var t=r=>{try{c(i.next(r))}catch(f){a(f)}},l=r=>{try{c(i.throw(r))}catch(f){a(f)}},c=r=>r.done?s(r.value):Promise.resolve(r.value).then(t,l);c((i=i.apply(o,e)).next())});var p=b(u=>{var d=document.getElementById("form-1"),n=document.getElementById("form-2");if(d)d.addEventListener("submit",o=>{if(o.preventDefault(),!d.checkValidity()){d.reportValidity();return}let e=Object.fromEntries(new FormData(d));localStorage.setItem("form1",JSON.stringify(e)),window.location.href="/poptavka/"});else if(n){let o=JSON.parse(localStorage.getItem("form1"));o||(window.location.href="/#objednavka"),Object.entries(o).forEach(([s,a])=>{let t=n.querySelector(`input[name="${s}"]`);t&&(t.value=a)});let e=n.querySelector('button[type="submit"]'),i=e.innerHTML;n.addEventListener("submit",s=>m(null,null,function*(){if(s.preventDefault(),n.dataset.sending==="true")return;n.dataset.sending="true",e.disabled=!0,e.innerHTML="Odes\xEDl\xE1m\u2026",[...n.elements].forEach(t=>t.disabled=!0);let a=new FormData(n);try{yield fetch("/",{method:"POST",body:a});let t=Object.fromEntries(a.entries());console.log("Data pro submit.js:",t),yield fetch("/.netlify/functions/submit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(t)}),localStorage.removeItem("form1"),window.location.href="/poptavka-odeslana/"}catch(t){console.error(t),n.dataset.sending="false",e.disabled=!1,e.innerHTML=i,[...n.elements].forEach(l=>l.disabled=!1),alert("Odesl\xE1n\xED se nezda\u0159ilo, zkuste to pros\xEDm znovu.")}}))}});p();})();
+(() => {
+  // src/assets/js/form.js
+  var form1 = document.getElementById("form-1");
+  var form2 = document.getElementById("form-2");
+  if (form1) {
+    form1.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!form1.checkValidity()) {
+        form1.reportValidity();
+        return;
+      }
+      const data = Object.fromEntries(new FormData(form1));
+      localStorage.setItem("form1", JSON.stringify(data));
+      window.location.href = "/poptavka/";
+    });
+  } else if (form2) {
+    const data1 = JSON.parse(localStorage.getItem("form1"));
+    if (!data1) window.location.href = "/#objednavka";
+    Object.entries(data1).forEach(([key, value]) => {
+      const input = form2.querySelector(`input[name="${key}"]`);
+      if (input) input.value = value;
+    });
+    const submitBtn = form2.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerHTML;
+    form2.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (form2.dataset.sending === "true") return;
+      form2.dataset.sending = "true";
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = "Odes\xEDl\xE1m\u2026";
+      [...form2.elements].forEach((el) => el.disabled = true);
+      const formData = new FormData(form2);
+      try {
+        await fetch("/", {
+          method: "POST",
+          body: formData
+        });
+        const data = Object.fromEntries(formData.entries());
+        console.log("Data pro submit.js:", data);
+        await fetch("/.netlify/functions/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+        localStorage.removeItem("form1");
+        window.location.href = "/poptavka-odeslana/";
+      } catch (err) {
+        console.error(err);
+        form2.dataset.sending = "false";
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+        [...form2.elements].forEach((el) => el.disabled = false);
+        alert("Odesl\xE1n\xED se nezda\u0159ilo, zkuste to pros\xEDm znovu.");
+      }
+    });
+  }
+})();
+//# sourceMappingURL=form.js.map
