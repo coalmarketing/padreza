@@ -1,0 +1,350 @@
+<!-- A fully fleshed-out <head>, dynamically changing based on client.json and the page front matter -->
+
+<!DOCTYPE html>
+<html lang="cs" class="scroll-smooth">
+  <head>
+    <!-- Standard meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="V Senoweb se specializujeme na tvorbu webových stránek na míru. Nepoužíváme koupené šablony, nástroje pro automatizované budování webů ani nástroje, které by váš web zahlcovali zbytečným kódem a tím vaší stránku zpomalovaly." />
+    <meta name="generator" content="Eleventy v3.1.2" />
+    <link rel="canonical" href="https://www.padreza.cz/sluzby/" />
+
+    <!-- Social Media Display -->
+    <meta property="og:title" content="Služby" />
+    <meta property="og:description" content="V Senoweb se specializujeme na tvorbu webových stránek na míru. Nepoužíváme koupené šablony, nástroje pro automatizované budování webů ani nástroje, které by váš web zahlcovali zbytečným kódem a tím vaší stránku zpomalovaly." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.padreza.cz/sluzby/" />
+    <meta property="og:image" content="/assets/images/og-logo.png"/> <meta property="og:image:secure_url" content="/assets/images/og-logo.png"/>
+    <meta property="og:locale" content="cs_CZ" />
+
+    <!-- Favicons -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/favicons/favicon-96x96.png"
+      sizes="96x96"
+    />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicons/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/favicons/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/favicons/apple-touch-icon.png"
+    />
+    <meta name="apple-mobile-web-app-title" content="Padřeza" />
+    <link rel="manifest" href="/assets/favicons/site.webmanifest" />
+
+    <!-- Preloads -->
+    <link rel="preload" as="image" href="/assets/svgs/Padreza_logo.svg" />
+
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/TitilliumWeb-Light.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/TitilliumWeb-Regular.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/TitilliumWeb-SemiBold.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/TitilliumWeb-Bold.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/TitilliumWeb-Black.woff2"
+      crossorigin
+    />
+
+    <!-- Sitewide Stylesheets and Scripts -->
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <script defer src="/assets/js/nav.js"></script>
+    <script defer src="/assets/js/cards.js"></script>
+
+    
+
+    <title>Služby | Padřeza</title>
+  </head>
+
+  <body
+    class="group/body interior"
+  >
+    <!-- Screen reader skip main nav -->
+    <a
+      class="sr-only"
+      aria-label="Kliknutím přeskočíte na hlavní obsah"
+      href="#main"
+      >Kliknutím přeskočíte na hlavní obsah</a
+    >
+
+    <header class="hidden py-4 ~px-4/8 fixed flex w-full bg-black/50 z-50">
+  <div class="container m-auto flex justify-between items-center gap-8">
+    <!-- LOGO -->
+    <a href="/">
+      <img
+        class="~h-5/6 w-auto"
+        src="/assets/svgs/senoweb-logo-white.svg"
+        alt="Senoweb logo"
+        width="170"
+        height="24"
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
+        draggable="false">
+    </a>
+
+    <!-- NAVIGATION -->
+    <nav class="max-lg:hidden max-lg:group-[.mobile-menu]/body:block max-lg:absolute max-lg:top-[calc(100%+0.5rem)] max-lg:left-1/2 max-lg:-translate-x-1/2
+      max-lg:w-[calc(100vw-2rem)] max-lg:p-4 max-lg:bg-black max-lg:rounded-lg">
+      <ul class="flex max-lg:flex-col ~gap-2/8">
+        
+
+        
+        
+
+          
+          
+
+          <li
+            class="group/li inline-flex ">
+
+            
+            
+              
+              <a
+                class="w-full ~p-1.5/4 whitespace-nowrap transition-colors duration-300 max-lg:pl-4 max-lg:border-l-4 max-lg:rounded-r-md text-gray-200 hover:text-white"
+                href="/o-nas/">
+                O nás
+              </a>
+            
+          </li>
+        
+
+          
+          
+
+          <li
+            class="group/li inline-flex ">
+
+            
+            
+              
+              <a
+                class="w-full ~p-1.5/4 whitespace-nowrap transition-colors duration-300 max-lg:pl-4 max-lg:border-l-4 max-lg:rounded-r-md text-primary font-semibold max-lg:border-l-primary max-lg:bg-primary/10"
+                href="/sluzby/"aria-current="page">
+                Služby
+              </a>
+            
+          </li>
+        
+
+          
+          
+
+          <li
+            class="group/li inline-flex ">
+
+            
+            
+              
+              <a
+                class="w-full ~p-1.5/4 whitespace-nowrap transition-colors duration-300 max-lg:pl-4 max-lg:border-l-4 max-lg:rounded-r-md text-gray-200 hover:text-white"
+                href="/kontakt/">
+                Kontakt
+              </a>
+            
+          </li>
+        
+      </ul>
+    </nav>
+
+    <!-- DARKMODE + CTA -->
+    <div class="flex items-center gap-2 lg:gap-4">
+      <!-- DARKMODE BUTTON -->
+      <label for="dark-mode-toggle" class="darkmode-container">
+        <span class="sr-only">Přepínač tmavého režimu</span>
+        <input id="dark-mode-toggle" type="checkbox">
+        <span class="planet"></span>
+        <span class="elements">
+          <svg
+            version="1.1"
+            viewBox="0 0 500 500"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon points="250,60 100,400 400,400"/>
+          </svg>
+          <svg
+            version="1.1"
+            viewBox="0 0 500 500"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon points="250,60 100,400 400,400"/>
+          </svg>
+          <svg
+            version="1.1"
+            viewBox="0 0 500 500"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon points="250,60 100,400 400,400"/>
+          </svg>
+          <svg
+            version="1.1"
+            viewBox="0 0 500 500"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon points="250,60 100,400 400,400"/>
+          </svg>
+          <svg
+            version="1.1"
+            viewBox="0 0 500 500"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon points="250,60 100,400 400,400"/>
+          </svg>
+          <svg
+            version="1.1"
+            viewBox="0 0 500 500"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon points="250,60 100,400 400,400"/>
+          </svg>
+          <svg
+            version="1.1"
+            viewBox="0 0 500 500"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon points="250,60 100,400 400,400"/>
+          </svg>
+          <svg
+            version="1.1"
+            viewBox="0 0 500 500"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon points="250,60 100,400 400,400"/>
+          </svg>
+          <svg
+            version="1.1"
+            viewBox="0 0 500 500"
+            xmlns="http://www.w3.org/2000/svg">
+            <circle
+            cx="250"
+            cy="250"
+            r="200"/>
+          </svg>
+          <svg
+            version="1.1"
+            viewBox="0 0 500 500"
+            xmlns="http://www.w3.org/2000/svg">
+            <circle
+            cx="250"
+            cy="250"
+            r="200"/>
+          </svg>
+          <svg
+            version="1.1"
+            viewBox="0 0 500 500"
+            xmlns="http://www.w3.org/2000/svg">
+            <circle
+            cx="250"
+            cy="250"
+            r="200"/>
+          </svg>
+        </span>
+      </label>
+
+      <!-- CTA -->
+      <a href="/kontakt" class="btn max-lg:hidden">Kontakt</a>
+
+      <!-- MOBILE MENU BUTTON -->
+      <button
+        id="mobile-menu-toggle"
+        class="group lg:hidden flex justify-center items-center gap-1 h-11 w-11 bg-secondary rounded-xl transition-transform duration-300 [&.active]:rotate-90"
+        type="button"
+        aria-expanded="false"
+      >
+        <span class="sr-only">Otevřít navigaci</span>
+        <span class="relative block h-3.5 w-5">
+          <span class="absolute top-0 block h-0.5 w-full bg-white rounded-full transition-transform duration-300 group-[.active]:rotate-45 group-[.active]:top-1/2 group-[.active]:-translate-y-1/2 group-[.active]:left-1/2 group-[.active]:-translate-x-1/2"></span>
+          <span class="absolute top-1/2 -translate-y-1/2 block h-0.5 w-full bg-white rounded-full transition-[opacity] duration-300 group-[.active]:opacity-0"></span>
+          <span class="absolute bottom-0 block h-0.5 w-full bg-white rounded-full transition-transform duration-300 group-[.active]:rotate-[315deg] group-[.active]:top-1/2 group-[.active]:-translate-y-1/2 group-[.active]:left-1/2 group-[.active]:-translate-x-1/2"></span>
+        </span>
+      </button>
+    </div>
+  </div>
+</header>
+    <main id="main" class="bg-background text-primary text-lg">
+      
+    <!-- LANDING -->
+<section class="relative ~px-4/8 pt-60 pb-16 z-10">
+  <div class="container m-auto flex flex-col items-start gap-8">
+    <!-- HEADING -->
+    <h1 class="text-center text-4xl"></h1>
+
+    <!-- BREADCRUMBS -->
+    <ul class="flex flex-wrap justify-center items-center ~gap-2/4">
+      
+    </ul>
+  </div>
+</section>
+
+    <!-- SERVICES -->
+    <section class="~py-16/24 ~px-4/8">
+        <div class="container m-auto"></div>
+    </section>
+
+    <section class="~py-16/24 ~px-4/8">
+    <div class="container m-auto"></div>
+</section>
+
+    </main>
+    <footer class="bg-black p-0 text-white">
+  <div class="m-auto flex plc prc max-md:px-8">
+    <div class="flex-auto py-3">
+      <img
+        alt="copyright icon"
+        decoding="async"
+        height="20"
+        loading="eager"
+        src="/assets/svgs/copyright-light.svg"
+        width="20"
+        class="inline-block"
+      />
+      copyright 2025
+    </div>
+    <div class="flex-right py-3">
+      <a href="https://matfix.cz" target="_blank" title="Matfix"
+        ><img
+          alt="matfix icon"
+          decoding="async"
+          height="15"
+          loading="eager"
+          src="/assets/svgs/matfix_test_black.svg"
+          width="58"
+          class="inline-block"
+      /></a>
+      <img
+        alt="footer icon"
+        decoding="async"
+        height="20"
+        loading="eager"
+        src="/assets/svgs/tvorba_paticka.svg"
+        width="20"
+        class="inline-block"
+      />
+    </div>
+  </div>
+</footer>
+ 
+  </body>
+</html>

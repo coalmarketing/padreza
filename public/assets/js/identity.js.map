@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/assets/js/identity.js"],
+  "sourcesContent": ["if (window.netlifyIdentity) {\n    window\n      .netlifyIdentity\n      .on('init', (user) => {\n        if (!user) {\n          window\n            .netlifyIdentity\n            .on('login', () => {\n                document.location.href = '/admin/';\n            });\n        }\n    });\n\n    window\n      .netlifyIdentity\n      .on('logout', () => {\n          document.location.href = '/admin/';\n      });\n    \n    window.netlifyIdentity.setLocale('cs');\n}"],
+  "mappings": ";;AAAA,MAAI,OAAO,iBAAiB;AACxB,WACG,gBACA,GAAG,QAAQ,CAAC,SAAS;AACpB,UAAI,CAAC,MAAM;AACT,eACG,gBACA,GAAG,SAAS,MAAM;AACf,mBAAS,SAAS,OAAO;AAAA,QAC7B,CAAC;AAAA,MACL;AAAA,IACJ,CAAC;AAED,WACG,gBACA,GAAG,UAAU,MAAM;AAChB,eAAS,SAAS,OAAO;AAAA,IAC7B,CAAC;AAEH,WAAO,gBAAgB,UAAU,IAAI;AAAA,EACzC;",
+  "names": []
+}

@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /gdpr/
+Allow: /
+
+Sitemap: https://www.padreza.cz/sitemap.xml

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/assets/js/cards.js"],
+  "sourcesContent": ["\nconst cards = document.querySelectorAll('.card');\nconst infos = document.querySelectorAll('.info');\n\ncards.forEach(card => {\n    card.addEventListener('click', () => {\n        const key = card.dataset.key;\n        const info = document.querySelector(`.info[data-key=\"${key}\"]`);\n\n        const isActive = card.classList.contains('active');\n\n        // reset v\u0161eho\n        cards.forEach(c => c.classList.remove('active'));\n        infos.forEach(i => i.classList.remove('active'));\n\n        // pokud nebyla aktivn\u00ED, aktivuj\n        if (!isActive) {\n            card.classList.add('active');\n            info.classList.add('active');\n        }\n    });\n});\n"],
+  "mappings": ";;AACA,MAAM,QAAQ,SAAS,iBAAiB,OAAO;AAC/C,MAAM,QAAQ,SAAS,iBAAiB,OAAO;AAE/C,QAAM,QAAQ,UAAQ;AAClB,SAAK,iBAAiB,SAAS,MAAM;AACjC,YAAM,MAAM,KAAK,QAAQ;AACzB,YAAM,OAAO,SAAS,cAAc,mBAAmB,GAAG,IAAI;AAE9D,YAAM,WAAW,KAAK,UAAU,SAAS,QAAQ;AAGjD,YAAM,QAAQ,OAAK,EAAE,UAAU,OAAO,QAAQ,CAAC;AAC/C,YAAM,QAAQ,OAAK,EAAE,UAAU,OAAO,QAAQ,CAAC;AAG/C,UAAI,CAAC,UAAU;AACX,aAAK,UAAU,IAAI,QAAQ;AAC3B,aAAK,UAAU,IAAI,QAAQ;AAAA,MAC/B;AAAA,IACJ,CAAC;AAAA,EACL,CAAC;",
+  "names": []
+}

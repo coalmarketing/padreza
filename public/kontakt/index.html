@@ -1,0 +1,262 @@
+<!-- A fully fleshed-out <head>, dynamically changing based on client.json and the page front matter -->
+
+<!DOCTYPE html>
+<html lang="cs" class="scroll-smooth">
+  <head>
+    <!-- Standard meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="V Senoweb se specializujeme na tvorbu webových stránek na míru. Nepoužíváme koupené šablony, nástroje pro automatizované budování webů ani nástroje, které by váš web zahlcovali zbytečným kódem a tím vaší stránku zpomalovaly." />
+    <meta name="generator" content="Eleventy v3.1.2" />
+    <link rel="canonical" href="https://www.padreza.cz/kontakt/" />
+
+    <!-- Social Media Display -->
+    <meta property="og:title" content="Kontakt" />
+    <meta property="og:description" content="V Senoweb se specializujeme na tvorbu webových stránek na míru. Nepoužíváme koupené šablony, nástroje pro automatizované budování webů ani nástroje, které by váš web zahlcovali zbytečným kódem a tím vaší stránku zpomalovaly." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.padreza.cz/kontakt/" />
+    <meta property="og:image" content="/assets/images/og-logo.png"/> <meta property="og:image:secure_url" content="/assets/images/og-logo.png"/>
+    <meta property="og:locale" content="cs_CZ" />
+
+    <!-- Favicons -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/favicons/favicon-96x96.png"
+      sizes="96x96"
+    />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicons/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/favicons/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/favicons/apple-touch-icon.png"
+    />
+    <meta name="apple-mobile-web-app-title" content="Padřeza" />
+    <link rel="manifest" href="/assets/favicons/site.webmanifest" />
+
+    <!-- Preloads -->
+    <link rel="preload" as="image" href="/assets/svgs/Padreza_logo.svg" />
+
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/TitilliumWeb-Light.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/TitilliumWeb-Regular.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/TitilliumWeb-SemiBold.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/TitilliumWeb-Bold.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/fonts/TitilliumWeb-Black.woff2"
+      crossorigin
+    />
+
+    <!-- Sitewide Stylesheets and Scripts -->
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <script defer src="/assets/js/nav.js"></script>
+    <script defer src="/assets/js/cards.js"></script>
+    <script defer src="/assets/js/form.js"></script>
+
+    
+
+    <title>Kontakt | Padřeza</title>
+  </head>
+
+  <body
+    class="group/body interior"
+  >
+    <!-- Screen reader skip main nav -->
+    <a
+      class="sr-only"
+      aria-label="Kliknutím přeskočíte na hlavní obsah"
+      href="#main"
+      >Kliknutím přeskočíte na hlavní obsah</a
+    >
+
+    <header
+  class="fixed z-50 top-0 left-0 w-full text-xl print:hidden underline-offset-4"
+>
+  <!-- MENU TOGGLE -->
+  <div class="z-20 fixed m-auto absolute right-[7%] lg:right-[14%]">
+    <button
+      id="toggle-menu"
+      class="absolute w-10 h-10 right-5 top-14"
+      aria-label="Menu"
+      aria-expanded="false"
+    >
+      <img
+        id="menu-open"
+        class="w-12 h-12"
+        src="/assets/svgs/Menu_icon.svg"
+        alt="Otevřít menu"
+      />
+      <img
+        id="menu-close"
+        class="w-12 h-12 hidden"
+        src="/assets/svgs/Close_icon.svg"
+        alt="Zavřít menu"
+      />
+    </button>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav
+    id="main-nav"
+    class="bg-background text-primary shadow-lg transition-transform duration-300 ease-in-out -translate-y-full"
+  >
+    <div class="prc2 plc2 lg:plc2 lg:prc2">
+      <ul
+        class="z-10 flex w-full flex-col lg:flex-row gap-6 lg:gap-2 py-40 pr-24 lg:items-center lg:justify-between lg:py-16 xl:pr-48"
+      >
+        <li><a href="/#" class="block">Úvod</a></li>
+        <li><a href="/#sluzby" class="block">Služby</a></li>
+        <li>
+          <a href="/assets/files/cenik.pdf" target="_blank" class="block">
+            Orientační ceník
+          </a>
+        </li>
+        <li><a href="/#objednavka" class="block">Nezávazná objednávka</a></li>
+        <li><a href="/#o-nas" class="block">O nás</a></li>
+        <li><a href="/#kontakt" class="block">Kontakt</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const toggleBtn = document.getElementById("toggle-menu");
+  const nav = document.getElementById("main-nav");
+  const iconOpen = document.getElementById("menu-open");
+  const iconClose = document.getElementById("menu-close");
+
+  let isOpen = false;
+
+  function openMenu() {
+    isOpen = true;
+    nav.classList.remove("-translate-y-full");
+    nav.classList.add("translate-y-0");
+
+    iconOpen.classList.add("hidden");
+    iconClose.classList.remove("hidden");
+
+    toggleBtn.setAttribute("aria-expanded", "true");
+  }
+
+  function closeMenu() {
+    isOpen = false;
+    nav.classList.add("-translate-y-full");
+    nav.classList.remove("translate-y-0");
+
+    iconOpen.classList.remove("hidden");
+    iconClose.classList.add("hidden");
+
+    toggleBtn.setAttribute("aria-expanded", "false");
+  }
+
+  toggleBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // zabrání zavření hned po kliknutí
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  /* 👉 klik mimo menu */
+  document.addEventListener("click", (e) => {
+    if (!isOpen) return;
+
+    if (!nav.contains(e.target) && !toggleBtn.contains(e.target)) {
+      closeMenu();
+    }
+  });
+
+  /* 👉 klik na položku menu */
+  nav.addEventListener("click", (e) => {
+    if (e.target.closest("a")) {
+      closeMenu();
+    }
+  });
+</script>
+
+    <main id="main" class="bg-background text-primary text-lg">
+      
+    <!-- LANDING -->
+<section class="relative ~px-4/8 pt-60 pb-16 z-10">
+  <div class="container m-auto flex flex-col items-start gap-8">
+    <!-- HEADING -->
+    <h1 class="text-center text-4xl"></h1>
+
+    <!-- BREADCRUMBS -->
+    <ul class="flex flex-wrap justify-center items-center ~gap-2/4">
+      
+    </ul>
+  </div>
+</section>
+
+    <!-- CONTACT -->
+    <section class="~py-16/24 ~px-4/8">
+        <div class="container m-auto"></div>
+    </section>
+
+    </main>
+    <footer class="bg-black p-0 text-white">
+  <div class="m-auto flex plc prc max-md:px-8">
+    <div class="flex-auto py-3">
+      <img
+        alt="copyright icon"
+        decoding="async"
+        height="20"
+        loading="eager"
+        src="/assets/svgs/copyright-light.svg"
+        width="20"
+        class="inline-block"
+      />
+      copyright 2025
+    </div>
+    <div class="flex-right py-3">
+      <a href="https://matfix.cz" target="_blank" title="Matfix"
+        ><img
+          alt="matfix icon"
+          decoding="async"
+          height="15"
+          loading="eager"
+          src="/assets/svgs/matfix_test_black.svg"
+          width="58"
+          class="inline-block"
+      /></a>
+      <img
+        alt="footer icon"
+        decoding="async"
+        height="20"
+        loading="eager"
+        src="/assets/svgs/tvorba_paticka.svg"
+        width="20"
+        class="inline-block"
+      />
+    </div>
+  </div>
+</footer>
+ 
+  </body>
+</html>
