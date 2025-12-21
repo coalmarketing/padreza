@@ -17,28 +17,8 @@
         </url>
     
         <url>
-            <loc>https://www.padreza.cz/content/i18n/cs/poptavky/testcz/</loc>
-            <lastmod>2025-12-21T16:29:39.198Z</lastmod>
-        </url>
-    
-        <url>
             <loc>https://www.padreza.cz/content/poptavky/testroot/</loc>
             <lastmod>2025-12-21T16:29:51.398Z</lastmod>
-        </url>
-    
-        <url>
-            <loc>https://www.padreza.cz/content/i18n/cs/poptavky/2025-12-21_19-47-10/</loc>
-            <lastmod>2025-12-21T19:47:10.326Z</lastmod>
-        </url>
-    
-        <url>
-            <loc>https://www.padreza.cz/content/i18n/cs/poptavky/2025-12-21_20-27-33/</loc>
-            <lastmod>2025-12-21T20:27:33.347Z</lastmod>
-        </url>
-    
-        <url>
-            <loc>https://www.padreza.cz/content/i18n/cs/poptavky/2025-12-21_20-35-28/</loc>
-            <lastmod>2025-12-21T20:35:28.232Z</lastmod>
         </url>
     
         <url>
@@ -59,6 +39,11 @@
         <url>
             <loc>https://www.padreza.cz/content/i18n/cs/poptavky/2025-12-21_21-12-46/</loc>
             <lastmod>2025-12-21T21:12:46.965Z</lastmod>
+        </url>
+    
+        <url>
+            <loc>https://www.padreza.cz/content/i18n/cs/poptavky/2025-12-21_21-14-55/</loc>
+            <lastmod>2025-12-21T21:14:55.464Z</lastmod>
         </url>
     
 </urlset>
