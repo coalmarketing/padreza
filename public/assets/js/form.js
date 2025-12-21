@@ -28,27 +28,16 @@
       form2.dataset.sending = "true";
       const formData = new FormData(form2);
       const data = Object.fromEntries(formData.entries());
-      console.log("Data pro submit.js:", data);
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = "Odes\xEDl\xE1m\u2026";
-      [...form2.elements].forEach((el) => el.disabled = true);
       try {
-        await fetch("/", { method: "POST", body: formData });
         await fetch("/.netlify/functions/submit", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data)
         });
-        localStorage.removeItem("form1");
-        window.location.href = "/poptavka-odeslana/";
       } catch (err) {
-        console.error(err);
-        form2.dataset.sending = "false";
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
-        [...form2.elements].forEach((el) => el.disabled = false);
-        alert("Odesl\xE1n\xED se nezda\u0159ilo, zkuste to pros\xEDm znovu.");
+        console.error("Chyba submit.js:", err);
       }
+      form2.submit();
     });
   }
 })();

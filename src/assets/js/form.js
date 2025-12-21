@@ -30,41 +30,26 @@ else if (form2) {
 
     form2.addEventListener("submit", async (e) => {
         e.preventDefault();
-        if (form2.dataset.sending === "true") return;
 
+        if (form2.dataset.sending === "true") return;
         form2.dataset.sending = "true";
 
-        // 1️⃣ vytvoření FormData před deaktivací
         const formData = new FormData(form2);
         const data = Object.fromEntries(formData.entries());
-        console.log("Data pro submit.js:", data);
 
-        // 2️⃣ UI stav – deaktivace tlačítka
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = "Odesílám…";
-
-        [...form2.elements].forEach(el => el.disabled = true);
-
+        // 1️⃣ Volání serverless funkce
         try {
-            // odeslání Netlify Forms
-            await fetch("/", { method: "POST", body: formData });
-
-            // volání serverless funkce
             await fetch("/.netlify/functions/submit", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
             });
-
-            localStorage.removeItem("form1");
-            window.location.href = "/poptavka-odeslana/";
         } catch (err) {
-            console.error(err);
-            form2.dataset.sending = "false";
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = originalBtnText;
-            [...form2.elements].forEach(el => (el.disabled = false));
-            alert("Odeslání se nezdařilo, zkuste to prosím znovu.");
+            console.error("Chyba submit.js:", err);
         }
+
+        // 2️⃣ Odeslání do Netlify Forms
+        form2.submit(); // klasický submit -> Netlify Forms zachytí data
     });
+
 }
