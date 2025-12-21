@@ -50,11 +50,11 @@ else if (form2) {
             const data = Object.fromEntries(formData.entries());
 
             // 3️⃣ Volání funkce submit.js, která vytvoří .md
-            await fetch("/.netlify/functions/submit", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-            });
+            // await fetch("/.netlify/functions/submit", {
+            //     method: "POST",
+            //     headers: { "Content-Type": "application/json" },
+            //     body: JSON.stringify(data),
+            // });
 
             // 4️⃣ Úspěch – smažeme localStorage a přesměrujeme
             localStorage.removeItem("form1");
