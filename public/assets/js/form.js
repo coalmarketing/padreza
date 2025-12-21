@@ -36,6 +36,11 @@
           body: formData
         });
         const data = Object.fromEntries(formData.entries());
+        await fetch("/.netlify/functions/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
         localStorage.removeItem("form1");
         window.location.href = "/poptavka-odeslana/";
       } catch (err) {
