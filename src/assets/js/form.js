@@ -1,8 +1,7 @@
 const form1 = document.getElementById("form-1");
 const form2 = document.getElementById("form-2");
-const data1 = JSON.parse(localStorage.getItem("form1"));
 
-if (typeof form1 !== "undefined" && form1 !== null) {
+if (form1) {
     form1.addEventListener("submit", (e) => {
         e.preventDefault(); // ❗ nezobrazuje se submit
 
@@ -12,15 +11,16 @@ if (typeof form1 !== "undefined" && form1 !== null) {
             return;
         }
         // sesbírá data z formuláře
-        const data1 = Object.fromEntries(new FormData(form1));
+        const data = Object.fromEntries(new FormData(form1));
         // uloží do prohlížeče
-        localStorage.setItem("form1", JSON.stringify(data1));
+        localStorage.setItem("form1", JSON.stringify(data));
         // přechod na krok 2
         window.location.href = "/poptavka/";
     });
 }
-else if (typeof form2 !== "undefined" && form2 !== null) {
-    // if (!data1) window.location.href = "/#objednavka"; // když někdo přeskočí krok 1 tak ho přesměruj
+else if (form2) {
+    const data1 = JSON.parse(localStorage.getItem("form1"));
+    if (!data1) window.location.href = "/#objednavka"; // když někdo přeskočí krok 1 tak ho přesměruj
 
     const submitBtn = form2.querySelector('button[type="submit"]');
     const originalBtnText = submitBtn.innerHTML;
