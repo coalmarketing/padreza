@@ -50,10 +50,12 @@ else if (form2) {
                 body: JSON.stringify(data),
             });
 
-            // 2️⃣ povolíme klasický submit
-            form2.dataset.sending = "done";
+            // 2️⃣ po úspěchu přesměruj RUČNĚ
+            localStorage.removeItem("form1");
+            window.location.href = "/poptavka-odeslana/";
 
-            // 3️⃣ ruční submit → Netlify Forms ho normálně zpracuje
+            // 3️⃣ a mezitím FORM submit (na pozadí)
+            form2.dataset.sending = "done";
             form2.submit();
 
         } catch (err) {

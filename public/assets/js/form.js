@@ -37,6 +37,8 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data)
         });
+        localStorage.removeItem("form1");
+        window.location.href = "/poptavka-odeslana/";
         form2.dataset.sending = "done";
         form2.submit();
       } catch (err) {
