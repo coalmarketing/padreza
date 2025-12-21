@@ -37,7 +37,7 @@ else if (form2) {
         const formData = new FormData(form2);
         const data = Object.fromEntries(formData.entries());
 
-        // 1️⃣ Volání serverless funkce
+        // Volání serverless funkce která vytvoří MD soubor v repozitáři
         try {
             await fetch("/.netlify/functions/submit", {
                 method: "POST",
@@ -48,9 +48,8 @@ else if (form2) {
             console.error("Chyba submit.js:", err);
         }
 
-        // 2️⃣ Odeslání do Netlify Forms
+        form2.removeEventListener("submit", handleSubmit);
         form2.submit(); // klasický submit -> Netlify Forms zachytí data
-        window.location.href = "/poptavka-odeslana/";
     });
 
 }
