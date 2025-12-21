@@ -36,6 +36,7 @@
           body: formData
         });
         const data = Object.fromEntries(formData.entries());
+        console.log("Data pro submit.js:", data);
         await fetch("/.netlify/functions/submit", {
           method: "POST",
           headers: { "Content-Type": "application/json" },

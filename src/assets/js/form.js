@@ -49,6 +49,8 @@ else if (form2) {
             // 2️⃣ Převod formuláře na JSON pro Netlify Function
             const data = Object.fromEntries(formData.entries());
 
+            console.log("Data pro submit.js:", data);
+
             // 3️⃣ Volání funkce submit.js, která vytvoří .md
             await fetch("/.netlify/functions/submit", {
                 method: "POST",
