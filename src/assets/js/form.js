@@ -34,48 +34,14 @@ else if (form2) {
     const originalBtnText = submitBtn.innerHTML;
 
     form2.addEventListener("submit", (e) => {
-        e.preventDefault();
-
         // zabrání opakovanému submitu
         if (form2.dataset.sending === "true") return;
-
-        // HTML5 validace
-        if (!form2.checkValidity()) {
-            form2.reportValidity();
-            return;
-        }
-
-        form2.dataset.sending = "true";
-
         // UI stav – odesílání
         submitBtn.disabled = true;
         submitBtn.innerHTML = "Odesílám…";
-
         // deaktivuj všechny inputy
         [...form2.elements].forEach(el => el.disabled = true);
-
         // zabránit duplicitnímu submitu
-        if (form2.dataset.sending === "true") return;
-        form2.dataset.sending = "true";
-
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = "Odesílám…";
-
-        // data z kroku 2
-        const data2 = Object.fromEntries(new FormData(form2));
-
-        // sloučení s krokem 1
-        const data = { ...data1, ...data2 };
-
-        const formData = new FormData();
-        formData.append("form-name", "objednavka");
-
-        Object.entries(data).forEach(([key, value]) => {
-            formData.append(key, value);
-        });
-
-        // nativní submit, obchází listener aby ho neblokoval
-        HTMLFormElement.prototype.submit.call(form2);
     });
 
 
