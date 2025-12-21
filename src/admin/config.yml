@@ -2,8 +2,6 @@ backend:
   name: git-gateway
   branch: main
 
-local_backend: true
-
 # Change url to a link to the image you want to use, no file paths, must be a URL
 logo:
   src: "https://www.senoweb.cz/assets/images/senoweb_og_logo_rounded.png"
@@ -18,44 +16,25 @@ media_folder: "src/assets/images/cms"
 public_folder: "/assets/images/cms"
 
 collections:
-  # BLOG CONFIG
-  - label: "Blog"
-    name: "blog"
-    folder: "src/content/cms/blog"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}_{{slug}}"
+  - name: "poptavky"
+    label: "Poptávky"
+    folder: "src/content/i18n/cs/poptavky"
+    create: false
+    delete: true
+    editor:
+      preview: false
     fields:
-      - { label: "Název", name: "title", widget: "string" }
-      - {
-          label: "URL odkaz",
-          name: "url",
-          widget: "string",
-          hint: "Určete, kam bude stránka zapsána. Pokud použijete „Blogový příspěvek“, bude příspěvek přístupný z „blog/blogovy-prispevek“. URL odkaz musí být jedinečný.",
-          pattern:
-            [
-              "^[A-Za-zÀ-ž0-9 ]+(?:-[A-Za-zÀ-ž0-9 ]+)*$",
-              "Pouze písmena (A-Z, a-z), číslice a pomlčky (-). Žádná lomítka ani speciální znaky.",
-            ],
-        }
-      - {
-          label: "Popis",
-          name: "description",
-          widget: "string",
-          hint: "Kratší popis blogového příspěvku, který se zobrazuje na náhledech příspěvků",
-        }
-      - { label: "Autor", name: "author", widget: "string" }
       - { label: "Datum", name: "date", widget: "datetime" }
+      - { label: "Délka", name: "Delka", widget: "string" }
+      - { label: "Dřevo", name: "Drevo", widget: "string" }
+      - { label: "Suchost", name: "Suchost", widget: "string" }
+      - { label: "Doprava", name: "Doprava", widget: "string" }
+      - { label: "Adresa", name: "Adresa", widget: "string" }
+      - { label: "Množství", name: "Mnozstvi", widget: "string" }
+      - { label: "Poznámka", name: "Poznamka", widget: "text", required: false }
       - {
-          label: "Náhledový obrázek",
-          name: "image",
-          widget: "image",
-          choose_url: false, # Only allow local images - for image optimization reasons
+          label: "Stav",
+          name: "status",
+          widget: "select",
+          options: ["nová poptávka", "zákazník kontaktován", "vyřízeno"],
         }
-      - {
-          label: "Popis obrázku",
-          name: "imageAlt",
-          widget: "string",
-          hint: "Popište, co je na obrázku. Slouží k validnímu SEO příspěvku.",
-        }
-      - { label: "Obsah", name: "body", widget: "markdown" }
-      - { label: "Štítky", name: "tags", widget: "hidden", default: ["post"] }
