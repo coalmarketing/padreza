@@ -20,15 +20,13 @@ if (form1) {
 }
 else if (form2) {
     const data1 = JSON.parse(localStorage.getItem("form1"));
-    if (!data1) window.location.href = "/#objednavka";
+    if (!data1) window.location.href = "/#objednavka"; // přesměrování pokud chybí krok 1
 
+    // vyplnění hidden inputů z kroku 1
     Object.entries(data1).forEach(([key, value]) => {
-        if (!form2.querySelector(`input[name="${key}"]`)) { // zabrání duplikaci
-            const input = document.createElement("input");
-            input.type = "hidden";
-            input.name = key;
-            input.value = value;
-            form2.appendChild(input);
+        const input = form2.querySelector(`input[name="${key}"]`);
+        if (input) {
+            input.value = value; // naplní hodnotu z localStorage
         }
     });
 
@@ -41,15 +39,12 @@ else if (form2) {
         if (form2.dataset.sending === "true") return;
         form2.dataset.sending = "true";
 
+        // UI stav – deaktivace a text
         submitBtn.disabled = true;
         submitBtn.innerHTML = "Odesílám…";
 
-        const data2 = Object.fromEntries(new FormData(form2));
-        const formData = new FormData();
-        formData.append("form-name", "objednavka");
-        Object.entries(data2).forEach(([key, value]) => {
-            formData.append(key, value);
-        });
+        // vytvoření FormData přímo z formuláře (obsahuje i hidden inputy z kroku 1)
+        const formData = new FormData(form2);
 
         try {
             await fetch("/", {
