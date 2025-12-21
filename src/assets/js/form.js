@@ -22,6 +22,14 @@ else if (form2) {
     const data1 = JSON.parse(localStorage.getItem("form1"));
     if (!data1) window.location.href = "/#objednavka"; // když někdo přeskočí krok 1 tak ho přesměruj
 
+    Object.entries(data1).forEach(([key, value]) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = value;
+        form2.appendChild(input);
+    });
+
     const submitBtn = form2.querySelector('button[type="submit"]');
     const originalBtnText = submitBtn.innerHTML;
 
@@ -46,6 +54,13 @@ else if (form2) {
         // deaktivuj všechny inputy
         [...form2.elements].forEach(el => el.disabled = true);
 
+        // zabránit duplicitnímu submitu
+        if (form2.dataset.sending === "true") return;
+        form2.dataset.sending = "true";
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Odesílám…";
+
         // data z kroku 2
         const data2 = Object.fromEntries(new FormData(form2));
 
@@ -59,25 +74,7 @@ else if (form2) {
             formData.append(key, value);
         });
 
-        fetch("/", {
-            method: "POST",
-            body: formData,
-        })
-            .then(() => {
-                localStorage.removeItem("form1");
-                window.location.href = "/poptavka-odeslana/";
-            })
-            .catch((error) => {
-                console.error("Chyba při odesílání:", error);
-
-                // UI zpět při chybě
-                form2.dataset.sending = "false";
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnText;
-                [...form2.elements].forEach(el => el.disabled = false);
-
-                alert("Odeslání se nezdařilo, zkuste to prosím znovu.");
-            });
+        form2.submit();
     });
 
 
