@@ -22,6 +22,16 @@ else if (form2) {
     const data1 = JSON.parse(localStorage.getItem("form1"));
     if (!data1) window.location.href = "/#objednavka";
 
+    Object.entries(data1).forEach(([key, value]) => {
+        if (!form2.querySelector(`input[name="${key}"]`)) { // zabrání duplikaci
+            const input = document.createElement("input");
+            input.type = "hidden";
+            input.name = key;
+            input.value = value;
+            form2.appendChild(input);
+        }
+    });
+
     const submitBtn = form2.querySelector('button[type="submit"]');
     const originalBtnText = submitBtn.innerHTML;
 
@@ -34,16 +44,10 @@ else if (form2) {
         submitBtn.disabled = true;
         submitBtn.innerHTML = "Odesílám…";
 
-        // 1️⃣ data z kroku 2
         const data2 = Object.fromEntries(new FormData(form2));
-
-        // 2️⃣ sloučení s daty z kroku 1
-        const data = { ...data1, ...data2 };
-
-        // 3️⃣ vytvoření FormData pro Netlify
         const formData = new FormData();
         formData.append("form-name", "objednavka");
-        Object.entries(data).forEach(([key, value]) => {
+        Object.entries(data2).forEach(([key, value]) => {
             formData.append(key, value);
         });
 
