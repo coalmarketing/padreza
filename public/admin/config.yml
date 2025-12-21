@@ -31,10 +31,34 @@ collections:
       - { label: "Jméno", name: "jmeno", widget: "string", readonly: true }
       - { label: "Telefon", name: "telefon", widget: "string", readonly: true }
       - { label: "E-mail", name: "mail", widget: "string", readonly: true }
-      - { label: "Délka", name: "delka", widget: "string", readonly: true }
-      - { label: "Dřevo", name: "drevo", widget: "string", readonly: true }
-      - { label: "Suchost", name: "suchost", widget: "string", readonly: true }
-      - { label: "Doprava", name: "doprava", widget: "string", readonly: true }
+      - {
+          label: "Délka",
+          name: "delka",
+          widget: "select",
+          options: ["25 cm", "33 cm", "40 cm", "50 cm"],
+          readonly: true,
+        }
+      - {
+          label: "Dřevo",
+          name: "drevo",
+          widget: "select",
+          options: ["měkké", "polotvrdé", "tvrdé"],
+          readonly: true,
+        }
+      - {
+          label: "Suchost",
+          name: "suchost",
+          widget: "select",
+          options: ["suché", "čerstvé"],
+          readonly: true,
+        }
+      - {
+          label: "Doprava",
+          name: "doprava",
+          widget: "select",
+          options: ["vlastní", "smluvní dopravce"],
+          readonly: true,
+        }
       - { label: "Adresa", name: "adresa", widget: "string", readonly: true }
       - {
           label: "Množství",
