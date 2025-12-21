@@ -1,25 +1,19 @@
 backend:
   name: git-gateway
   branch: main
-  # aktivní Git Gateway
-  # pokud používáš lokální backend, můžeš přidat: local_backend: true
 
-local_backend: true
-
-# Logo v headeru skryto
+# Change url to a link to the image you want to use, no file paths, must be a URL
 logo:
   src: "https://www.senoweb.cz/assets/images/senoweb_og_logo_rounded.png"
   show_in_header: false
 
 locale: "cs"
 
-# Media Library deaktivovaná
 media_folder: "src/assets/images/cms"
 public_folder: "/assets/images/cms"
 media_library:
   name: "disabled"
 
-# Pouze kolekce poptávek
 collections:
   - name: "poptavky"
     label: "Poptávky"
