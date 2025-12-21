@@ -8,7 +8,7 @@ local_backend: true
 
 # Logo v headeru skryto
 logo:
-  # src: "https://www.senoweb.cz/assets/images/senoweb_og_logo_rounded.png"
+  src: "https://www.senoweb.cz/assets/images/senoweb_og_logo_rounded.png"
   show_in_header: false
 
 locale: "cs"
