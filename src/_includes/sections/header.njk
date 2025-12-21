@@ -1,0 +1,101 @@
+<header
+  class="fixed z-50 top-0 left-0 w-full text-xl print:hidden underline-offset-4"
+>
+  <!-- MENU TOGGLE -->
+  <div class="z-20 fixed m-auto absolute right-[7%] lg:right-[14%]">
+    <button
+      id="toggle-menu"
+      class="absolute w-10 h-10 right-5 top-14"
+      aria-label="Menu"
+      aria-expanded="false"
+    >
+      <img
+        id="menu-open"
+        class="w-12 h-12"
+        src="/assets/svgs/Menu_icon.svg"
+        alt="Otevřít menu"
+      />
+      <img
+        id="menu-close"
+        class="w-12 h-12 hidden"
+        src="/assets/svgs/Close_icon.svg"
+        alt="Zavřít menu"
+      />
+    </button>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav
+    id="main-nav"
+    class="bg-background text-primary shadow-lg transition-transform duration-300 ease-in-out -translate-y-full"
+  >
+    <div class="prc2 plc2 lg:plc2 lg:prc2">
+      <ul
+        class="z-10 flex w-full flex-col lg:flex-row gap-6 lg:gap-2 py-40 pr-24 lg:items-center lg:justify-between lg:py-16 xl:pr-48"
+      >
+        <li><a href="/#" class="block">Úvod</a></li>
+        <li><a href="/#sluzby" class="block">Služby</a></li>
+        <li>
+          <a href="/assets/files/cenik.pdf" target="_blank" class="block">
+            Orientační ceník
+          </a>
+        </li>
+        <li><a href="/#objednavka" class="block">Nezávazná objednávka</a></li>
+        <li><a href="/#o-nas" class="block">O nás</a></li>
+        <li><a href="/#kontakt" class="block">Kontakt</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const toggleBtn = document.getElementById("toggle-menu");
+  const nav = document.getElementById("main-nav");
+  const iconOpen = document.getElementById("menu-open");
+  const iconClose = document.getElementById("menu-close");
+
+  let isOpen = false;
+
+  function openMenu() {
+    isOpen = true;
+    nav.classList.remove("-translate-y-full");
+    nav.classList.add("translate-y-0");
+
+    iconOpen.classList.add("hidden");
+    iconClose.classList.remove("hidden");
+
+    toggleBtn.setAttribute("aria-expanded", "true");
+  }
+
+  function closeMenu() {
+    isOpen = false;
+    nav.classList.add("-translate-y-full");
+    nav.classList.remove("translate-y-0");
+
+    iconOpen.classList.remove("hidden");
+    iconClose.classList.add("hidden");
+
+    toggleBtn.setAttribute("aria-expanded", "false");
+  }
+
+  toggleBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // zabrání zavření hned po kliknutí
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  /* 👉 klik mimo menu */
+  document.addEventListener("click", (e) => {
+    if (!isOpen) return;
+
+    if (!nav.contains(e.target) && !toggleBtn.contains(e.target)) {
+      closeMenu();
+    }
+  });
+
+  /* 👉 klik na položku menu */
+  nav.addEventListener("click", (e) => {
+    if (e.target.closest("a")) {
+      closeMenu();
+    }
+  });
+</script>

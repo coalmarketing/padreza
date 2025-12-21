@@ -1,0 +1,45 @@
+{% extends "layouts/base.njk" %} {% block head %}
+
+<!-- Script for Netlify Identity -->
+<script
+  defer
+  src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+></script>
+<!-- Netlify Identity configuration -->
+<script defer src="/assets/js/identity.js"></script>
+
+<!-- To ensure proper validation, prevent errors, and encourage developers to check, schema's are an opt-in feature. They're very bespoke and requires some customising  -->
+<!-- Uncomment the code below to enable Structured Data, and test it when you deploy to Netlify - https://developers.google.com/search/docs/appearance/structured-data -->
+{% include "components/home-schema.njk" %} {% endblock %} {% block body %}
+
+<section
+  class="flex h-[calc(100vh-48px)] flex-col bg-[url(/assets/images/person-working-wood-working-industry-factory.jpg)] bg-cover bg-center"
+>
+  <div
+    class="flex h-full items-center lg:plc2 lg:prc2 plc prc max-md:px-12 bg-background bg-opacity-25"
+  >
+    <div class="w-[620px] my-auto text-white">
+      <h1 class="text-4xl font-bold">
+        Děkujeme za&nbsp;vyplnění<br />nezávazného formuláře.
+      </h1>
+      <p class="text-3xl leading-tight mt-10 mb-20">
+        Do vašeho e-mailu jsme odeslali shrnutí zadaných údajů. Váš požadavek
+        nyní zpracováváme a&nbsp;co&nbsp;nejdříve se&nbsp;vám ozveme
+        s&nbsp;konkrétní nabídkou.
+      </p>
+
+      <a
+        href="/"
+        class="bg-secondary items-center m-auto md:m-0 gap-8 p-4 pl-6 pr-12 border-secondary text-white font-bold inline-flex text-2xl"
+      >
+        <img
+          class="w-6 h-6 rotate-180"
+          src="/assets/svgs/Button_arow_right.svg"
+        />
+        <span>Zpět na úvod</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock body %}

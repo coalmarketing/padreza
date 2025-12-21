@@ -1,0 +1,349 @@
+{% extends "layouts/base.njk" %} {% block head %}
+
+<!-- Script for Netlify Identity -->
+<script
+  defer
+  src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+></script>
+<!-- Netlify Identity configuration -->
+<script defer src="/assets/js/identity.js"></script>
+
+<!-- To ensure proper validation, prevent errors, and encourage developers to check, schema's are an opt-in feature. They're very bespoke and requires some customising  -->
+<!-- Uncomment the code below to enable Structured Data, and test it when you deploy to Netlify - https://developers.google.com/search/docs/appearance/structured-data -->
+{% include "components/home-schema.njk" %} {% endblock %} {% block body %}
+
+<section
+  class="flex flex-col md:flex-row bg-[url(/assets/images/person-working-wood-working-industry-factory.jpg)] bg-cover bg-center"
+>
+  <div
+    class="basis-[43%] flex items-center justify-center plc prc max-md:px-12 lg:plc2 bg-background bg-opacity-80"
+  >
+    <h1>
+      <img
+        alt="Padřeza"
+        decoding="async"
+        loading="eager"
+        src="/assets/svgs/Padreza_logo.svg"
+        class="flex-auto my-16"
+      />
+    </h1>
+  </div>
+  <div
+    class="basis-[57%] content-center text-justify flex-column plc prc lg:prc2 bg-secondary bg-opacity-80 text-white align-middle"
+  >
+    <h2 class="text-6xl sm:text-7xl whitespace-pre-line font-bold uppercase">
+      Prodej<br />palivového<br />dřeva
+      <span class="font-normal">Záhorský</span>
+    </h2>
+    <div class="relative max-lg:min-h-[140px] pb-10">
+      <div
+        class="absolute lg:hidden w-[5px] h-[calc(100%+70px)] left-[50px] bg-white top-0"
+      ></div>
+      <p
+        class="max-w-80 text-2xl sm:text-2xl text-left mt-8 max-lg:ml-[100px] lg:mb-[80px]"
+      >
+        Zpracováváme a&nbsp;dodáváme dřevo ve&nbsp;východních Čechách.<br />Včetně
+        možnosti vyrovnání dřeva u Vás.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="sluzby" class="plc prc md:plc2 md:prc2 py-16 max-lg:pt-28">
+  <div class="relative max-md:plc">
+    <div
+      class="absolute w-[5px] h-[calc(100%+130px)] left-1/2 max-lg:hidden bg-white bottom-0"
+    ></div>
+    <h3 class="lg:max-w-[50%]">
+      Topte s námi <b>pohodlně</b>.<br />Nabízíme i možnost dopravy<br />a
+      zpracování dřeva přímo u vás.
+    </h3>
+  </div>
+
+  <div class="md:plc md:prc flex flex-wrap mt-10">
+    <div data-key="1" class="card order-1">
+      <!-- Horní polovina – ikona -->
+      <div>
+        <svg decoding="async" loading="eager" viewBox="0 0 63 84">
+          <use href="/assets/svgs/Sluzba_1_icon.svg#Sluzba_1_icon" />
+        </svg>
+      </div>
+      <!-- Dolní polovina – titulek -->
+      <div class="print:hidden">
+        <p>PRODEJ<br />PALIVOVÉHO<br />DŘEVA</p>
+      </div>
+    </div>
+
+    <div data-key="1" class="info order-3 lg:order-5">
+      <h3>PRODEJ PALIVOVÉHO DŘEVA</h3>
+      <p>
+        Nabízíme širokou škálu služeb spojených s prodejem a zpracováním
+        palivového dřeva. Ať už potřebujete dřevo na topení, nebo hledáte
+        profesionální zpracování dřeva, jsme tu pro vás.
+      </p>
+    </div>
+
+    <div data-key="2" class="card order-2">
+      <!-- Horní polovina – ikona -->
+      <div>
+        <svg decoding="async" loading="eager" viewBox="0 0 94 70">
+          <use href="/assets/svgs/Sluzba_2_icon.svg#Sluzba_2_icon" />
+        </svg>
+      </div>
+      <!-- Dolní polovina – titulek -->
+      <div class="print:hidden">
+        <p>DOPRAVA<br />OBJEDNANÉHO<br />DŘEVA</p>
+      </div>
+    </div>
+
+    <div data-key="2" class="info order-4 lg:order-6">
+      <h3>DOPRAVA OBJEDNANÉHO DŘEVA</h3>
+      <p>
+        Zajišťujeme spolehlivou dopravu palivového dřeva již od 1 prms.
+        Využíváme několik ověřených smluvních partnerů, díky čemuž garantujeme
+        rychlé a flexibilní dodání až k vám domů. Dřevo dopravíme na předem
+        domluvené místo tak, aby pro vás převzetí bylo co nejpohodlnější.
+      </p>
+    </div>
+
+    <div data-key="3" class="card order-5 lg:order-3">
+      <!-- Horní polovina – ikona -->
+      <div>
+        <svg decoding="async" loading="eager" viewBox="0 0 86 77">
+          <use href="/assets/svgs/Sluzba_3_icon.svg#Sluzba_3_icon" />
+        </svg>
+      </div>
+      <!-- Dolní polovina – titulek -->
+      <div class="print:hidden">
+        <p>MOŽNOST<br />VYROVNÁNÍ<br />DŘEVA</p>
+      </div>
+    </div>
+
+    <div data-key="3" class="info order-7">
+      <h3>MOŽNOST VYROVNÁNÍ DŘEVA</h3>
+      <p>
+        Rádi vám pomůžeme s přesunem a rovnáním dřeva přímo na místo určené k
+        uskladnění – a to jak u námi dodaného dřeva, tak i u dřeva, které máte
+        vlastní. Cena služby se odvíjí od vzdálenosti a náročnosti terénu.
+        Poskytujeme pečlivé a rychlé vyrovnání tak, aby bylo dřevo připravené k
+        okamžitému použití.
+      </p>
+    </div>
+
+    <div data-key="4" class="card order-6 lg:order-4">
+      <!-- Horní polovina – ikona -->
+      <div>
+        <svg decoding="async" loading="eager" viewBox="0 0 88 73">
+          <use href="/assets/svgs/Sluzba_4_icon.svg#Sluzba_4_icon" />
+        </svg>
+      </div>
+      <!-- Dolní polovina – titulek -->
+      <div class="print:hidden">
+        <p>ZPRACOVÁNÍ<br />PALIVOVÉHO<br />DŘEVA</p>
+      </div>
+    </div>
+
+    <div data-key="4" class="info order-8">
+      <h3>ZPRACOVÁNÍ PALIVOVÉHO DŘEVA</h3>
+      <p>
+        Zpracujeme jak dodané, tak vaše vlastní dřevo přesně podle vašich
+        požadavků. Dojedeme k vám a provedeme řezání, štípání a další potřebné
+        úkony – platíte pouze za samotné zpracování. Vaše dřevo tak bude
+        připravené k okamžitému použití, bez starostí a zbytečné námahy.
+      </p>
+    </div>
+
+    <div data-key="5" class="card order-9">
+      <!-- Horní polovina – ikona -->
+      <div>
+        <svg decoding="async" loading="eager" viewBox="0 0 70 75">
+          <use href="/assets/svgs/Sluzba_5_icon.svg#Sluzba_5_icon" />
+        </svg>
+      </div>
+      <!-- Dolní polovina – titulek -->
+      <div class="print:hidden">
+        <p>PRONÁJEM<br />AUTOMATICKÉ<br />ŠTÍPAČKY</p>
+      </div>
+    </div>
+
+    <div data-key="5" class="info order-11">
+      <h3>PRONÁJEM AUTOMATICKÉ ŠTÍPAČKY</h3>
+      <p>
+        Máte své dřevo a potřebujete rychlého pomocníka? Nabízíme pronájem
+        automatické štípačky s naší obsluhou. Službu připravujeme k dispozici od
+        roku 2026 – pro více informací nás kontaktujte telefonicky nebo
+        e-mailem.
+      </p>
+    </div>
+
+    <div data-key="6" class="card order-10">
+      <!-- Horní polovina – ikona -->
+      <div>
+        <svg decoding="async" loading="eager" viewBox="0 0 97 78">
+          <use href="/assets/svgs/Sluzba_6_icon.svg#Sluzba_6_icon" />
+        </svg>
+      </div>
+      <!-- Dolní polovina – titulek -->
+      <div class="print:hidden">
+        <p>VÝKUP<br />DŘEVA</p>
+      </div>
+    </div>
+
+    <div data-key="6" class="info order-12">
+      <h3>VÝKUP DŘEVA</h3>
+      <p>
+        Nabízíme výkup dřeva jak od těžebních dodavatelů, tak od jednotlivců,
+        kteří své dřevo již nevyužijí. Postaráme se o veškeré zpracování
+        vykoupeného dřeva – řezání, štípání i dopravu – takže vy nemusíte s
+        ničím nic dělat. Pro nabídky a více informací nás kontaktujte
+        telefonicky nebo e-mailem.
+      </p>
+    </div>
+
+    <div class="flex-auto"></div>
+  </div>
+</section>
+
+<section id="objednavka">
+  <div class="plc prc pt-8 pb-48">
+    <h3 class="plc prc">
+      <b>Pošlete nám rychlou<br /><u>nezávaznou</u> objednávku</b><br />a my se
+      vám ozveme<br />s nabídkou přímo pro vás.
+    </h3>
+    <div class="lg:plc2 lg:prc2 mt-12">
+      <form id="form-1" class="grid lg:grid-cols-4 gap-4">
+        <div>
+          <input
+            type="text"
+            name="jmeno"
+            placeholder="Jméno a příjmení *"
+            required
+          />
+        </div>
+        <div>
+          <input type="text" name="telefon" placeholder="Telefon *" required />
+        </div>
+        <div>
+          <input type="email" name="email" placeholder="E-mail *" required />
+        </div>
+        <div class="max-lg:p-10 items-center">
+          <button
+            type="submit"
+            class="bg-secondary overflow-hidden whitespace-nowrap items-center m-auto md:m-0 gap-2 p-4 lg:p-2 lg:w-full border-secondary text-white font-bold flex flex-row text-2xl"
+          >
+            <span class="flex-auto">Vyberte si dřevo</span>
+            <img
+              class="w-7 h-7 flex-1 lg:w-5 lg:h-5"
+              src="/assets/svgs/Button_arow_right.svg"
+            />
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div
+    class="h-[220px] md:h-[125px] bg-[url(/assets/images/person-working-wood-working-industry-factory.jpg)] bg-cover bg-center"
+  ></div>
+  <div class="plc2 prc2 pb-48" id="o-nas">
+    <div class="pt-[170px] md:pt-24 pb-8 relative">
+      <div
+        class="absolute w-[5px] h-[260px] md:h-[100px] left-[30px] md:left-0 bg-white -top-[130px] md:-top-[50px]"
+      ></div>
+      <h3 class="md:text-4xl font-semibold">O nás</h3>
+    </div>
+    <p class="mb-8 lg:w-3/5">
+      Naše firma vznikla s jasným cílem – pomáhat lidem se zpracováním dřeva.
+      Díky kvalitní pile, sekerám a především nadšení pro zdokonalování se v
+      tomto řemesle jsme přišli na to, že dokážeme dřevo zpracovat rychleji a
+      kvalitněji pro ty, kteří nemají potřebnou techniku, čas nebo sílu.
+    </p>
+    <p class="lg:w-3/5">
+      Naše cesta začala s odvahou a nadšením, bez jediného zákazníka, s vizí
+      vybudovat spokojenou zákaznickou základnu. Dnes se naši klienti pravidelně
+      vrací pro dřevo připravené přesně podle jejich přání. Jsme schopni i
+      ochotni zpracovat dřevo na palivo dle individuálních požadavků. Stačí nás
+      kontaktovat s vaším přáním a my připravíme, naceníme a dovezeme dřevo tak,
+      aby byli naši zákazníci vždy maximálně spokojeni.
+    </p>
+  </div>
+</section>
+
+<section class="lg:pb-24">
+  <div
+    class="h-[220px] md:h-[125px] bg-[url(/assets/images/dry-chopped-firewood-logs-ready-winter.jpg)] bg-cover bg-center"
+  ></div>
+
+  <div class="plc2 prc2 pb-24 flex flex-col lg:flex-row" id="kontakt">
+    <div class="flex-initial lg:w-3/5 pt-[170px] lg:pt-24 relative">
+      <div
+        class="absolute w-[5px] h-[260px] md:h-[100px] left-[30px] md:left-0 bg-white -top-[130px] md:-top-[50px]"
+      ></div>
+      <h3 class="lg:w-3/4">
+        <b>Můžete se na&nbsp;nás obrátit<br />s&nbsp;jakýmkoliv přáním</b> –
+        dřevo vám individuálně naceníme, připravíme a&nbsp;dovezeme tak, abyste
+        byli spokojeni.
+      </h3>
+      <div class="flex flex-col md:flex-row mt-28 text-xl">
+        <div class="flex-auto">
+          <a href="tel:{{ client.phoneForTel }}" class="block">
+            <img
+              alt="Telefon"
+              decoding="async"
+              loading="eager"
+              src="/assets/svgs/Phone_icon.svg"
+              class="inline-block mr-4 w-12 h-12"
+            />
+            {{ client.phoneFormatted }}</a
+          >
+          <br />
+          <a href="mailto:{{ client.email }}" class="block">
+            <img
+              alt="E-mail"
+              decoding="async"
+              loading="eager"
+              src="/assets/svgs/Mail_icon.svg"
+              class="inline-block mr-4 w-12 h-12"
+            />{{ client.email }}</a
+          >
+          <br />
+        </div>
+        <div class="flex-auto">
+          <a href="{{ client.socials.facebook }}" class="block">
+            <img
+              alt="Facebook"
+              decoding="async"
+              loading="eager"
+              src="/assets/svgs/FB_icon.svg"
+              class="inline-block mr-4 w-12 h-12"
+            />
+            /padreza</a
+          >
+          <br />
+          <a href="{{ client.socials.instagram }}" class="block">
+            <img
+              alt="Instagram"
+              decoding="async"
+              loading="eager"
+              src="/assets/svgs/Ig_icon.svg"
+              class="inline-block mr-4 w-12 h-12"
+            />/padreza</a
+          >
+          <br />
+        </div>
+      </div>
+    </div>
+    <div class="lg:w-2/5 pt-12 lg:pt-24">
+      <img
+        alt="Padřeza"
+        decoding="async"
+        loading="eager"
+        src="/assets/svgs/Logo_name.svg"
+        class="flex-auto my-8 m-auto w-3/4"
+      />
+    </div>
+  </div>
+</section>
+{% endblock body %}
