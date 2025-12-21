@@ -28,6 +28,12 @@ collections:
           required: true,
           readonly: true,
         }
+      - {
+          label: "Stav",
+          name: "status",
+          widget: "select",
+          options: ["nová poptávka", "zákazník kontaktován", "vyřízeno"],
+        }
       - { label: "Jméno", name: "jmeno", widget: "string", readonly: true }
       - { label: "Telefon", name: "telefon", widget: "string", readonly: true }
       - { label: "E-mail", name: "mail", widget: "string", readonly: true }
@@ -59,7 +65,13 @@ collections:
           options: ["vlastní", "smluvní dopravce"],
           readonly: true,
         }
-      - { label: "Adresa", name: "adresa", widget: "string", readonly: true }
+      - {
+          label: "Adresa",
+          name: "adresa",
+          widget: "string",
+          readonly: true,
+          required: false,
+        }
       - {
           label: "Množství prms",
           name: "mnozstvi",
@@ -74,9 +86,3 @@ collections:
           required: false,
         }
       - { label: "Komentář", name: "komentar", widget: "text", required: false }
-      - {
-          label: "Stav",
-          name: "status",
-          widget: "select",
-          options: ["nová poptávka", "zákazník kontaktován", "vyřízeno"],
-        }

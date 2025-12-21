@@ -29,6 +29,11 @@ else if (form2) {
     const originalBtnText = submitBtn.innerHTML;
 
     form2.addEventListener("submit", async (e) => {
+        // pokud už jsme po serverless funkci → necháme submit proběhnout
+        if (form2.dataset.sending === "done") {
+            return;
+        }
+
         e.preventDefault();
 
         if (form2.dataset.sending === "true") return;
@@ -37,19 +42,26 @@ else if (form2) {
         const formData = new FormData(form2);
         const data = Object.fromEntries(formData.entries());
 
-        // Volání serverless funkce která vytvoří MD soubor v repozitáři
         try {
+            // 1️⃣ serverless funkce (MD soubor)
             await fetch("/.netlify/functions/submit", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
             });
+
+            // 2️⃣ povolíme klasický submit
+            form2.dataset.sending = "done";
+
+            // 3️⃣ ruční submit → Netlify Forms ho normálně zpracuje
+            form2.submit();
+
         } catch (err) {
             console.error("Chyba submit.js:", err);
+            form2.dataset.sending = "false";
+            alert("Odeslání se nezdařilo, zkuste to prosím znovu.");
         }
-
-        form2.removeEventListener("submit", this);
-        form2.submit(); // klasický submit -> Netlify Forms zachytí data
     });
+
 
 }
