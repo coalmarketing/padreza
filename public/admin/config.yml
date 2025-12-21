@@ -19,7 +19,7 @@ collections:
     create: false # formulář generuje soubory, CMS je pouze pro úpravu
     delete: true
     editor:
-      preview: false
+      preview: true
     fields:
       - {
           label: "Datum",
@@ -61,7 +61,7 @@ collections:
         }
       - { label: "Adresa", name: "adresa", widget: "string", readonly: true }
       - {
-          label: "Množství",
+          label: "Množství prms",
           name: "mnozstvi",
           widget: "string",
           readonly: true,
