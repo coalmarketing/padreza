@@ -2,7 +2,7 @@
   class="fixed z-50 top-0 left-0 w-full text-xl print:hidden underline-offset-4"
 >
   <!-- MENU TOGGLE -->
-  <div class="z-20 fixed m-auto absolute right-[7%] lg:right-[14%]">
+  <div class="fixed z-50 m-auto absolute right-[7%] lg:right-[14%]">
     <button
       id="toggle-menu"
       class="absolute w-10 h-10 right-5 top-14"
@@ -27,7 +27,7 @@
   <!-- NAVIGATION -->
   <nav
     id="main-nav"
-    class="bg-background text-primary shadow-lg transition-transform duration-300 ease-in-out -translate-y-full"
+    class="z-40 bg-background text-primary shadow-lg fixed top-0 left-0 w-full transform -translate-y-full transition-transform duration-500 ease-in-out hidden"
   >
     <div class="prc2 plc2 lg:plc2 lg:prc2">
       <ul
@@ -58,41 +58,48 @@
 
   function openMenu() {
     isOpen = true;
-    nav.classList.remove("-translate-y-full");
-    nav.classList.add("translate-y-0");
+    nav.classList.remove("hidden");
+    // malá prodleva, aby se aktivoval transition
+    requestAnimationFrame(() => {
+      nav.classList.remove("-translate-y-full");
+      nav.classList.add("translate-y-0");
+    });
 
     iconOpen.classList.add("hidden");
     iconClose.classList.remove("hidden");
-
     toggleBtn.setAttribute("aria-expanded", "true");
   }
 
   function closeMenu() {
     isOpen = false;
-    nav.classList.add("-translate-y-full");
     nav.classList.remove("translate-y-0");
+    nav.classList.add("-translate-y-full");
+
+    // po konci transition skryjeme menu
+    nav.addEventListener("transitionend", function handler() {
+      if (!isOpen) {
+        nav.classList.add("hidden");
+      }
+      nav.removeEventListener("transitionend", handler);
+    });
 
     iconOpen.classList.remove("hidden");
     iconClose.classList.add("hidden");
-
     toggleBtn.setAttribute("aria-expanded", "false");
   }
 
   toggleBtn.addEventListener("click", (e) => {
-    e.stopPropagation(); // zabrání zavření hned po kliknutí
+    e.stopPropagation();
     isOpen ? closeMenu() : openMenu();
   });
 
-  /* 👉 klik mimo menu */
   document.addEventListener("click", (e) => {
     if (!isOpen) return;
-
     if (!nav.contains(e.target) && !toggleBtn.contains(e.target)) {
       closeMenu();
     }
   });
 
-  /* 👉 klik na položku menu */
   nav.addEventListener("click", (e) => {
     if (e.target.closest("a")) {
       closeMenu();
