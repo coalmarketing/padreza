@@ -26,17 +26,14 @@
       e.preventDefault();
       if (form2.dataset.sending === "true") return;
       form2.dataset.sending = "true";
+      const formData = new FormData(form2);
+      const data = Object.fromEntries(formData.entries());
+      console.log("Data pro submit.js:", data);
       submitBtn.disabled = true;
       submitBtn.innerHTML = "Odes\xEDl\xE1m\u2026";
       [...form2.elements].forEach((el) => el.disabled = true);
-      const formData = new FormData(form2);
       try {
-        await fetch("/", {
-          method: "POST",
-          body: formData
-        });
-        const data = Object.fromEntries(formData.entries());
-        console.log("Data pro submit.js:", data);
+        await fetch("/", { method: "POST", body: formData });
         await fetch("/.netlify/functions/submit", {
           method: "POST",
           headers: { "Content-Type": "application/json" },

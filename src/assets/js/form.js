@@ -33,32 +33,29 @@ else if (form2) {
         if (form2.dataset.sending === "true") return;
 
         form2.dataset.sending = "true";
+
+        // 1️⃣ vytvoření FormData před deaktivací
+        const formData = new FormData(form2);
+        const data = Object.fromEntries(formData.entries());
+        console.log("Data pro submit.js:", data);
+
+        // 2️⃣ UI stav – deaktivace tlačítka
         submitBtn.disabled = true;
         submitBtn.innerHTML = "Odesílám…";
+
         [...form2.elements].forEach(el => el.disabled = true);
 
-        const formData = new FormData(form2);
-
         try {
-            // 1️⃣ Odeslání do Netlify Forms
-            await fetch("/", {
-                method: "POST",
-                body: formData,
-            });
+            // odeslání Netlify Forms
+            await fetch("/", { method: "POST", body: formData });
 
-            // 2️⃣ Převod formuláře na JSON pro Netlify Function
-            const data = Object.fromEntries(formData.entries());
-
-            console.log("Data pro submit.js:", data);
-
-            // 3️⃣ Volání funkce submit.js, která vytvoří .md
+            // volání serverless funkce
             await fetch("/.netlify/functions/submit", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
             });
 
-            // 4️⃣ Úspěch – smažeme localStorage a přesměrujeme
             localStorage.removeItem("form1");
             window.location.href = "/poptavka-odeslana/";
         } catch (err) {
