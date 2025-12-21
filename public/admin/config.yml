@@ -11,8 +11,6 @@ locale: "cs"
 
 media_folder: "src/assets/images/cms"
 public_folder: "/assets/images/cms"
-media_library:
-  name: "disabled"
 
 collections:
   - name: "poptavky"
