@@ -34,7 +34,7 @@ else if (form2) {
             return;
         }
 
-        e.preventDefault();
+        // e.preventDefault();
 
         if (form2.dataset.sending === "true") return;
         form2.dataset.sending = "true";
@@ -42,27 +42,7 @@ else if (form2) {
         const formData = new FormData(form2);
         const data = Object.fromEntries(formData.entries());
 
-        try {
-            // 1️⃣ serverless funkce (MD soubor)
-            await fetch("/.netlify/functions/submit", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-            });
 
-            // 2️⃣ po úspěchu přesměruj RUČNĚ
-            localStorage.removeItem("form1");
-            window.location.href = "/poptavka-odeslana/";
-
-            // 3️⃣ a mezitím FORM submit (na pozadí)
-            form2.dataset.sending = "done";
-            form2.submit();
-
-        } catch (err) {
-            console.error("Chyba submit.js:", err);
-            form2.dataset.sending = "false";
-            alert("Odeslání se nezdařilo, zkuste to prosím znovu.");
-        }
     });
 
 

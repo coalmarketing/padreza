@@ -26,26 +26,10 @@
       if (form2.dataset.sending === "done") {
         return;
       }
-      e.preventDefault();
       if (form2.dataset.sending === "true") return;
       form2.dataset.sending = "true";
       const formData = new FormData(form2);
       const data = Object.fromEntries(formData.entries());
-      try {
-        await fetch("/.netlify/functions/submit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        });
-        localStorage.removeItem("form1");
-        window.location.href = "/poptavka-odeslana/";
-        form2.dataset.sending = "done";
-        form2.submit();
-      } catch (err) {
-        console.error("Chyba submit.js:", err);
-        form2.dataset.sending = "false";
-        alert("Odesl\xE1n\xED se nezda\u0159ilo, zkuste to pros\xEDm znovu.");
-      }
     });
   }
 })();
