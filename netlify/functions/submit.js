@@ -24,6 +24,7 @@ export async function handler(event) {
         const content = `---
 title: "${yyyy}-${mm}-${dd}_${hh}-${min}-${ss} - ${data.jmeno}"
 status: "nová poptávka"
+lang: "cs"
 date: "${date.toISOString()}"
 jmeno: "${data.jmeno}"
 telefon: "${data.telefon}"
