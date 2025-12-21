@@ -74,7 +74,8 @@ else if (form2) {
             formData.append(key, value);
         });
 
-        form2.submit();
+        // nativní submit, obchází listener aby ho neblokoval
+        HTMLFormElement.prototype.submit.call(form2);
     });
 
 
