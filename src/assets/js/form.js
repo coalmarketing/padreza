@@ -6,10 +6,10 @@ if (form1) {
         e.preventDefault();
 
         // HTML5 validace
-        if (!form1.checkValidity()) {
-            form1.reportValidity();
-            return;
-        }
+        // if (!form1.checkValidity()) {
+        //     form1.reportValidity();
+        //     return;
+        // }
 
         // sesbírá data z formuláře
         const data = Object.fromEntries(new FormData(form1));
@@ -38,10 +38,10 @@ else if (form2) {
         e.preventDefault();
 
         // HTML5 validace
-        if (!form1.checkValidity()) {
-            form1.reportValidity();
-            return;
-        }
+        // if (!form1.checkValidity()) {
+        //     form1.reportValidity();
+        //     return;
+        // }
 
         if (form2.dataset.sending === "true") return;
         form2.dataset.sending = "true";
