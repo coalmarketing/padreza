@@ -50,10 +50,7 @@ else if (form2) {
         const data2 = Object.fromEntries(new FormData(form2));
 
         // sloučení s krokem 1
-        const data = {
-            ...data1,
-            ...data2,
-        };
+        const data = { ...data1, ...data2 };
 
         const formData = new FormData();
         formData.append("form-name", "objednavka");
