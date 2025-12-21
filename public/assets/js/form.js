@@ -1,1 +1,50 @@
-(()=>{var b=(n,e)=>()=>(e||n((e={exports:{}}).exports,e),e.exports);var u=(n,e,i)=>new Promise((s,o)=>{var r=a=>{try{m(i.next(a))}catch(f){o(f)}},c=a=>{try{m(i.throw(a))}catch(f){o(f)}},m=a=>a.done?s(a.value):Promise.resolve(a.value).then(r,c);m((i=i.apply(n,e)).next())});var y=b(l=>{var d=document.getElementById("form-1"),t=document.getElementById("form-2");if(d)d.addEventListener("submit",n=>{if(n.preventDefault(),!d.checkValidity()){d.reportValidity();return}let e=Object.fromEntries(new FormData(d));localStorage.setItem("form1",JSON.stringify(e)),window.location.href="/poptavka/"});else if(t){let n=JSON.parse(localStorage.getItem("form1"));n||(window.location.href="/#objednavka"),Object.entries(n).forEach(([s,o])=>{let r=t.querySelector(`input[name="${s}"]`);r&&(r.value=o)});let i=t.querySelector('button[type="submit"]').innerHTML;t.addEventListener("submit",s=>u(null,null,function*(){if(t.dataset.sending==="done"||(s.preventDefault(),t.dataset.sending==="true"))return;t.dataset.sending="true";let o=new FormData(t),r=Object.fromEntries(o.entries());try{yield fetch("/.netlify/functions/submit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(r)}),t.dataset.sending="done",t.submit()}catch(c){console.error("Chyba submit.js:",c),t.dataset.sending="false",alert("Odesl\xE1n\xED se nezda\u0159ilo, zkuste to pros\xEDm znovu.")}}))}});y();})();
+(() => {
+  // src/assets/js/form.js
+  var form1 = document.getElementById("form-1");
+  var form2 = document.getElementById("form-2");
+  if (form1) {
+    form1.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!form1.checkValidity()) {
+        form1.reportValidity();
+        return;
+      }
+      const data = Object.fromEntries(new FormData(form1));
+      localStorage.setItem("form1", JSON.stringify(data));
+      window.location.href = "/poptavka/";
+    });
+  } else if (form2) {
+    const data1 = JSON.parse(localStorage.getItem("form1"));
+    if (!data1) window.location.href = "/#objednavka";
+    Object.entries(data1).forEach(([key, value]) => {
+      const input = form2.querySelector(`input[name="${key}"]`);
+      if (input) input.value = value;
+    });
+    const submitBtn = form2.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerHTML;
+    form2.addEventListener("submit", async (e) => {
+      if (form2.dataset.sending === "done") {
+        return;
+      }
+      e.preventDefault();
+      if (form2.dataset.sending === "true") return;
+      form2.dataset.sending = "true";
+      const formData = new FormData(form2);
+      const data = Object.fromEntries(formData.entries());
+      try {
+        await fetch("/.netlify/functions/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+        form2.dataset.sending = "done";
+        form2.submit();
+      } catch (err) {
+        console.error("Chyba submit.js:", err);
+        form2.dataset.sending = "false";
+        alert("Odesl\xE1n\xED se nezda\u0159ilo, zkuste to pros\xEDm znovu.");
+      }
+    });
+  }
+})();
+//# sourceMappingURL=form.js.map
