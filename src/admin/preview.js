@@ -1,35 +1,37 @@
+const h = window.h;
+
 CMS.registerPreviewTemplate("poptavky", ({ entry }) => {
     const data = entry.get("data").toJS();
 
-    return `
-    <div style="font-family: sans-serif; padding: 1rem">
-      <h2>Poptávka</h2>
+    return h(
+        "div",
+        { style: { fontFamily: "sans-serif", padding: "1rem" } },
 
-      <p><strong>Stav:</strong> ${data.status}</p>
+        h("h2", null, "Poptávka"),
 
-      <p><strong>Datum:</strong> ${data.date}</p>
-      <p><strong>Jméno:</strong> ${data.jmeno}</p>
-      <p><strong>Telefon:</strong> ${data.telefon}</p>
-      <p><strong>E-mail:</strong> ${data.mail}</p>
+        h("p", null, h("strong", null, "Stav: "), data.status),
+        h("p", null, h("strong", null, "Datum: "), data.date),
+        h("p", null, h("strong", null, "Jméno: "), data.jmeno),
+        h("p", null, h("strong", null, "Telefon: "), data.telefon),
+        h("p", null, h("strong", null, "E-mail: "), data.mail),
 
-      <hr />
+        h("hr"),
 
-      <p><strong>Délka:</strong> ${data.delka}</p>
-      <p><strong>Dřevo:</strong> ${data.drevo}</p>
-      <p><strong>Suchost:</strong> ${data.suchost}</p>
-      <p><strong>Doprava:</strong> ${data.doprava}</p>
-      <p><strong>Adresa:</strong> ${data.adresa || "—"}</p>
-      <p><strong>Množství:</strong> ${data.mnozstvi}</p>
+        h("p", null, h("strong", null, "Délka: "), data.delka),
+        h("p", null, h("strong", null, "Dřevo: "), data.drevo),
+        h("p", null, h("strong", null, "Suchost: "), data.suchost),
+        h("p", null, h("strong", null, "Doprava: "), data.doprava),
+        h("p", null, h("strong", null, "Adresa: "), data.adresa || "—"),
+        h("p", null, h("strong", null, "Množství: "), data.mnozstvi),
 
-      <hr />
+        h("hr"),
 
-      <p><strong>Poznámka:</strong></p>
-      <p>${data.poznamka || "—"}</p>
+        h("p", null, h("strong", null, "Poznámka:")),
+        h("p", null, data.poznamka || "—"),
 
-      <hr />
+        h("hr"),
 
-      <p><strong>Interní komentář:</strong></p>
-      <p>${data.komentar || "—"}</p>
-    </div>
-  `;
+        h("p", null, h("strong", null, "Interní komentář:")),
+        h("p", null, data.komentar || "—")
+    );
 });
