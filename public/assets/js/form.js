@@ -38,6 +38,7 @@
         console.error("Chyba submit.js:", err);
       }
       form2.submit();
+      window.location.href = "/poptavka-odeslana/";
     });
   }
 })();

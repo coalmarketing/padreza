@@ -50,6 +50,7 @@ else if (form2) {
 
         // 2️⃣ Odeslání do Netlify Forms
         form2.submit(); // klasický submit -> Netlify Forms zachytí data
+        window.location.href = "/poptavka-odeslana/";
     });
 
 }
