@@ -3,16 +3,17 @@ const form2 = document.getElementById("form-2");
 
 if (form1) {
     form1.addEventListener("submit", (e) => {
-        e.preventDefault(); // ❗ nezobrazuje se submit
+        e.preventDefault();
 
         // HTML5 validace
         if (!form1.checkValidity()) {
             form1.reportValidity();
             return;
         }
+
         // sesbírá data z formuláře
         const data = Object.fromEntries(new FormData(form1));
-        // uloží do prohlížeče
+        // uloží do localStorage
         localStorage.setItem("form1", JSON.stringify(data));
         // přechod na krok 2
         window.location.href = "/poptavka/";
@@ -26,7 +27,7 @@ else if (form2) {
     Object.entries(data1).forEach(([key, value]) => {
         const input = form2.querySelector(`input[name="${key}"]`);
         if (input) {
-            input.value = value; // naplní hodnotu z localStorage
+            input.value = value;
         }
     });
 
@@ -36,21 +37,41 @@ else if (form2) {
     form2.addEventListener("submit", async (e) => {
         e.preventDefault();
 
+        // HTML5 validace
+        if (!form1.checkValidity()) {
+            form1.reportValidity();
+            return;
+        }
+
         if (form2.dataset.sending === "true") return;
         form2.dataset.sending = "true";
 
         // UI stav – deaktivace a text
         submitBtn.disabled = true;
         submitBtn.innerHTML = "Odesílám…";
+        [...form2.elements].forEach(el => (el.disabled = true));
 
-        // vytvoření FormData přímo z formuláře (obsahuje i hidden inputy z kroku 1)
+        // data z formuláře (včetně hidden inputů)
         const formData = new FormData(form2);
 
         try {
+            // Odeslání do Netlify Forms
             await fetch("/", {
                 method: "POST",
                 body: formData,
             });
+
+            // Převod dat do JSON pro Netlify Function
+            const data = Object.fromEntries(formData.entries());
+
+            // Volání Netlify Function pro generování .md souboru
+            await fetch("/.netlify/functions/submit", {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: { "Content-Type": "application/json" },
+            });
+
+            // 4️⃣ Úspěšné odeslání – odstraníme localStorage a přesměrujeme
             localStorage.removeItem("form1");
             window.location.href = "/poptavka-odeslana/";
         } catch (err) {
