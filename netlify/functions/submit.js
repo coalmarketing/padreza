@@ -1,27 +1,27 @@
-import fs from "fs";
-import path from "path";
+import fetch from "node-fetch";
 
-// funkce přijme POST z formuláře
-export async function handler(event, context) {
+export async function handler(event) {
     if (event.httpMethod !== "POST") {
         return { statusCode: 405, body: "Method Not Allowed" };
     }
 
-    const data = JSON.parse(event.body);
+    try {
+        const data = JSON.parse(event.body);
+        const now = new Date();
 
-    // 1️⃣ Vytvoření názvu souboru podle časového razítka
-    const date = new Date();
-    const yyyy = date.getFullYear();
-    const mm = String(date.getMonth() + 1).padStart(2, "0");
-    const dd = String(date.getDate()).padStart(2, "0");
-    const hh = String(date.getHours()).padStart(2, "0");
-    const min = String(date.getMinutes()).padStart(2, "0");
-    const ss = String(date.getSeconds()).padStart(2, "0");
+        // ⏱ časové razítko
+        const yyyy = now.getFullYear();
+        const mm = String(now.getMonth() + 1).padStart(2, "0");
+        const dd = String(now.getDate()).padStart(2, "0");
+        const hh = String(now.getHours()).padStart(2, "0");
+        const min = String(now.getMinutes()).padStart(2, "0");
+        const ss = String(now.getSeconds()).padStart(2, "0");
 
-    const filename = `${yyyy}-${mm}-${dd}_${hh}-${min}-${ss}.md`;
+        const filename = `${yyyy}-${mm}-${dd}_${hh}-${min}-${ss}.md`;
+        const path = `src/content/i18n/cs/poptavky/${filename}`;
 
-    // 2️⃣ Frontmatter pro Decap CMS
-    const frontmatter = `---
+        // 📄 markdown obsah
+        const content = `---
 title: "${yyyy}-${mm}-${dd}_${hh}-${min}-${ss} - ${data.jmeno}"
 status: "nová poptávka"
 date: "${date.toISOString()}"
@@ -36,23 +36,50 @@ adresa: "${data.adresa || ""}"
 mnozstvi: "${data.mnozstvi}"
 poznamka: "${data.poznamka || ""}"
 ---
+
 `;
 
-    const content = frontmatter + "\n";
+        const encoded = Buffer.from(content).toString("base64");
 
-    // 3️⃣ Cesta do repozitáře, kde Decap CMS čte soubory
-    const filePath = path.join(process.cwd(), "content", "poptavky", filename);
+        const res = await fetch(
+            `https://api.github.com/repos/${process.env.GITHUB_REPO}/contents/${path}`,
+            {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+                    "Content-Type": "application/json",
+                    Accept: "application/vnd.github+json",
+                },
+                body: JSON.stringify({
+                    message: `Nová poptávka ${filename}`,
+                    content: encoded,
+                }),
+            }
+        );
 
-    try {
-        fs.writeFileSync(filePath, content);
-        console.log("Soubor vytvořen:", filename);
+        if (!res.ok) {
+            const text = await res.text();
+            throw new Error(text);
+        }
+
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ ok: true, filename }),
+        };
     } catch (err) {
         console.error(err);
-        return { statusCode: 500, body: "Chyba při vytváření souboru" };
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: "Chyba při ukládání souboru" }),
+        };
     }
-
-    return {
-        statusCode: 200,
-        body: JSON.stringify({ message: "OK", filename }),
-    };
 }
+
+
+
+
+
+
+
+
+
