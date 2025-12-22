@@ -11,8 +11,8 @@ module.exports = {
     mapLink: "https://maps.app.goo.gl/GQmwqUWKd6JMZi8Y7",
   },
   socials: {
-    facebook: "https://www.facebook.com/padreza/",
-    instagram: "https://www.instagram.com/padreza/",
+    facebook: "https://www.facebook.com/profile.php?id=61578745085616",
+    instagram: "https://www.instagram.com/",
     whatsapp: "https://wa.me/" + this.phoneForTel
   },
   //! Make sure you include the file protocol (e.g. https://) and that NO TRAILING SLASH is included
