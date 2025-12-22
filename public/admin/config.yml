@@ -13,33 +13,23 @@ public_folder: "/assets/images/cms"
 local_backend: true
 
 collections:
-  - summary: "{{jmeno}} • {{mnozstvi}} • {{drevo}} • {{suchost}} • {{delka}} [{{date}}]"
-    sortable_fields: ["date", "jmeno", "status"]
-    view_filters:
-      - label: "nová poptávka"
-        field: status
-        pattern: "nová poptávka"
-      - label: "zákazník kontaktován"
-        field: status
-        pattern: "zákazník kontaktován"
-      - label: "vyřízeno"
-        field: status
-        pattern: "vyřízeno"
-    name: "poptavky"
-    label: "Poptávky"
+  # =========================
+  # NOVÉ POPTÁVKY
+  # =========================
+  - name: "poptavky_nove"
+    label: "Poptávky – nové"
+    summary: "{{jmeno}} • {{mnozstvi}} • {{drevo}} • {{suchost}} • {{delka}} [{{date}}]"
     folder: "src/content/i18n/cs/poptavky"
-    create: false # formulář generuje soubory, CMS je pouze pro úpravu
+    create: false
     delete: true
+    filter:
+      field: status
+      value: "nová poptávka"
+    sortable_fields: ["date", "jmeno"]
     editor:
       preview: true
-    fields:
-      - {
-          label: "Datum",
-          name: "date",
-          widget: "datetime",
-          required: true,
-          readonly: true,
-        }
+    fields: &poptavky_fields
+      - { label: "Datum", name: "date", widget: "datetime", readonly: true }
       - {
           label: "Stav",
           name: "status",
@@ -98,3 +88,37 @@ collections:
           required: false,
         }
       - { label: "Komentář", name: "komentar", widget: "text", required: false }
+
+  # =========================
+  # KONTAKTOVANÉ
+  # =========================
+  - name: "poptavky_kontaktovane"
+    label: "Poptávky – kontaktované"
+    summary: "{{jmeno}} • {{mnozstvi}} • {{drevo}} • {{delka}}"
+    folder: "src/content/i18n/cs/poptavky"
+    create: false
+    delete: true
+    filter:
+      field: status
+      value: "zákazník kontaktován"
+    sortable_fields: ["date", "jmeno"]
+    editor:
+      preview: true
+    fields: *poptavky_fields
+
+  # =========================
+  # VYŘÍZENÉ
+  # =========================
+  - name: "poptavky_vyrizene"
+    label: "Poptávky – vyřízené"
+    summary: "{{jmeno}} • {{mnozstvi}} • {{drevo}}"
+    folder: "src/content/i18n/cs/poptavky"
+    create: false
+    delete: true
+    filter:
+      field: status
+      value: "vyřízeno"
+    sortable_fields: ["date", "jmeno"]
+    editor:
+      preview: true
+    fields: *poptavky_fields
