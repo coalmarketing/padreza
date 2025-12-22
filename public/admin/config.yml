@@ -4,7 +4,7 @@ backend:
 
 # Change url to a link to the image you want to use, no file paths, must be a URL
 logo:
-  src: "https://www.senoweb.cz/assets/images/senoweb_og_logo_rounded.png"
+  src: "https://padreza.netlify.app/assets/svgs/Padreza_logo.svg"
   show_in_header: false
 
 locale: "cs"
