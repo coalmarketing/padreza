@@ -13,8 +13,8 @@ public_folder: "/assets/images/cms"
 local_backend: true
 
 collections:
-  - identifier_field: "{{date - jmeno}}"
-    summary: "{{mnozstvi}} | {{drevo}} | {{suchost}} | {{delka}}"
+  - identifier_field: date
+    summary: "{{status}} - {{jmeno}} ({{mnozstvi}} cpm, {{drevo}}, {{suchost}}, {{delka}}"
     sortable_fields: ["date", "jmeno", "status"]
     view_filters:
       - label: "nová poptávka"
