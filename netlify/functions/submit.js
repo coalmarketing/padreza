@@ -21,10 +21,10 @@ exports.handler = async function (event, context) {
         const path = `src/content/i18n/cs/poptavky/${filename}`;
 
         const content = `---
-title: "${yyyy}-${mm}-${dd}_${hh}-${min}-${ss} - ${data.jmeno || ""}"
+title: "${yyyy}-${mm}-${dd} v ${hh}:${min} - ${data.jmeno || ""}"
 status: "nová poptávka"
 lang: "cs"
-date: "${now.toISOString()}"
+date: "${yyyy}-${mm}-${dd} @ ${hh}:${min}:${ss}"
 jmeno: "${data.jmeno || ""}"
 telefon: "${data.telefon || ""}"
 mail: "${data.mail || ""}"
