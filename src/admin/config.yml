@@ -13,7 +13,20 @@ public_folder: "/assets/images/cms"
 local_backend: true
 
 collections:
-  - name: "poptavky"
+  - identifier_field: "{{date - jmeno}}"
+    summary: "{{mnozstvi}} | {{drevo}} | {{suchost}} | {{delka}}"
+    sortable_fields: ["date", "jmeno", "status"]
+    view_filters:
+      - label: "nová poptávka"
+        field: status
+        pattern: true
+      - label: "zákazník kontaktován"
+        field: status
+        pattern: true
+      - label: "vyřízeno"
+        field: status
+        pattern: true
+    name: "poptavky"
     label: "Poptávky"
     folder: "src/content/i18n/cs/poptavky"
     create: false # formulář generuje soubory, CMS je pouze pro úpravu
