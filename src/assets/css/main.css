@@ -1785,6 +1785,10 @@ nav ul a:hover {
   padding-top: 170px;
 }
 
+.pt-10 {
+  padding-top: 2.5rem;
+}
+
 .text-left {
   text-align: left;
 }
