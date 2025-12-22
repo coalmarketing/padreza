@@ -19,13 +19,13 @@ collections:
     view_filters:
       - label: "nová poptávka"
         field: status
-        pattern: true
+        pattern: "nová poptávka"
       - label: "zákazník kontaktován"
         field: status
-        pattern: true
+        pattern: "zákazník kontaktován"
       - label: "vyřízeno"
         field: status
-        pattern: true
+        pattern: "vyřízeno"
     name: "poptavky"
     label: "Poptávky"
     folder: "src/content/i18n/cs/poptavky"
