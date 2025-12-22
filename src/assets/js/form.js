@@ -56,7 +56,7 @@ else if (form2) {
 
             // 3️⃣ a mezitím FORM submit (na pozadí)
             form2.dataset.sending = "done";
-            form2.submit();
+            // form2.submit();
 
         } catch (err) {
             console.error("Chyba submit.js:", err);

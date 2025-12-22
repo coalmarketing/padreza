@@ -40,7 +40,6 @@
         localStorage.removeItem("form1");
         window.location.href = "/poptavka-odeslana/";
         form2.dataset.sending = "done";
-        form2.submit();
       } catch (err) {
         console.error("Chyba submit.js:", err);
         form2.dataset.sending = "false";

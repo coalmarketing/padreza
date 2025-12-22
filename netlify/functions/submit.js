@@ -33,7 +33,7 @@ drevo: "${data.drevo || ""}"
 suchost: "${data.suchost || ""}"
 doprava: "${data.doprava || ""}"
 adresa: "${data.adresa || ""}"
-mnozstvi: "${data.mnozstvi || ""}"
+mnozstvi: "${data.mnozstvi || ""} prms"
 poznamka: "${data.poznamka || ""}"
 ---
 `;
