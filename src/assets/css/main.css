@@ -1769,6 +1769,10 @@ nav ul a:hover {
   padding-right: 6rem;
 }
 
+.pt-10 {
+  padding-top: 2.5rem;
+}
+
 .pt-12 {
   padding-top: 3rem;
 }
@@ -1783,10 +1787,6 @@ nav ul a:hover {
 
 .pt-\[170px\] {
   padding-top: 170px;
-}
-
-.pt-10 {
-  padding-top: 2.5rem;
 }
 
 .text-left {

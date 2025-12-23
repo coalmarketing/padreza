@@ -24,7 +24,7 @@ exports.handler = async function (event, context) {
 title: "${yyyy}-${mm}-${dd} v ${hh}:${min} - ${data.jmeno || ""}"
 status: "nová poptávka"
 lang: "cs"
-date: "${yyyy}-${mm}-${dd} @ ${hh}:${min}:${ss}"
+date: "${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}"
 jmeno: "${data.jmeno || ""}"
 telefon: "${data.telefon || ""}"
 mail: "${data.mail || ""}"
