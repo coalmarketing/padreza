@@ -60,7 +60,7 @@
   }
 
   .card {
-    @apply py-3 aspect-square bg-primary text-white flex flex-initial border border-4 sm:border-8 border-background flex-col justify-between w-full basis-full basis-1/2 lg:basis-1/4 cursor-pointer;
+    @apply aspect-square bg-primary text-white flex border border-4 sm:border-8 border-background flex-col justify-between w-full basis-full basis-1/2 lg:basis-1/4 cursor-pointer;
   }
 
   .card.active {
@@ -76,11 +76,15 @@
   }
 
   .card div {
-    @apply flex items-center justify-center flex-1;
+    @apply items-center justify-center flex flex-initial h-1/2;
+  }
+
+  .card div:first-child {
+    @apply pt-[15%];
   }
 
   .card div:first-child svg {
-    @apply text-secondary h-[70%] w-auto;
+    @apply text-secondary h-full w-auto;
   }
 
   .card:hover div:first-child svg,
