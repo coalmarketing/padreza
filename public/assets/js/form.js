@@ -35,17 +35,25 @@
     });
     const dopravaRadios = form2.querySelectorAll('input[name="doprava"]');
     const adresa = form2.querySelector('input[name="adresa"]');
+    const submitBtn = form2.querySelector('button[type="submit"], input[type="submit"]');
     dopravaRadios.forEach((radio) => {
       radio.addEventListener("change", updateAdresa);
     });
     updateAdresa();
     form2.addEventListener("submit", async (e) => {
-      if (form2.dataset.sending === "done") {
-        return;
-      }
+      if (form2.dataset.sending === "done") return;
       e.preventDefault();
       if (form2.dataset.sending === "true") return;
       form2.dataset.sending = "true";
+      form2.querySelectorAll("input, select, textarea, button").forEach((el) => el.disabled = true);
+      if (submitBtn) {
+        submitBtn.dataset.originalText = submitBtn.textContent || submitBtn.value;
+        if (submitBtn.tagName === "BUTTON") {
+          submitBtn.textContent = "Odes\xEDl\xE1m \u2026";
+        } else {
+          submitBtn.value = "Odes\xEDl\xE1m \u2026";
+        }
+      }
       const formData = new FormData(form2);
       const data = Object.fromEntries(formData.entries());
       try {
@@ -62,8 +70,16 @@
         window.location.href = "/poptavka-odeslana/";
         form2.dataset.sending = "done";
       } catch (err) {
-        console.error("Chyba submit.js:", err);
+        console.error("Chyba odes\xEDl\xE1n\xED popt\xE1vky", err);
         form2.dataset.sending = "false";
+        form2.querySelectorAll("input, select, textarea, button").forEach((el) => el.disabled = false);
+        if (submitBtn && submitBtn.dataset.originalText) {
+          if (submitBtn.tagName === "BUTTON") {
+            submitBtn.textContent = submitBtn.dataset.originalText;
+          } else {
+            submitBtn.value = submitBtn.dataset.originalText;
+          }
+        }
         alert("Odesl\xE1n\xED se nezda\u0159ilo, zkuste to pros\xEDm znovu.");
       }
     });

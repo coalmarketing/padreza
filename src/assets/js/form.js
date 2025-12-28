@@ -27,6 +27,7 @@ else if (form2) {
 
     const dopravaRadios = form2.querySelectorAll('input[name="doprava"]');
     const adresa = form2.querySelector('input[name="adresa"]');
+    const submitBtn = form2.querySelector('button[type="submit"], input[type="submit"]');
 
     function updateAdresa() {
         const selected = form2.querySelector('input[name="doprava"]:checked');
@@ -48,15 +49,23 @@ else if (form2) {
     updateAdresa();
 
     form2.addEventListener("submit", async (e) => {
-        // pokud už jsme po serverless funkci → necháme submit proběhnout
-        if (form2.dataset.sending === "done") {
-            return;
-        }
+        if (form2.dataset.sending === "done") return;
 
         e.preventDefault();
-
         if (form2.dataset.sending === "true") return;
+
         form2.dataset.sending = "true";
+
+        // Deaktivace formuláře a změna textu tlačítka
+        form2.querySelectorAll("input, select, textarea, button").forEach(el => el.disabled = true);
+        if (submitBtn) {
+            submitBtn.dataset.originalText = submitBtn.textContent || submitBtn.value;
+            if (submitBtn.tagName === "BUTTON") {
+                submitBtn.textContent = "Odesílám …";
+            } else {
+                submitBtn.value = "Odesílám …";
+            }
+        }
 
         const formData = new FormData(form2);
         const data = Object.fromEntries(formData.entries());
@@ -68,24 +77,31 @@ else if (form2) {
                 body: JSON.stringify(data),
             });
 
-            // kontrola HTTP status
             if (!res.ok) {
-                const text = await res.text(); // nebo res.json()
+                const text = await res.text();
                 throw new Error(`Chyba serveru: ${res.status} ${text}`);
             }
 
-            // 2️⃣ po úspěchu přesměruj
+            // Po úspěchu přesměruj
             localStorage.removeItem("form1");
             window.location.href = "/poptavka-odeslana/";
-
             form2.dataset.sending = "done";
 
         } catch (err) {
-            console.error("Chyba submit.js:", err);
+            console.error("Chyba odesílání poptávky", err);
             form2.dataset.sending = "false";
+
+            // Obnovení formuláře a tlačítka
+            form2.querySelectorAll("input, select, textarea, button").forEach(el => el.disabled = false);
+            if (submitBtn && submitBtn.dataset.originalText) {
+                if (submitBtn.tagName === "BUTTON") {
+                    submitBtn.textContent = submitBtn.dataset.originalText;
+                } else {
+                    submitBtn.value = submitBtn.dataset.originalText;
+                }
+            }
+
             alert("Odeslání se nezdařilo, zkuste to prosím znovu.");
         }
     });
-
-
 }
