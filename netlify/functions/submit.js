@@ -9,21 +9,26 @@ export async function handler(event) {
     try {
         const data = JSON.parse(event.body);
         const now = new Date();
+        const options = {
+            timeZone: 'Europe/Prague',
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+        };
+        const [d, m, yyyy, hh, min, ss] = new Intl.DateTimeFormat('cs-CZ', {
+            ...options,
+            hour12: false
+        }).formatToParts(now).filter(p => ['day', 'month', 'year', 'hour', 'minute', 'second'].includes(p.type)).map(p => p.value);
 
-        const yyyy = now.getFullYear();
-        const mm = String(now.getMonth() + 1).padStart(2, "0");
-        const dd = String(now.getDate()).padStart(2, "0");
-        const m = String(now.getMonth() + 1);
-        const d = String(now.getDate());
-        const hh = String(now.getHours()).padStart(2, "0");
-        const min = String(now.getMinutes()).padStart(2, "0");
-        const ss = String(now.getSeconds()).padStart(2, "0");
         const domain = process.env.SITE_URL || "https://www.padreza.cz";
-        const filename = `${yyyy}-${mm}-${dd}_${hh}-${min}-${ss}.md`;
+        const filename = `${yyyy}-${m.padStart(2, '0')}-${d.padStart(2, '0')}_${hh}-${min}-${ss}.md`;
         const path = `src/content/i18n/cs/poptavky/${filename}`;
 
         const content = `---
-title: "${yyyy}-${mm}-${dd} v ${hh}:${min} - ${data.jmeno || ""}"
+title: "${yyyy}-${m.padStart(2, '0')}-${d.padStart(2, '0')} v ${hh}:${min} - ${data.jmeno || ""}"
 lang: "cs"
 date: "${now.toISOString()}"
 status: "nová poptávka"
@@ -93,9 +98,10 @@ poznamka: "${data.poznamka || ""}"
                     <li><b>Délka:</b> ${data.delka || "---"}</li>
                     <li><b>Doprava:</b> ${data.adresa ? `${data.doprava} &gt; ${data.adresa}` : data.doprava || "---"}</li>
                 </ul>
-                <p><b>Poznámka:</b><br /> ${data.poznamka || "---"}</p>
+                <h3>Poznámka:</h3>
+                    <p> ${data.poznamka || "---"}</p>
                 <hr />
-                <p>Nezávazná poptávka z webu <a href="${domain}">${domain}</a> ze dne ${d}.${m}.${yyyy} v ${hh}:${min}:${ss} hodin.</p>
+                <p>Nezávazná poptávka z webu <a href="${domain}">${domain}</a> ze dne ${d}.${m}.${yyyy} - ${hh}:${min}:${ss} hodin.</p>
             `,
         });
 
