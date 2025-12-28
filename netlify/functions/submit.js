@@ -105,9 +105,10 @@ poznamka: "${data.poznamka || ""}"
         };
     } catch (err) {
         console.error("Chyba při zpracování poptávky", err);
+        console.error(JSON.stringify({ error: err.message }));
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: err.message }),
+            body: "Poptávku se nepodařilo zpracovat",
         };
     }
 }

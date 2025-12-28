@@ -62,20 +62,23 @@ else if (form2) {
         const data = Object.fromEntries(formData.entries());
 
         try {
-            // 1️⃣ serverless funkce (MD soubor)
-            await fetch("/.netlify/functions/submit", {
+            const res = await fetch("/.netlify/functions/submit", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
             });
 
-            // 2️⃣ po úspěchu přesměruj RUČNĚ
+            // kontrola HTTP status
+            if (!res.ok) {
+                const text = await res.text(); // nebo res.json()
+                throw new Error(`Chyba serveru: ${res.status} ${text}`);
+            }
+
+            // 2️⃣ po úspěchu přesměruj
             localStorage.removeItem("form1");
             window.location.href = "/poptavka-odeslana/";
 
-            // 3️⃣ a mezitím FORM submit (na pozadí)
             form2.dataset.sending = "done";
-            // form2.submit();
 
         } catch (err) {
             console.error("Chyba submit.js:", err);

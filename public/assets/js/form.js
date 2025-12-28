@@ -49,11 +49,15 @@
       const formData = new FormData(form2);
       const data = Object.fromEntries(formData.entries());
       try {
-        await fetch("/.netlify/functions/submit", {
+        const res = await fetch("/.netlify/functions/submit", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data)
         });
+        if (!res.ok) {
+          const text = await res.text();
+          throw new Error(`Chyba serveru: ${res.status} ${text}`);
+        }
         localStorage.removeItem("form1");
         window.location.href = "/poptavka-odeslana/";
         form2.dataset.sending = "done";
