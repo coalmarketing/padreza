@@ -25,8 +25,27 @@ else if (form2) {
         if (input) input.value = value;
     });
 
-    const submitBtn = form2.querySelector('button[type="submit"]');
-    const originalBtnText = submitBtn.innerHTML;
+    const dopravaRadios = form2.querySelectorAll('input[name="doprava"]');
+    const adresa = form2.querySelector('input[name="adresa"]');
+
+    function updateAdresa() {
+        const selected = form2.querySelector('input[name="doprava"]:checked');
+        if (!selected) return;
+
+        if (selected.value === "vlastní") {
+            adresa.style.display = "none";
+            adresa.required = false;
+            adresa.value = "";
+        } else {
+            adresa.style.display = "";
+            adresa.required = true;
+        }
+    }
+
+    dopravaRadios.forEach(radio => {
+        radio.addEventListener("change", updateAdresa);
+    });
+    updateAdresa();
 
     form2.addEventListener("submit", async (e) => {
         // pokud už jsme po serverless funkci → necháme submit proběhnout

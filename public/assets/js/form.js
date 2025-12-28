@@ -14,14 +14,31 @@
       window.location.href = "/poptavka/";
     });
   } else if (form2) {
+    let updateAdresa = function() {
+      const selected = form2.querySelector('input[name="doprava"]:checked');
+      if (!selected) return;
+      if (selected.value === "vlastn\xED") {
+        adresa.style.display = "none";
+        adresa.required = false;
+        adresa.value = "";
+      } else {
+        adresa.style.display = "";
+        adresa.required = true;
+      }
+    };
+    updateAdresa2 = updateAdresa;
     const data1 = JSON.parse(localStorage.getItem("form1"));
     if (!data1) window.location.href = "/#objednavka";
     Object.entries(data1).forEach(([key, value]) => {
       const input = form2.querySelector(`input[name="${key}"]`);
       if (input) input.value = value;
     });
-    const submitBtn = form2.querySelector('button[type="submit"]');
-    const originalBtnText = submitBtn.innerHTML;
+    const dopravaRadios = form2.querySelectorAll('input[name="doprava"]');
+    const adresa = form2.querySelector('input[name="adresa"]');
+    dopravaRadios.forEach((radio) => {
+      radio.addEventListener("change", updateAdresa);
+    });
+    updateAdresa();
     form2.addEventListener("submit", async (e) => {
       if (form2.dataset.sending === "done") {
         return;
@@ -47,5 +64,6 @@
       }
     });
   }
+  var updateAdresa2;
 })();
 //# sourceMappingURL=form.js.map

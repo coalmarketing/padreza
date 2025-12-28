@@ -75,12 +75,12 @@
     @apply text-black;
   }
 
-  .card div:first-child {
-    @apply flex-1 flex items-center justify-center;
+  .card div {
+    @apply flex items-center justify-center flex-1;
   }
 
   .card div:first-child svg {
-    @apply w-14 h-14 text-secondary sm:w-20 sm:h-20 lg:w-14 lg:h-14;
+    @apply text-secondary h-[70%] w-auto;
   }
 
   .card:hover div:first-child svg,
@@ -89,7 +89,7 @@
   }
 
   .card div:last-child {
-    @apply flex-1 flex items-center justify-center overflow-hidden;
+    @apply overflow-hidden;
   }
 
   nav ul a:hover {
@@ -97,7 +97,7 @@
   }
 
   .card div:last-child p {
-    @apply font-bold text-center leading-tight text-lg sm:text-2xl lg:text-xl;
+    @apply h-full flex items-center text-center sm:text-2xl md:text-2xl lg:text-base xl:text-2xl font-bold;
   }
 
   .info {
