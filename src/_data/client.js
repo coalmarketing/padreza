@@ -4,6 +4,7 @@ module.exports = {
   ico: "87313561",
   phoneForTel: "+420604895070",
   phoneFormatted: "+420 604 895 070",
+  description: "Padřeza - prodej a dovoz řeziva, palivového dřeva a stavebního dřeva v Pardubicích a okolí.",
   address: {
     lineOne: "Na Drážce 1555",
     city: "Pardubice",
