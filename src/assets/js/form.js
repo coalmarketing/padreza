@@ -86,7 +86,7 @@ else if (form2) {
             console.error("Chyba submit:", err);
             form2.dataset.sending = "false";
             alert("Odeslání se nezdařilo, zkuste to prosím znovu.");
-            form2.querySelectorAll("input, select, textarea, button").forEach(el => el.disabled = false;
+            form2.querySelectorAll("input, select, textarea, button").forEach(el => el.disabled = false);
             submitBtn.value = "Nezávazně poptat";
         }
     });
