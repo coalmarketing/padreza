@@ -13,7 +13,10 @@
 {% include "components/home-schema.njk" %} {% endblock %} {% block body %}
 
 <section
-  class="flex h-[calc(100vh-48px)] flex-col bg-[url(/assets/images/person-working-wood-working-industry-factory.jpg)] bg-cover bg-center"
+  style="
+    background-image: url('/.netlify/images?url=/assets/images/person-working-wood-working-industry-factory.jpg&w=1600');
+  "
+  class="flex h-[calc(100vh-48px)] flex-col bg-cover bg-center"
 >
   <div
     class="flex h-full items-center lg:plc2 lg:prc2 plc prc max-md:px-12 bg-background bg-opacity-25"
