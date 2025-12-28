@@ -1016,6 +1016,12 @@ h3 {
   padding-top: 15%;
 }
 
+@media not all and (min-width: 40rem) {
+  .card div:first-child {
+    padding-bottom: 5%;
+  }
+}
+
 .card div:first-child svg {
   height: 100%;
   width: auto;
@@ -1043,12 +1049,14 @@ nav ul a:hover {
   align-items: center;
   text-align: center;
   font-weight: 700;
+  line-height: 1.25;
 }
 
 @media (min-width: 40rem) {
   .card div:last-child p {
     font-size: 1.5rem;
     line-height: 2rem;
+    line-height: 1.5;
   }
 }
 

@@ -80,7 +80,7 @@
   }
 
   .card div:first-child {
-    @apply pt-[15%];
+    @apply pt-[15%] max-sm:pb-[5%];
   }
 
   .card div:first-child svg {
@@ -101,7 +101,7 @@
   }
 
   .card div:last-child p {
-    @apply h-full flex items-center text-center sm:text-2xl md:text-2xl lg:text-base xl:text-2xl font-bold;
+    @apply h-full flex items-center leading-tight sm:leading-normal text-center sm:text-2xl md:text-2xl lg:text-base xl:text-2xl font-bold;
   }
 
   .info {
