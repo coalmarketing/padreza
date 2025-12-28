@@ -41,14 +41,14 @@
     });
     updateAdresa();
     form2.addEventListener("submit", async (e) => {
-      form2.querySelectorAll("input, select, textarea, button").forEach((el) => el.disabled = true);
-      submitBtn.value = "Odes\xEDl\xE1m popt\xE1vku...";
       if (form2.dataset.sending === "done") return;
       e.preventDefault();
       if (form2.dataset.sending === "true") return;
       form2.dataset.sending = "true";
       const formData = new FormData(form2);
       const data = Object.fromEntries(formData.entries());
+      form2.querySelectorAll("input, select, textarea, button").forEach((el) => el.disabled = true);
+      submitBtn.value = "Odes\xEDl\xE1m popt\xE1vku...";
       try {
         const res = await fetch("/.netlify/functions/submit", {
           method: "POST",

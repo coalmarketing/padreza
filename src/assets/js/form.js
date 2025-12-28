@@ -49,9 +49,6 @@ else if (form2) {
     updateAdresa();
 
     form2.addEventListener("submit", async (e) => {
-        form2.querySelectorAll("input, select, textarea, button").forEach(el => el.disabled = true);
-        submitBtn.value = "Odesílám poptávku...";
-
         // pokud už jsme po serverless funkci → necháme submit proběhnout
         if (form2.dataset.sending === "done") return;
 
@@ -62,6 +59,9 @@ else if (form2) {
 
         const formData = new FormData(form2);
         const data = Object.fromEntries(formData.entries());
+
+        form2.querySelectorAll("input, select, textarea, button").forEach(el => el.disabled = true);
+        submitBtn.value = "Odesílám poptávku...";
 
         try {
             const res = await fetch("/.netlify/functions/submit", {
