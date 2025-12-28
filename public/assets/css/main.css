@@ -1812,6 +1812,14 @@ nav ul a:hover {
   background-position: center;
 }
 
+.bg-\[50\%_calc\(50\%\+300px\)\] {
+  background-position: 50% calc(50% + 300px);
+}
+
+.bg-\[50\%_calc\(50\%\+50px\)\] {
+  background-position: 50% calc(50% + 50px);
+}
+
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -2544,6 +2552,54 @@ html.dark label.darkmode-container input[type="checkbox"] ~ .elements svg:nth-ch
     flex-direction: row;
   }
 
+  .md\:bg-\[50\%_calc\(50\%\+50px\)\] {
+    background-position: 50% calc(50% + 50px);
+  }
+
+  .md\:bg-\[50\%_calc\(50\%\+150px\)\] {
+    background-position: 50% calc(50% + 150px);
+  }
+
+  .md\:bg-\[50\%_calc\(50\%\+200px\)\] {
+    background-position: 50% calc(50% + 200px);
+  }
+
+  .md\:bg-\[50\%_calc\(50\%\+250px\)\] {
+    background-position: 50% calc(50% + 250px);
+  }
+
+  .md\:bg-\[50\%_calc\(60\%\)\] {
+    background-position: 50% calc(60%);
+  }
+
+  .md\:bg-\[50\%_calc\(80\%\)\] {
+    background-position: 50% calc(80%);
+  }
+
+  .md\:bg-\[50\%_calc\(20\%\)\] {
+    background-position: 50% calc(20%);
+  }
+
+  .md\:bg-\[50\%_calc\(10\%\)\] {
+    background-position: 50% calc(10%);
+  }
+
+  .md\:bg-\[50\%_calc\(40\%\+200px\)\] {
+    background-position: 50% calc(40% + 200px);
+  }
+
+  .md\:bg-\[50\%_calc\(40\%\+10px\)\] {
+    background-position: 50% calc(40% + 10px);
+  }
+
+  .md\:bg-\[50\%_calc\(40\%\+100px\)\] {
+    background-position: 50% calc(40% + 100px);
+  }
+
+  .md\:bg-\[50\%_calc\(40\%\)\] {
+    background-position: 50% calc(40%);
+  }
+
   .md\:pt-24 {
     padding-top: 6rem;
   }
@@ -2684,6 +2740,10 @@ html.dark label.darkmode-container input[type="checkbox"] ~ .elements svg:nth-ch
 
   .lg\:gap-2 {
     gap: 0.5rem;
+  }
+
+  .lg\:bg-\[50\%_calc\(50\%\+50px\)\] {
+    background-position: 50% calc(50% + 50px);
   }
 
   .lg\:p-2 {
