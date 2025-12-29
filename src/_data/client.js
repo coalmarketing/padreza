@@ -13,7 +13,7 @@ module.exports = {
   },
   socials: {
     facebook: "https://www.facebook.com/profile.php?id=61578745085616",
-    instagram: "https://www.instagram.com/",
+    instagram: "https://www.instagram.com/padreza_/",
     whatsapp: "https://wa.me/" + this.phoneForTel
   },
   //! Make sure you include the file protocol (e.g. https://) and that NO TRAILING SLASH is included
