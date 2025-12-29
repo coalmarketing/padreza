@@ -119,141 +119,22 @@
       >Kliknutím přeskočíte na hlavní obsah</a
     >
 
-    <header
-  class="fixed z-50 top-0 left-0 w-full text-xl print:hidden underline-offset-4"
->
-  <!-- MENU TOGGLE -->
-  <div class="fixed z-50 m-auto absolute right-[7%] lg:right-[14%]">
-    <button
-      id="toggle-menu"
-      class="absolute w-10 h-10 right-5 top-14"
-      aria-label="Menu"
-      aria-expanded="false"
-    >
-      <img
-        id="menu-open"
-        class="w-12 h-12"
-        src="/assets/svgs/Menu_icon.svg"
-        alt="Otevřít menu"
-      />
-      <img
-        id="menu-close"
-        class="w-12 h-12 hidden"
-        src="/assets/svgs/Close_icon.svg"
-        alt="Zavřít menu"
-      />
-    </button>
-  </div>
-
-  <!-- NAVIGATION -->
-  <nav
-    id="main-nav"
-    class="z-40 bg-background text-primary shadow-lg fixed top-0 left-0 w-full transform -translate-y-full transition-transform duration-500 ease-in-out hidden"
-  >
-    <div class="prc2 plc2 lg:plc2 lg:prc2">
-      <ul
-        class="z-10 flex w-full flex-col lg:flex-row gap-6 lg:gap-2 py-40 pr-24 lg:items-center lg:justify-between lg:py-16 xl:pr-48"
-      >
-        <li><a href="/#" class="block">Úvod</a></li>
-        <li><a href="/#sluzby" class="block">Služby</a></li>
-        <li>
-          <a
-            href="/assets/files/Padreza_cenik_web.pdf"
-            target="_blank"
-            class="block"
-          >
-            Orientační ceník
-          </a>
-        </li>
-        <li><a href="/#objednavka" class="block">Nezávazná objednávka</a></li>
-        <li><a href="/#o-nas" class="block">O nás</a></li>
-        <li><a href="/#kontakt" class="block">Kontakt</a></li>
-      </ul>
-    </div>
-  </nav>
-</header>
-
-<script>
-  const toggleBtn = document.getElementById("toggle-menu");
-  const nav = document.getElementById("main-nav");
-  const iconOpen = document.getElementById("menu-open");
-  const iconClose = document.getElementById("menu-close");
-
-  let isOpen = false;
-
-  function openMenu() {
-    isOpen = true;
-    nav.classList.remove("hidden");
-    // malá prodleva, aby se aktivoval transition
-    requestAnimationFrame(() => {
-      nav.classList.remove("-translate-y-full");
-      nav.classList.add("translate-y-0");
-    });
-
-    iconOpen.classList.add("hidden");
-    iconClose.classList.remove("hidden");
-    toggleBtn.setAttribute("aria-expanded", "true");
-  }
-
-  function closeMenu() {
-    isOpen = false;
-    nav.classList.remove("translate-y-0");
-    nav.classList.add("-translate-y-full");
-
-    // po konci transition skryjeme menu
-    nav.addEventListener("transitionend", function handler() {
-      if (!isOpen) {
-        nav.classList.add("hidden");
-      }
-      nav.removeEventListener("transitionend", handler);
-    });
-
-    iconOpen.classList.remove("hidden");
-    iconClose.classList.add("hidden");
-    toggleBtn.setAttribute("aria-expanded", "false");
-  }
-
-  toggleBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    isOpen ? closeMenu() : openMenu();
-  });
-
-  document.addEventListener("click", (e) => {
-    if (!isOpen) return;
-    if (!nav.contains(e.target) && !toggleBtn.contains(e.target)) {
-      closeMenu();
-    }
-  });
-
-  nav.addEventListener("click", (e) => {
-    if (e.target.closest("a")) {
-      closeMenu();
-    }
-  });
-</script>
-
+    
     <main id="main" class="bg-background text-primary text-lg">
-       <!-- LANDING -->
-<section class="relative ~px-4/8 pt-60 pb-16 z-10">
-  <div class="container m-auto flex flex-col items-start gap-8">
-    <!-- HEADING -->
-    <h1 class="text-center text-4xl"></h1>
-
-    <!-- BREADCRUMBS -->
-    <ul class="flex flex-wrap justify-center items-center ~gap-2/4">
       
-    </ul>
-  </div>
-</section>
 
 <!-- GDPR -->
-<section class="~py-16/24 ~px-4/8">
+<section class="py-32 plc2 prc2">
   <div class="container m-auto">
-    <div class="max-w-[75ch]">
+    <div class="max-w-[75ch] text-lg">
+      
+      <h2 class="text-3xl font-semibold mb-4">
+        Zásady ochrany osobních údajů
+      </h2>
       
       <div class="mb-6">
         
-        <p class="~text-sm/base text-gray-800 dark:text-gray-200 mb-2">
+        <p class="text-base mb-2">
           S Vašimi údaji je nakládáno v souladu se zákonem 101/2000 Sb. o ochraně osobních údajů, a dále také dle rozšiřujícího a sjednocujícího nařízení GDPR v podobě směrnice (EU) 2016/679, která původní zákon 101/2000 Sb. a směrnici 95/46/ES nahrazuje.
         </p>
         
@@ -261,23 +142,23 @@
       
       <div class="mb-6">
         
-        <h3 class="dark:text-white ~text-xl/2xl font-semibold mb-4">
+        <h3 class="text-2xl font-semibold mb-4">
           Správce osobních údajů
         </h3>
         
-        <p class="~text-sm/base text-gray-800 dark:text-gray-200 mb-2">
-          Správcem osobních údajů je Štěpán Horák, se sídlem 	Paběnická 179/6, Libuš, 14200 Praha 4, IČO 87212935 a jako správce zpracováváme tyto vaše osobní údaje - jméno, příjmení, email a telefonní číslo.
+        <p class="text-base mb-2">
+          Správcem osobních údajů je Ladislav Záhorský, se sídlem Na Drážce 1555, 53003 Pardubice, IČO 87313561 a jako správce zpracováváme tyto vaše osobní údaje – jméno, příjmení, e-mail a telefonní číslo.
         </p>
         
       </div>
       
       <div class="mb-6">
         
-        <h3 class="dark:text-white ~text-xl/2xl font-semibold mb-4">
+        <h3 class="text-2xl font-semibold mb-4">
           Účel sběru osobních údajů
         </h3>
         
-        <p class="~text-sm/base text-gray-800 dark:text-gray-200 mb-2">
+        <p class="text-base mb-2">
           Osobní údaje je nutné zpracovat za účelem vyřízení vašeho dotazu nebo poptávky. Tyto údaje jsou správcem zpracovány po dobu pravděpodobného trvání vašeho zájmu (maximálně 5 let) nebo po dobu trvání spolupráce.
         </p>
         
@@ -285,34 +166,35 @@
       
       <div class="mb-6">
         
-        <h3 class="dark:text-white ~text-xl/2xl font-semibold mb-4">
+        <h3 class="text-2xl font-semibold mb-4">
           Vaše práva
         </h3>
         
-        <p class="~text-sm/base text-gray-800 dark:text-gray-200 mb-2">
+        <p class="text-base mb-2">
           Vezměte prosím na vědomí, že podle nařízení (EU) 2016/679 (zvané GDPR) a zákona o ochraně osobních údajů máte právo:
+
         </p>
         
-        <ul class="list-disc max-w-2xl space-y-1 ml-8">
+        <ul class="list-disc text-base max-w-2xl space-y-1 ml-8">
           
-          <li class="font-work-sans text-gray-800 dark:text-gray-200">
+          <li>
             vzít souhlas kdykoliv zpět
           </li>
           
-          <li class="font-work-sans text-gray-800 dark:text-gray-200">
+          <li>
             požadovat po nás informaci, jaké vaše osobní údaje zpracováváme
           </li>
           
-          <li class="font-work-sans text-gray-800 dark:text-gray-200">
+          <li>
             požadovat po nás vysvětlení ohledně zpracování osobních údajů
           </li>
           
-          <li class="font-work-sans text-gray-800 dark:text-gray-200">
+          <li>
             vyžádat si u nás přístup k těmto údajům a tyto nechat aktualizovat nebo opravit
           </li>
           
-          <li class="font-work-sans text-gray-800 dark:text-gray-200">
-            v případě pochybností o dodržování povinností souvisejících se zpracováním  osobních údajů obrátit se na nás nebo na Úřad pro ochranu osobních údajů
+          <li>
+            v případě pochybností o dodržování povinností souvisejících se zpracováním osobních údajů obrátit se na nás nebo na Úřad pro ochranu osobních údajů
           </li>
           
         </ul>
@@ -325,8 +207,8 @@
 
     </main>
     <footer class="bg-black p-0 text-white">
-  <div class="m-auto flex plc prc max-md:px-8">
-    <div class="flex-auto py-3">
+  <div class="m-auto flex items-center plc prc max-md:px-8">
+    <div class="flex-auto py-3 text-xs md:text-base">
       <img
         alt="copyright icon"
         decoding="async"
@@ -336,7 +218,7 @@
         width="20"
         class="inline-block"
       />
-      copyright 2025
+      copyright 2026, vytvoříme web i vám
     </div>
     <div class="flex-right py-3">
       <a href="https://matfix.cz" target="_blank" title="Matfix"

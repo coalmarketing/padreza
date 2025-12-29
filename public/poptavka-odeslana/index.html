@@ -151,119 +151,7 @@
       >Kliknutím přeskočíte na hlavní obsah</a
     >
 
-    <header
-  class="fixed z-50 top-0 left-0 w-full text-xl print:hidden underline-offset-4"
->
-  <!-- MENU TOGGLE -->
-  <div class="fixed z-50 m-auto absolute right-[7%] lg:right-[14%]">
-    <button
-      id="toggle-menu"
-      class="absolute w-10 h-10 right-5 top-14"
-      aria-label="Menu"
-      aria-expanded="false"
-    >
-      <img
-        id="menu-open"
-        class="w-12 h-12"
-        src="/assets/svgs/Menu_icon.svg"
-        alt="Otevřít menu"
-      />
-      <img
-        id="menu-close"
-        class="w-12 h-12 hidden"
-        src="/assets/svgs/Close_icon.svg"
-        alt="Zavřít menu"
-      />
-    </button>
-  </div>
-
-  <!-- NAVIGATION -->
-  <nav
-    id="main-nav"
-    class="z-40 bg-background text-primary shadow-lg fixed top-0 left-0 w-full transform -translate-y-full transition-transform duration-500 ease-in-out hidden"
-  >
-    <div class="prc2 plc2 lg:plc2 lg:prc2">
-      <ul
-        class="z-10 flex w-full flex-col lg:flex-row gap-6 lg:gap-2 py-40 pr-24 lg:items-center lg:justify-between lg:py-16 xl:pr-48"
-      >
-        <li><a href="/#" class="block">Úvod</a></li>
-        <li><a href="/#sluzby" class="block">Služby</a></li>
-        <li>
-          <a
-            href="/assets/files/Padreza_cenik_web.pdf"
-            target="_blank"
-            class="block"
-          >
-            Orientační ceník
-          </a>
-        </li>
-        <li><a href="/#objednavka" class="block">Nezávazná objednávka</a></li>
-        <li><a href="/#o-nas" class="block">O nás</a></li>
-        <li><a href="/#kontakt" class="block">Kontakt</a></li>
-      </ul>
-    </div>
-  </nav>
-</header>
-
-<script>
-  const toggleBtn = document.getElementById("toggle-menu");
-  const nav = document.getElementById("main-nav");
-  const iconOpen = document.getElementById("menu-open");
-  const iconClose = document.getElementById("menu-close");
-
-  let isOpen = false;
-
-  function openMenu() {
-    isOpen = true;
-    nav.classList.remove("hidden");
-    // malá prodleva, aby se aktivoval transition
-    requestAnimationFrame(() => {
-      nav.classList.remove("-translate-y-full");
-      nav.classList.add("translate-y-0");
-    });
-
-    iconOpen.classList.add("hidden");
-    iconClose.classList.remove("hidden");
-    toggleBtn.setAttribute("aria-expanded", "true");
-  }
-
-  function closeMenu() {
-    isOpen = false;
-    nav.classList.remove("translate-y-0");
-    nav.classList.add("-translate-y-full");
-
-    // po konci transition skryjeme menu
-    nav.addEventListener("transitionend", function handler() {
-      if (!isOpen) {
-        nav.classList.add("hidden");
-      }
-      nav.removeEventListener("transitionend", handler);
-    });
-
-    iconOpen.classList.remove("hidden");
-    iconClose.classList.add("hidden");
-    toggleBtn.setAttribute("aria-expanded", "false");
-  }
-
-  toggleBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    isOpen ? closeMenu() : openMenu();
-  });
-
-  document.addEventListener("click", (e) => {
-    if (!isOpen) return;
-    if (!nav.contains(e.target) && !toggleBtn.contains(e.target)) {
-      closeMenu();
-    }
-  });
-
-  nav.addEventListener("click", (e) => {
-    if (e.target.closest("a")) {
-      closeMenu();
-    }
-  });
-</script>
-
+    
     <main id="main" class="bg-background text-primary text-lg">
       
 
@@ -303,8 +191,8 @@
 
     </main>
     <footer class="bg-black p-0 text-white">
-  <div class="m-auto flex plc prc max-md:px-8">
-    <div class="flex-auto py-3">
+  <div class="m-auto flex items-center plc prc max-md:px-8">
+    <div class="flex-auto py-3 text-xs md:text-base">
       <img
         alt="copyright icon"
         decoding="async"
@@ -314,7 +202,7 @@
         width="20"
         class="inline-block"
       />
-      copyright 2025
+      copyright 2026, vytvoříme web i vám
     </div>
     <div class="flex-right py-3">
       <a href="https://matfix.cz" target="_blank" title="Matfix"

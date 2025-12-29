@@ -1388,6 +1388,10 @@ nav ul a:hover {
   display: grid;
 }
 
+.list-item {
+  display: list-item;
+}
+
 .hidden {
   display: none;
 }
@@ -1442,6 +1446,10 @@ nav ul a:hover {
 
 .h-full {
   height: 100%;
+}
+
+.max-h-96 {
+  max-height: 24rem;
 }
 
 .w-10 {
@@ -1691,14 +1699,6 @@ nav ul a:hover {
   --tw-bg-opacity: 0.8;
 }
 
-.bg-\[url\(\/assets\/images\/dry-chopped-firewood-logs-ready-winter\.jpg\)\] {
-  background-image: url(/assets/images/dry-chopped-firewood-logs-ready-winter.jpg);
-}
-
-.bg-\[url\(\/assets\/images\/person-working-wood-working-industry-factory\.jpg\)\] {
-  background-image: url(/assets/images/person-working-wood-working-industry-factory.jpg);
-}
-
 .bg-cover {
   background-size: cover;
 }
@@ -1724,6 +1724,10 @@ nav ul a:hover {
   padding: 1rem;
 }
 
+.p-8 {
+  padding: 2rem;
+}
+
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1742,6 +1746,21 @@ nav ul a:hover {
 .py-40 {
   padding-top: 10rem;
   padding-bottom: 10rem;
+}
+
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.py-24 {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.py-32 {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
 }
 
 .pb-16 {
@@ -1839,6 +1858,16 @@ nav ul a:hover {
   line-height: 1.75rem;
 }
 
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -1933,6 +1962,11 @@ nav ul a:hover {
 .\~text-xl\/2xl {
   font-size: clamp(1.25rem,1.07rem + 0.45vw,1.5rem)/* fluid type from 1.25rem at 40rem to 1.5rem at 96rem */;
   line-height: clamp(1.75rem,1.57rem + 0.45vw,2rem)/* fluid from 1.75rem at 40rem to 2rem at 96rem */;
+}
+
+.\~text-2xl\/3xl {
+  font-size: clamp(1.5rem,1.232rem + 0.67vw,1.875rem)/* fluid type from 1.5rem at 40rem to 1.875rem at 96rem */;
+  line-height: clamp(2rem,1.82rem + 0.45vw,2.25rem)/* fluid from 2rem at 40rem to 2.25rem at 96rem */;
 }
 
 .\~gap-2\/4 {
@@ -2410,6 +2444,11 @@ html.dark label.darkmode-container input[type="checkbox"] ~ .elements svg:nth-ch
     line-height: 4.5rem;
   }
 
+  .md\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
   .md\:leading-snug {
     line-height: 1.375;
   }
@@ -2474,6 +2513,10 @@ html.dark label.darkmode-container input[type="checkbox"] ~ .elements svg:nth-ch
 
   .lg\:w-full {
     width: 100%;
+  }
+
+  .lg\:w-1\/4 {
+    width: 25%;
   }
 
   .lg\:max-w-\[50\%\] {

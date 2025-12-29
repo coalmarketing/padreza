@@ -1,8 +1,8 @@
 {
-  "name": "webousheck",
+  "name": "WEBoush",
   "private": true,
   "version": "1.0.0",
-  "description": "webousheck - custom websites",
+  "description": "WEBoush - custom websites",
   "main": "index.js",
   "scripts": {
     "watch:eleventy": "cross-env ELEVENTY_ENV=DEV eleventy --serve",
@@ -18,7 +18,7 @@
     "url": "git+https://github.com/slesingrmichal/dev-template-initial.git"
   },
   "keywords": [],
-  "author": "webousheck",
+  "author": "WEBoush",
   "license": "ISC",
   "dependencies": {
     "@11ty/eleventy": "^3.1.2",

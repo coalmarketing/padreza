@@ -24,7 +24,19 @@
 
 
 
+
+
+
+
+
+
     }}"/> <meta property="og:image:secure_url" content="{{ image or "/assets/images/og-logo.png"
+
+
+
+
+
+
 
 
 
@@ -135,7 +147,8 @@
       >Kliknutím přeskočíte na hlavní obsah</a
     >
 
-    {% include "sections/header.njk" %}
+    {% if permalink == "/" or permalink == "poptavka/" %} {% include
+    "sections/header.njk" %} {% endif %}
     <main id="main" class="bg-background text-primary text-lg">
       {% block body %}{% endblock %}
     </main>
