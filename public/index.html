@@ -489,7 +489,20 @@
         <div>
           <input type="email" name="mail" placeholder="E-mail *" required />
         </div>
-        <div class="max-lg:p-10 items-center">
+
+        <div class="order-4 lg:order-5 lg:col-span-3">
+          <label class="flex-row text-base">
+            <input type="checkbox" required />
+            <span>
+              * Souhlasím s
+              <a href="/gdpr/" target="_blank" class="underline">
+                ochranou osobních údajů / GDPR
+              </a>
+            </span>
+          </label>
+        </div>
+
+        <div class="max-lg:p-10 items-center order-5 lg:order-4">
           <button
             type="submit"
             class="bg-secondary overflow-hidden whitespace-nowrap items-center m-auto md:m-0 gap-2 p-4 lg:p-2 lg:w-full border-secondary text-white font-bold flex flex-row text-2xl"

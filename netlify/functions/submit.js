@@ -1,13 +1,13 @@
+import crypto from "crypto";
 import fetch from "node-fetch";
 import nodemailer from "nodemailer";
 
 export async function handler(event) {
-    if (event.httpMethod !== "POST") {
-        return { statusCode: 405, body: "Method Not Allowed" };
-    }
-
     try {
-        const data = JSON.parse(event.body);
+        if (event.httpMethod !== "POST") {
+            return { statusCode: 405, body: "Method Not Allowed" };
+        }
+
         const now = new Date();
         const options = {
             timeZone: 'Europe/Prague',
@@ -23,15 +23,27 @@ export async function handler(event) {
             hour12: false
         }).formatToParts(now).filter(p => ['day', 'month', 'year', 'hour', 'minute', 'second'].includes(p.type)).map(p => p.value);
 
+        const data = JSON.parse(event.body);
+
+        if (data.id && !/^[a-f0-9-]{36}$/.test(data.id)) {
+            return {
+                statusCode: 400,
+                body: "Neplatné ID",
+            };
+        }
+
         const domain = process.env.SITE_URL || "https://www.padreza.cz";
-        const filename = `${yyyy}-${m.padStart(2, '0')}-${d.padStart(2, '0')}_${hh}-${min}-${ss}.md`;
+        const id = data.id || crypto.randomUUID();
+        const filename = `${id}.md`;
         const path = `src/content/i18n/cs/poptavky/${filename}`;
+        const isUpdate = !!data.id;
 
         const content = `---
+id: "${id}"
 title: "${yyyy}-${m.padStart(2, '0')}-${d.padStart(2, '0')} v ${hh}:${min} - ${data.jmeno || ""}"
 lang: "cs"
 date: "${now.toISOString()}"
-status: "nová poptávka"
+status: "${isUpdate ? "nová poptávka" : "nový kontakt"}"
 datum: "${d}.${m}.${yyyy}"
 cas: "${hh}:${min}:${ss}"
 jmeno: "${data.jmeno || ""}"
@@ -47,8 +59,31 @@ poznamka: "${data.poznamka || ""}"
 ---
 `;
 
-        // 1️⃣ Uložení do GitHubu
-        const res = await fetch(
+        let sha = null;
+        // 🔁 UPDATE – načti existující soubor
+        if (isUpdate) {
+            const getRes = await fetch(
+                `https://api.github.com/repos/${process.env.GITHUB_REPO}/contents/${path}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+                    },
+                }
+            );
+
+            if (!getRes.ok) {
+                return {
+                    statusCode: 404,
+                    body: "Soubor k aktualizaci nebyl nalezen",
+                };
+            }
+
+            const existing = await getRes.json();
+            sha = existing.sha;
+        }
+
+        // 🧠 CREATE / UPDATE
+        const putRes = await fetch(
             `https://api.github.com/repos/${process.env.GITHUB_REPO}/contents/${path}`,
             {
                 method: "PUT",
@@ -57,32 +92,42 @@ poznamka: "${data.poznamka || ""}"
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    message: `Nová poptávka ${filename}`,
+                    message: isUpdate
+                        ? `Nová poptávka ${id}`
+                        : `Nový kontakt ${id}`,
                     content: Buffer.from(content).toString("base64"),
+                    ...(isUpdate && { sha }),
                 }),
             }
         );
 
-        if (!res.ok) throw new Error(await res.text());
+        if (!putRes.ok) {
+            const err = await putRes.text();
+            return {
+                statusCode: 500,
+                body: `Chyba při ukládání: ${err}`,
+            };
+        }
 
-        // 2️⃣ Odeslání emailu
-        const transporter = nodemailer.createTransport({
-            host: process.env.MAIL_HOST,
-            port: Number(process.env.MAIL_PORT),
-            secure: true,
-            auth: {
-                user: process.env.MAIL_USER,
-                pass: process.env.MAIL_PASS,
-            },
-        });
+        if (isUpdate) {
+            // 2️⃣ Odeslání emailu
+            const transporter = nodemailer.createTransport({
+                host: process.env.MAIL_HOST,
+                port: Number(process.env.MAIL_PORT),
+                secure: true,
+                auth: {
+                    user: process.env.MAIL_USER,
+                    pass: process.env.MAIL_PASS,
+                },
+            });
 
-        await transporter.sendMail({
-            from: `"Poptávky Padřeza" <${process.env.MAIL_USER}>`,
-            to: process.env.MAIL_TO,
-            cc: data.mail ? data.mail : undefined,
-            replyTo: data.mail || process.env.MAIL_USER,
-            subject: `📩 Nová nezávazná poptávka – ${data.jmeno || "anonymní"}`,
-            html: `
+            await transporter.sendMail({
+                from: `"Poptávky Padřeza" <${process.env.MAIL_USER}>`,
+                to: process.env.MAIL_TO,
+                cc: data.mail ? data.mail : undefined,
+                replyTo: data.mail || process.env.MAIL_USER,
+                subject: `📩 Nová nezávazná poptávka – ${data.jmeno || "anonymní"}`,
+                html: `
                 <h2>Nezávazná poptávka palivového dřeva Padřeza</h2>
                 <h3>Zákazník</h3>
                 <ul>
@@ -103,18 +148,34 @@ poznamka: "${data.poznamka || ""}"
                 <hr />
                 <p>Nezávazná poptávka z webu <a href="${domain}">${domain}</a> ze dne ${d}.${m}.${yyyy} - ${hh}:${min}:${ss} hodin.</p>
             `,
-        });
+            });
+
+        }
+
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ ok: true, filename }),
+            body: JSON.stringify({
+                ok: true,
+                id,
+                mode: isUpdate ? "update" : "create",
+            }),
         };
-    } catch (err) {
-        console.error("Chyba při zpracování poptávky", err);
-        console.error(JSON.stringify({ error: err.message }));
+
+
+
+
+
+
+    }
+    catch (err) {
+        console.error("Chyba v submit funkci:", err);
         return {
             statusCode: 500,
-            body: "Poptávku se nepodařilo zpracovat",
+            body: JSON.stringify({
+                error: "Interní chyba serveru",
+                message: err.message,
+            }),
         };
     }
 }

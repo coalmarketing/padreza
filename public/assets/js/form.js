@@ -10,10 +10,23 @@
         return;
       }
       const data = Object.fromEntries(new FormData(form1));
-      localStorage.setItem("form1", JSON.stringify(data));
+      fetch("/.netlify/functions/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      }).then((res) => res.json()).then((res) => {
+        if (res?.id) {
+          localStorage.setItem("form1", JSON.stringify({
+            ...data,
+            id: res.id
+          }));
+        }
+      }).catch(() => {
+      });
       window.location.href = "/poptavka/";
     });
-  } else if (form2) {
+  }
+  if (form2) {
     let updateAdresa = function() {
       const selected = form2.querySelector('input[name="doprava"]:checked');
       if (!selected) return;
@@ -27,28 +40,39 @@
       }
     };
     updateAdresa2 = updateAdresa;
-    const data1 = JSON.parse(localStorage.getItem("form1"));
-    if (!data1) window.location.href = "/#objednavka";
-    Object.entries(data1).forEach(([key, value]) => {
-      const input = form2.querySelector(`input[name="${key}"]`);
-      if (input) input.value = value;
-    });
+    const waitForData = async (timeout = 5e3) => {
+      const start = Date.now();
+      while (Date.now() - start < timeout) {
+        const data = JSON.parse(localStorage.getItem("form1"));
+        if (data?.id) return data;
+        await new Promise((r) => setTimeout(r, 100));
+      }
+      return null;
+    };
+    (async () => {
+      const data1 = await waitForData();
+      if (!data1) {
+        alert("Nepoda\u0159ilo se na\u010D\xEDst data formul\xE1\u0159e.");
+        window.location.href = "/";
+        return;
+      }
+      Object.entries(data1).forEach(([key, value]) => {
+        const input = form2.querySelector(`[name="${key}"]`);
+        if (input) input.value = value;
+      });
+    })();
     const dopravaRadios = form2.querySelectorAll('input[name="doprava"]');
     const adresa = form2.querySelector('input[name="adresa"]');
-    const submitBtn = form2.querySelector('button[type="submit"], input[type="submit"]');
-    dopravaRadios.forEach((radio) => {
-      radio.addEventListener("change", updateAdresa);
-    });
+    const submitBtn = form2.querySelector('[type="submit"]');
+    dopravaRadios.forEach((r) => r.addEventListener("change", updateAdresa));
     updateAdresa();
     form2.addEventListener("submit", async (e) => {
-      if (form2.dataset.sending === "done") return;
       e.preventDefault();
       if (form2.dataset.sending === "true") return;
       form2.dataset.sending = "true";
-      const formData = new FormData(form2);
-      const data = Object.fromEntries(formData.entries());
+      const data = Object.fromEntries(new FormData(form2));
       form2.querySelectorAll("input, select, textarea, button").forEach((el) => el.disabled = true);
-      submitBtn.value = "Odes\xEDl\xE1m popt\xE1vku...";
+      submitBtn.value = "Odes\xEDl\xE1m...";
       try {
         const res = await fetch("/.netlify/functions/submit", {
           method: "POST",
@@ -56,18 +80,17 @@
           body: JSON.stringify(data)
         });
         if (!res.ok) {
-          const text = await res.text();
-          throw new Error(`Chyba serveru: ${res.status} ${text}`);
+          const txt = await res.text();
+          throw new Error(txt);
         }
         localStorage.removeItem("form1");
         window.location.href = "/poptavka-odeslana/";
-        form2.dataset.sending = "done";
       } catch (err) {
-        console.error("Chyba submit:", err);
+        console.error("Chyba odesl\xE1n\xED:", err);
+        alert("Odesl\xE1n\xED se nezda\u0159ilo. Zkuste to pros\xEDm znovu.");
         form2.dataset.sending = "false";
-        alert("Odesl\xE1n\xED se nezda\u0159ilo, zkuste to pros\xEDm znovu.");
         form2.querySelectorAll("input, select, textarea, button").forEach((el) => el.disabled = false);
-        submitBtn.value = "Nez\xE1vazn\u011B poptat";
+        submitBtn.value = "Odeslat popt\xE1vku";
       }
     });
   }
