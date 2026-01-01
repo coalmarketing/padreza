@@ -52,7 +52,6 @@ if (form2) {
         // Pokud ještě nemáme ID, odeslat data
         if (!data1.id) {
             try {
-                submitBtn.value = "Odesílám...";
                 const res = await fetch("/.netlify/functions/submit", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },

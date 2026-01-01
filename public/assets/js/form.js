@@ -47,7 +47,6 @@
       }
       if (!data1.id) {
         try {
-          submitBtn.value = "Odes\xEDl\xE1m...";
           const res = await fetch("/.netlify/functions/submit", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
