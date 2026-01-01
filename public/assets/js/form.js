@@ -1,1 +1,99 @@
-(()=>{var w=Object.defineProperty,b=Object.defineProperties;var S=Object.getOwnPropertyDescriptors;var y=Object.getOwnPropertySymbols;var g=Object.prototype.hasOwnProperty,E=Object.prototype.propertyIsEnumerable;var p=(a,t,e)=>t in a?w(a,t,{enumerable:!0,configurable:!0,writable:!0,value:e}):a[t]=e,h=(a,t)=>{for(var e in t||(t={}))g.call(t,e)&&p(a,e,t[e]);if(y)for(var e of y(t))E.call(t,e)&&p(a,e,t[e]);return a},v=(a,t)=>b(a,S(t));var O=(a,t)=>()=>(t||a((t={exports:{}}).exports,t),t.exports);var u=(a,t,e)=>new Promise((d,l)=>{var r=o=>{try{n(e.next(o))}catch(m){l(m)}},s=o=>{try{n(e.throw(o))}catch(m){l(m)}},n=o=>o.done?d(o.value):Promise.resolve(o.value).then(r,s);n((e=e.apply(a,t)).next())});var k=O(f=>{var c=document.getElementById("form-1"),i=document.getElementById("form-2");c&&c.addEventListener("submit",a=>{if(a.preventDefault(),!c.checkValidity()){c.reportValidity();return}let t=Object.fromEntries(new FormData(c));fetch("/.netlify/functions/submit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(t)}).then(e=>e.json()).then(e=>{e!=null&&e.id&&localStorage.setItem("form1",JSON.stringify(v(h({},t),{id:e.id})))}).catch(()=>{}),window.location.href="/poptavka/"});if(i){let l=function(){let r=i.querySelector('input[name="doprava"]:checked');r&&(r.value==="vlastn\xED"?(e.style.display="none",e.required=!1,e.value=""):(e.style.display="",e.required=!0))};q=l;let a=(r=5e3)=>u(null,null,function*(){let s=Date.now();for(;Date.now()-s<r;){let n=JSON.parse(localStorage.getItem("form1"));if(n!=null&&n.id)return n;yield new Promise(o=>setTimeout(o,100))}return null});u(null,null,function*(){let r=yield a();if(!r){alert("Nepoda\u0159ilo se na\u010D\xEDst data formul\xE1\u0159e."),window.location.href="/";return}Object.entries(r).forEach(([s,n])=>{let o=i.querySelector(`[name="${s}"]`);o&&(o.value=n)})});let t=i.querySelectorAll('input[name="doprava"]'),e=i.querySelector('input[name="adresa"]'),d=i.querySelector('[type="submit"]');t.forEach(r=>r.addEventListener("change",l)),l(),i.addEventListener("submit",r=>u(null,null,function*(){if(r.preventDefault(),i.dataset.sending==="true")return;i.dataset.sending="true";let s=Object.fromEntries(new FormData(i));i.querySelectorAll("input, select, textarea, button").forEach(n=>n.disabled=!0),d.value="Odes\xEDl\xE1m...";try{let n=yield fetch("/.netlify/functions/submit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(s)});if(!n.ok){let o=yield n.text();throw new Error(o)}localStorage.removeItem("form1"),window.location.href="/poptavka-odeslana/"}catch(n){console.error("Chyba odesl\xE1n\xED:",n),alert("Odesl\xE1n\xED se nezda\u0159ilo. Zkuste to pros\xEDm znovu."),i.dataset.sending="false",i.querySelectorAll("input, select, textarea, button").forEach(o=>o.disabled=!1),d.value="Odeslat popt\xE1vku"}}))}var q});k();})();
+(() => {
+  // src/assets/js/form.js
+  var form1 = document.getElementById("form-1");
+  var form2 = document.getElementById("form-2");
+  if (form1) {
+    form1.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!form1.checkValidity()) {
+        form1.reportValidity();
+        return;
+      }
+      const data = Object.fromEntries(new FormData(form1));
+      fetch("/.netlify/functions/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      }).then((res) => res.json()).then((res) => {
+        if (res?.id) {
+          localStorage.setItem("form1", JSON.stringify({
+            ...data,
+            id: res.id
+          }));
+        }
+      }).catch(() => {
+      });
+      window.location.href = "/poptavka/";
+    });
+  }
+  if (form2) {
+    let updateAdresa = function() {
+      const selected = form2.querySelector('input[name="doprava"]:checked');
+      if (!selected) return;
+      if (selected.value === "vlastn\xED") {
+        adresa.style.display = "none";
+        adresa.required = false;
+        adresa.value = "";
+      } else {
+        adresa.style.display = "";
+        adresa.required = true;
+      }
+    };
+    updateAdresa2 = updateAdresa;
+    const waitForData = async (timeout = 5e3) => {
+      const start = Date.now();
+      while (Date.now() - start < timeout) {
+        const data = JSON.parse(localStorage.getItem("form1"));
+        if (data?.id) return data;
+        await new Promise((r) => setTimeout(r, 100));
+      }
+      return null;
+    };
+    (async () => {
+      const data1 = await waitForData();
+      if (!data1) {
+        alert("Nepoda\u0159ilo se na\u010D\xEDst data formul\xE1\u0159e.");
+        window.location.href = "/";
+        return;
+      }
+      Object.entries(data1).forEach(([key, value]) => {
+        const input = form2.querySelector(`[name="${key}"]`);
+        if (input) input.value = value;
+      });
+    })();
+    const dopravaRadios = form2.querySelectorAll('input[name="doprava"]');
+    const adresa = form2.querySelector('input[name="adresa"]');
+    const submitBtn = form2.querySelector('[type="submit"]');
+    dopravaRadios.forEach((r) => r.addEventListener("change", updateAdresa));
+    updateAdresa();
+    form2.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (form2.dataset.sending === "true") return;
+      form2.dataset.sending = "true";
+      const data = Object.fromEntries(new FormData(form2));
+      form2.querySelectorAll("input, select, textarea, button").forEach((el) => el.disabled = true);
+      submitBtn.value = "Odes\xEDl\xE1m...";
+      try {
+        const res = await fetch("/.netlify/functions/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) {
+          const txt = await res.text();
+          throw new Error(txt);
+        }
+        localStorage.removeItem("form1");
+        window.location.href = "/poptavka-odeslana/";
+      } catch (err) {
+        console.error("Chyba odesl\xE1n\xED:", err);
+        alert("Odesl\xE1n\xED se nezda\u0159ilo. Zkuste to pros\xEDm znovu.");
+        form2.dataset.sending = "false";
+        form2.querySelectorAll("input, select, textarea, button").forEach((el) => el.disabled = false);
+        submitBtn.value = "Odeslat popt\xE1vku";
+      }
+    });
+  }
+  var updateAdresa2;
+})();
+//# sourceMappingURL=form.js.map
