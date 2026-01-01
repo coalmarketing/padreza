@@ -1,6 +1,6 @@
-import crypto from "crypto";
-import fetch from "node-fetch";
-import nodemailer from "nodemailer";
+const crypto = require("crypto");
+const fetch = require("node-fetch");
+const nodemailer = require("nodemailer");
 
 exports.handler = async (event) => {
     try {
