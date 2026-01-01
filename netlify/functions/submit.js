@@ -1,7 +1,7 @@
-import crypto from "crypto";
-import nodemailer from "nodemailer";
+const crypto = require("crypto");
+const nodemailer = require("nodemailer");
 
-export async function handler(event) {
+exports.handler = async (event) => {
     try {
         if (event.httpMethod !== "POST") {
             return { statusCode: 405, body: "Method Not Allowed" };
