@@ -11,19 +11,7 @@
       }
       const data = Object.fromEntries(new FormData(form1));
       console.log(data);
-      fetch("/.netlify/functions/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      }).then((res) => res.json()).then((res) => {
-        if (res?.id) {
-          localStorage.setItem("form1", JSON.stringify({
-            ...data,
-            id: res.id
-          }));
-        }
-      }).catch(() => {
-      });
+      localStorage.setItem("form1", JSON.stringify(data));
       window.location.href = "/poptavka/";
     });
   }
@@ -45,7 +33,7 @@
       const start = Date.now();
       while (Date.now() - start < timeout) {
         const data = JSON.parse(localStorage.getItem("form1"));
-        if (data?.id) return data;
+        if (data) return data;
         await new Promise((r) => setTimeout(r, 100));
       }
       return null;
@@ -57,6 +45,28 @@
         window.location.href = "/";
         return;
       }
+      if (!data1.id) {
+        try {
+          submitBtn.value = "Odes\xEDl\xE1m...";
+          const res = await fetch("/.netlify/functions/submit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data1)
+          });
+          if (!res.ok) {
+            const txt = await res.text();
+            throw new Error(txt);
+          }
+          const json = await res.json();
+          data1.id = json.id;
+          localStorage.setItem("form1", JSON.stringify(data1));
+        } catch (err) {
+          console.error("Chyba p\u0159i submitu Form 1:", err);
+          alert("Odesl\xE1n\xED se nezda\u0159ilo, zkuste to pros\xEDm znovu.");
+        } finally {
+          submitBtn.value = "Odeslat popt\xE1vku";
+        }
+      }
       Object.entries(data1).forEach(([key, value]) => {
         const input = form2.querySelector(`[name="${key}"]`);
         if (input) input.value = value;
@@ -64,7 +74,6 @@
     })();
     const dopravaRadios = form2.querySelectorAll('input[name="doprava"]');
     const adresa = form2.querySelector('input[name="adresa"]');
-    const submitBtn = form2.querySelector('[type="submit"]');
     dopravaRadios.forEach((r) => r.addEventListener("change", updateAdresa));
     updateAdresa();
     form2.addEventListener("submit", async (e) => {

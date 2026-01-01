@@ -17,27 +17,8 @@ if (form1) {
         }
 
         const data = Object.fromEntries(new FormData(form1));
-
         console.log(data);
-
-        // odeslat asynchronně (neblokovat přesměrování)
-        fetch("/.netlify/functions/submit", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-        })
-            .then(res => res.json())
-            .then(res => {
-                if (res?.id) {
-                    localStorage.setItem("form1", JSON.stringify({
-                        ...data,
-                        id: res.id
-                    }));
-                }
-            })
-            .catch(() => {
-                // tichá chyba – fallback se řeší na druhé stránce
-            });
+        localStorage.setItem("form1", JSON.stringify(data));
 
         // okamžitý přechod na krok 2
         window.location.href = "/poptavka/";
@@ -49,12 +30,11 @@ if (form1) {
 // KROK 2 – načtení a odeslání
 // -------------------------------
 if (form2) {
-
     const waitForData = async (timeout = 5000) => {
         const start = Date.now();
         while (Date.now() - start < timeout) {
             const data = JSON.parse(localStorage.getItem("form1"));
-            if (data?.id) return data;
+            if (data) return data;
             await new Promise(r => setTimeout(r, 100));
         }
         return null;
@@ -69,7 +49,35 @@ if (form2) {
             return;
         }
 
-        // naplnění skrytých polí
+        // Pokud ještě nemáme ID, odeslat data
+        if (!data1.id) {
+            try {
+                submitBtn.value = "Odesílám...";
+                const res = await fetch("/.netlify/functions/submit", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data1),
+                });
+
+                if (!res.ok) {
+                    const txt = await res.text();
+                    throw new Error(txt);
+                }
+
+                const json = await res.json();
+                data1.id = json.id;
+
+                // uložit id zpět do localStorage
+                localStorage.setItem("form1", JSON.stringify(data1));
+            } catch (err) {
+                console.error("Chyba při submitu Form 1:", err);
+                alert("Odeslání se nezdařilo, zkuste to prosím znovu.");
+            } finally {
+                submitBtn.value = "Odeslat poptávku";
+            }
+        }
+
+        // naplnění inputů daty (ať už po submitu, nebo po refreshi)
         Object.entries(data1).forEach(([key, value]) => {
             const input = form2.querySelector(`[name="${key}"]`);
             if (input) input.value = value;
@@ -79,7 +87,6 @@ if (form2) {
     // přepínání dopravy
     const dopravaRadios = form2.querySelectorAll('input[name="doprava"]');
     const adresa = form2.querySelector('input[name="adresa"]');
-    const submitBtn = form2.querySelector('[type="submit"]');
 
     function updateAdresa() {
         const selected = form2.querySelector('input[name="doprava"]:checked');
