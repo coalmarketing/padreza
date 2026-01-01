@@ -30,7 +30,7 @@ if (form1) {
 // KROK 2 – načtení a odeslání
 // -------------------------------
 if (form2) {
-    const submitBtn = form2.querySelectorAll('[type="submit"]')
+    const submitBtn = form2.querySelectorAll('[type="submit"]');
     const waitForData = async (timeout = 5000) => {
         const start = Date.now();
         while (Date.now() - start < timeout) {
