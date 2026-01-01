@@ -18,6 +18,8 @@ if (form1) {
 
         const data = Object.fromEntries(new FormData(form1));
 
+        console.log(data);
+
         // odeslat asynchronně (neblokovat přesměrování)
         fetch("/.netlify/functions/submit", {
             method: "POST",
