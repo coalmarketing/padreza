@@ -29,6 +29,7 @@
       }
     };
     updateAdresa2 = updateAdresa;
+    const submitBtn = form2.querySelectorAll('[type="submit"]');
     const waitForData = async (timeout = 5e3) => {
       const start = Date.now();
       while (Date.now() - start < timeout) {
