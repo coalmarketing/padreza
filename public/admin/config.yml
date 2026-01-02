@@ -8,7 +8,8 @@ logo:
   show_in_header: false
 
 locale: "cs"
-
+media_folder: "src/assets/images/cms"
+public_folder: "/assets/images/cms"
 local_backend: true
 
 collections:
