@@ -67,7 +67,13 @@ collections:
           label: "Stav",
           name: "status",
           widget: "select",
-          options: ["nová poptávka", "zákazník kontaktován", "vyřízeno"],
+          options:
+            [
+              "nový kontakt",
+              "nová poptávka",
+              "zákazník kontaktován",
+              "vyřízeno",
+            ],
         }
       - { label: "Jméno", name: "jmeno", widget: "string", readonly: true }
       - { label: "Telefon", name: "telefon", widget: "string", readonly: true }
