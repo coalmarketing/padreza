@@ -140,7 +140,7 @@ collections:
     delete: true
     filter:
       field: status
-      value: ["kontakt", "nový kontakt"]
+      value: "nový kontakt"
     sortable_fields: ["date", "jmeno"]
     editor:
       preview: true
