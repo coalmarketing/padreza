@@ -41,7 +41,7 @@ collections:
   # =========================
   - name: "poptavky_nove"
     label: "2 - Poptávky"
-    summary: "🗓️ {{datum}} 👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} prms 🚚 {{doprava}}"
+    summary: "🗓️ {{datum}} 👤 {{jmeno}} 🪵 {{mnozstvi}} prms - {{suchost}} {{drevo}} 🚚 {{doprava}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
@@ -69,7 +69,7 @@ collections:
   # =========================
   - name: "poptavky_kontaktovane"
     label: "3 - V řešení (kontaktováno)"
-    summary: "🗓️ {{datum}} 👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} 🚚 {{doprava}}"
+    summary: "🗓️ {{datum}} 👤 {{jmeno}} 🪵 {{mnozstvi}} prms - {{suchost}} {{drevo}} 🚚 {{doprava}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
@@ -86,7 +86,7 @@ collections:
   # =========================
   - name: "poptavky_vyrizene"
     label: "4 - Vyřízené"
-    summary: "🗓️ {{datum}} 👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} 🚚 {{doprava}}"
+    summary: "🗓️ {{datum}} 👤 {{jmeno}} 🪵 {{mnozstvi}} prms - {{suchost}} {{drevo}} 🚚 {{doprava}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
