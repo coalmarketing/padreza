@@ -49,7 +49,7 @@ collections:
             - bold
             - italic
             - bulleted-list
-            - numbered-list,
+            - numbered-list
         }
 
   # =========================
@@ -136,7 +136,7 @@ collections:
             - bold
             - italic
             - bulleted-list
-            - numbered-list,
+            - numbered-list
         }
 
   # =========================
