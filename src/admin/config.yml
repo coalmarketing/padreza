@@ -8,8 +8,7 @@ logo:
   show_in_header: false
 
 locale: "cs"
-media_folder: "src/assets/images/cms"
-public_folder: "/assets/images/cms"
+
 local_backend: true
 
 collections:
@@ -51,7 +50,7 @@ collections:
   # =========================
   - name: "poptavky"
     label: "Poptávky"
-    summary: "{{#if stav == 'nová poptávka'}}🪵{{/if}}{{#if stav == 'zákazník kontaktován'}}💬{{/if}}{{#if stav == 'vyřízeno'}}✅{{/if}} {{jmeno}} ✉️ {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
+    summary: "[{{status}}] 👤 {{jmeno}} ✉️ {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
