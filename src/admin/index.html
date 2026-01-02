@@ -49,8 +49,6 @@
           handler: () => {
             setTimeout(() => {
               const hash = window.location.hash;
-
-              // očekává tvar: #/collections/NAZEV_KOLEKCE/...
               const match = hash.match(/#\/collections\/([^/]+)/);
 
               if (!match) return;
@@ -58,7 +56,13 @@
               const collection = match[1];
               const base = window.location.pathname.split("#")[0];
 
-              window.location.href = `${base}#/collections/${collection}`;
+              // 1️⃣ přesměruj pryč (donutí reload routeru)
+              window.location.href = `${base}#/`;
+
+              // 2️⃣ vrať se zpět do kolekce
+              setTimeout(() => {
+                window.location.href = `${base}#/collections/${collection}`;
+              }, 150);
             }, 300);
           },
         });
