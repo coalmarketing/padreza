@@ -40,20 +40,14 @@ collections:
       - { label: "Jméno", name: "jmeno", widget: "string", readonly: true }
       - { label: "Telefon", name: "telefon", widget: "string", readonly: true }
       - { label: "E-mail", name: "mail", widget: "string", readonly: true }
-      - {
-          label: "Komentář",
-          name: "komentar",
-          widget: "markdown",
-          required: false,
-          editor_components: ["bold", "italic", "bulleted-list", "numbered-list"]
-        }
+      - { label: "Komentář", name: "komentar", widget: "text", required: false}
 
   # =========================
   # NOVÉ POPTÁVKY
   # =========================
   - name: "poptavky_nove"
     label: "2. Poptávky"
-    summary: "👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} 🚚 {{doprava}} 🗓️ {{datum}} ⏰ {{cas}}"
+    summary: "🗓️ {{datum}} 👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} prms 🚚 {{doprava}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
@@ -64,7 +58,6 @@ collections:
     editor:
       preview: true
     fields: &poptavky_fields
-      - { label: "Datum", name: "date", widget: "datetime", readonly: true }
       - {
           label: "Stav",
           name: "status",
@@ -111,7 +104,7 @@ collections:
           required: false,
         }
       - {
-          label: "Množství",
+          label: "Množství (prms)",
           name: "mnozstvi",
           widget: "string",
           readonly: true,
@@ -123,20 +116,14 @@ collections:
           readonly: true,
           required: false,
         }
-      - {
-          label: "Komentář",
-          name: "komentar",
-          widget: "markdown",
-          required: false,
-          editor_components: ["bold", "italic", "bulleted-list", "numbered-list"]
-        }
+      - { label: "Komentář", name: "komentar", widget: "text", required: false}
 
   # =========================
   # KONTAKTOVANÉ
   # =========================
   - name: "poptavky_kontaktovane"
     label: "3. V řešení (kontaktováno)"
-    summary: "👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} 🚚 {{doprava}} 🗓️ {{datum}} ⏰ {{cas}}"
+    summary: "🗓️ {{datum}} 👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} 🚚 {{doprava}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
@@ -153,7 +140,7 @@ collections:
   # =========================
   - name: "poptavky_vyrizene"
     label: "4. Vyřízené"
-    summary: "👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} 🚚 {{doprava}} 🗓️ {{datum}} ⏰ {{cas}}"
+    summary: "🗓️ {{datum}} 👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} 🚚 {{doprava}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
