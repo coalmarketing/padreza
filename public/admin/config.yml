@@ -20,9 +20,7 @@ collections:
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
-    filter:
-      field: status
-      value: "kontakt"
+
     sortable_fields: ["date", "jmeno"]
     summary: "{{ikona}} {{jmeno}} ✉️ {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
     editor:
