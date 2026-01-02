@@ -14,39 +14,6 @@ local_backend: true
 
 collections:
   # =========================
-  # KONTAKTY
-  # =========================
-  - name: "kontakty"
-    label: "Kontakty"
-    summary: "{{jmeno}} ✉️ {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
-    folder: "src/content/i18n/cs/poptavky"
-    create: false
-    delete: true
-    filter:
-      field: status
-      value: ["nový kontakt", "kontakt"]
-    sortable_fields: ["date", "jmeno"]
-    editor:
-      preview: true
-    fields:
-      - { label: "Datum", name: "date", widget: "datetime", readonly: true }
-      - {
-          label: "Stav",
-          name: "status",
-          widget: "select",
-          options:
-            [
-              "nový kontakt",
-              "nová poptávka",
-              "zákazník kontaktován",
-              "vyřízeno",
-            ],
-        }
-      - { label: "Jméno", name: "jmeno", widget: "string", readonly: true }
-      - { label: "Telefon", name: "telefon", widget: "string", readonly: true }
-      - { label: "E-mail", name: "mail", widget: "string", readonly: true }
-
-  # =========================
   # NOVÉ POPTÁVKY
   # =========================
   - name: "poptavky_nove"
@@ -167,7 +134,7 @@ collections:
   # =========================
   - name: "kontakty"
     label: "Kontakty"
-    summary: "{{jmeno}} • {{mnozstvi}} • {{drevo}}"
+    summary: "{{jmeno}} ✉️ {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
