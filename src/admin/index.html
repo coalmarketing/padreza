@@ -44,22 +44,75 @@
       CMS.registerPreviewStyle("/admin/decap-preview-styles.css");
 
       if (window.CMS) {
+        // 🔁 Po uložení – vždy reload seznam
         window.CMS.registerEventListener({
           name: "postSave",
-          handler: () => {
+          handler: ({ collection }) => {
             setTimeout(() => {
-              const hash = window.location.hash;
-
-              // extrahuj kolekci z aktuální URL
-              const match = hash.match(/#\/collections\/([^/]+)/);
-
-              if (match && match[1]) {
-                window.location.href = `/admin/#/collections/${match[1]}`;
-              } else {
-                // fallback
-                window.location.href = "/admin/#/collections";
-              }
+              const base = window.location.pathname.split("#")[0];
+              window.location.href = `${base}#/collections/${collection.get(
+                "name"
+              )}`;
             }, 300);
+          },
+        });
+
+        // 🧠 Přidání vlastních tlačítek do editoru
+        window.CMS.registerEventListener({
+          name: "editor",
+          handler: ({ entry, collection }) => {
+            if (
+              !["poptavky_nove", "poptavky_kontaktovane"].includes(
+                collection.get("name")
+              )
+            ) {
+              return;
+            }
+
+            // zabrání duplikaci tlačítek
+            if (document.querySelector(".custom-status-buttons")) return;
+
+            const container = document.createElement("div");
+            container.className = "custom-status-buttons";
+            container.style.margin = "1rem 0";
+            container.style.display = "flex";
+            container.style.gap = "1rem";
+
+            const makeButton = (label, status, color) => {
+              const btn = document.createElement("button");
+              btn.textContent = label;
+              btn.style.padding = "8px 14px";
+              btn.style.background = color;
+              btn.style.color = "#fff";
+              btn.style.border = "none";
+              btn.style.borderRadius = "6px";
+              btn.style.cursor = "pointer";
+
+              btn.onclick = async () => {
+                const updated = entry.get("data").set("status", status);
+
+                await window.CMS.actions.saveEntry({
+                  ...entry.toJS(),
+                  data: updated.toJS(),
+                });
+              };
+
+              return btn;
+            };
+
+            container.appendChild(
+              makeButton(
+                "📞 Označit jako kontaktováno",
+                "zákazník kontaktován",
+                "#2563eb"
+              )
+            );
+            container.appendChild(
+              makeButton("✅ Označit jako vyřízené", "vyřízeno", "#16a34a")
+            );
+
+            const editor = document.querySelector(".nc-entryEditor");
+            if (editor) editor.prepend(container);
           },
         });
       }
