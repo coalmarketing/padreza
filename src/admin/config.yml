@@ -18,7 +18,7 @@ collections:
   # KONTAKTY
   # =========================
   - name: "kontakty"
-    label: "1. Kontakty"
+    label: "1 - Kontakty"
     summary: "👤 {{jmeno}} 📮 {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
@@ -30,23 +30,17 @@ collections:
     editor:
       preview: true
     fields:
-      - {
-          label: "Stav",
-          name: "status",
-          widget: "select",
-          options:
-            ["kontakt", "nová poptávka", "zákazník kontaktován", "vyřízeno"],
-        }
-      - { label: "Jméno", name: "jmeno", widget: "string", readonly: true }
-      - { label: "Telefon", name: "telefon", widget: "string", readonly: true }
-      - { label: "E-mail", name: "mail", widget: "string", readonly: true }
-      - { label: "Komentář", name: "komentar", widget: "text", required: false}
+      - { label: "Stav", name: "status", widget: "select", options: ["kontakt", "nová poptávka", "zákazník kontaktován", "vyřízeno"] }
+      - { label: "Jméno", name: "jmeno", widget: "string", required: true }
+      - { label: "Telefon", name: "telefon", widget: "string", required: true }
+      - { label: "E-mail", name: "mail", widget: "string", required: true }
+      - { label: "Poznámka", name: "poznamka", widget: "text", required: false }
 
   # =========================
   # NOVÉ POPTÁVKY
   # =========================
   - name: "poptavky_nove"
-    label: "2. Poptávky"
+    label: "2 - Poptávky"
     summary: "🗓️ {{datum}} 👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} prms 🚚 {{doprava}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
@@ -58,71 +52,23 @@ collections:
     editor:
       preview: true
     fields: &poptavky_fields
-      - {
-          label: "Stav",
-          name: "status",
-          widget: "select",
-          options:
-            ["kontakt", "nová poptávka", "zákazník kontaktován", "vyřízeno"],
-        }
-      - { label: "Jméno", name: "jmeno", widget: "string", readonly: true }
-      - { label: "Telefon", name: "telefon", widget: "string", readonly: true }
-      - { label: "E-mail", name: "mail", widget: "string", readonly: true }
-      - {
-          label: "Délka",
-          name: "delka",
-          widget: "select",
-          options: ["25 cm", "33 cm", "40 cm", "50 cm"],
-          readonly: true,
-        }
-      - {
-          label: "Dřevo",
-          name: "drevo",
-          widget: "select",
-          options: ["měkké", "polotvrdé", "tvrdé"],
-          readonly: true,
-        }
-      - {
-          label: "Suchost",
-          name: "suchost",
-          widget: "select",
-          options: ["suché", "čerstvé"],
-          readonly: true,
-        }
-      - {
-          label: "Doprava",
-          name: "doprava",
-          widget: "select",
-          options: ["vlastní", "smluvní dopravce"],
-          readonly: true,
-        }
-      - {
-          label: "Adresa",
-          name: "adresa",
-          widget: "string",
-          readonly: true,
-          required: false,
-        }
-      - {
-          label: "Množství (prms)",
-          name: "mnozstvi",
-          widget: "string",
-          readonly: true,
-        }
-      - {
-          label: "Poznámka",
-          name: "poznamka",
-          widget: "text",
-          readonly: true,
-          required: false,
-        }
-      - { label: "Komentář", name: "komentar", widget: "text", required: false}
+      - { label: "Stav", name: "status", widget: "select", options: ["kontakt", "nová poptávka", "zákazník kontaktován", "vyřízeno"] }
+      - { label: "Jméno", name: "jmeno", widget: "string", required: true }
+      - { label: "Telefon", name: "telefon", widget: "string", required: true }
+      - { label: "E-mail", name: "mail", widget: "string", required: true }
+      - { label: "Délka", name: "delka", widget: "select", options: ["25 cm", "33 cm", "40 cm", "50 cm"], required: false }
+      - { label: "Dřevo", name: "drevo", widget: "select", options: ["měkké", "polotvrdé", "tvrdé"], required: false }
+      - { label: "Suchost", name: "suchost", widget: "select", options: ["suché", "čerstvé"], required: false }
+      - { label: "Doprava", name: "doprava", widget: "select", options: ["vlastní", "smluvní dopravce"], required: false }
+      - { label: "Adresa", name: "adresa", widget: "string", required: false }
+      - { label: "Množství (prms)", name: "mnozstvi", widget: "string", required: false }
+      - { label: "Poznámka", name: "poznamka", widget: "text", required: false }
 
   # =========================
   # KONTAKTOVANÉ
   # =========================
   - name: "poptavky_kontaktovane"
-    label: "3. V řešení (kontaktováno)"
+    label: "3 - V řešení (kontaktováno)"
     summary: "🗓️ {{datum}} 👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} 🚚 {{doprava}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
@@ -139,7 +85,7 @@ collections:
   # VYŘÍZENÉ
   # =========================
   - name: "poptavky_vyrizene"
-    label: "4. Vyřízené"
+    label: "4 - Vyřízené"
     summary: "🗓️ {{datum}} 👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} 🚚 {{doprava}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
