@@ -161,3 +161,20 @@ collections:
     editor:
       preview: true
     fields: *poptavky_fields
+
+  # =========================
+  # VYŘÍZENÉ
+  # =========================
+  - name: "kontakty"
+    label: "Kontakty"
+    summary: "{{jmeno}} • {{mnozstvi}} • {{drevo}}"
+    folder: "src/content/i18n/cs/poptavky"
+    create: false
+    delete: true
+    filter:
+      field: status
+      value: ["kontakt", "nový kontakt"]
+    sortable_fields: ["date", "jmeno"]
+    editor:
+      preview: true
+    fields: *poptavky_fields
