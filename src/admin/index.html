@@ -45,11 +45,8 @@
 
       if (window.CMS) {
         document.addEventListener("DOMContentLoaded", () => {
-          // najde horní menu položku Media a skryje ji
-          const mediaNav = document.querySelector(
-            '.nc-nav-item[href="#/media-library"]'
-          );
-          if (mediaNav) mediaNav.style.display = "none";
+          const headerNav = document.querySelector("header nav");
+          if (headerNav) headerNav.remove();
         });
         window.CMS.registerEventListener({
           name: "postSave",
