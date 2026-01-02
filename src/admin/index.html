@@ -44,10 +44,10 @@
       CMS.registerPreviewStyle("/admin/decap-preview-styles.css");
 
       if (window.CMS) {
-        document.addEventListener("DOMContentLoaded", () => {
-          const headerNav = document.querySelector("header nav");
-          if (headerNav) headerNav.remove();
-        });
+        const headerNav = document.querySelector("header nav");
+        console.log(headerNav);
+        if (headerNav) headerNav.remove();
+
         window.CMS.registerEventListener({
           name: "postSave",
           handler: () => {
