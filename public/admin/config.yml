@@ -9,8 +9,8 @@ logo:
   show_in_header: false
 
 locale: "cs"
-media_folder: "src/assets/images/cms"
-public_folder: "/assets/images/cms"
+media_folder: ""        # žádná složka pro soubory
+public_folder: ""       # žádná cesta pro veřejné odkazy
 local_backend: true
 
 collections:
@@ -26,7 +26,7 @@ collections:
     filter:
       field: status
       value: "kontakt"
-    sortable_fields: ["datum", "jmeno"]
+    sortable_fields: ["date", "jmeno"]
     editor:
       preview: true
     fields:
