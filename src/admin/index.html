@@ -48,18 +48,25 @@
           name: "postSave",
           handler: async () => {
             const hash = window.location.hash;
-            const match = hash.match(/#\/collections\/([^/]+)/);
+            const match = hash.match(
+              /#\/collections\/([^/]+)\/entries\/([^/]+)/
+            );
             if (!match) return;
 
             const collection = match[1];
+            const entryId = match[2];
 
             try {
-              // 1️⃣ Vymaž cache a načti novou kolekci
-              const entries = await window.CMS.api()
-                .entries(collection)
-                .fetch();
+              const backend = window.CMS.getBackend();
+              if (!backend || !backend.listEntries) {
+                console.warn("Backend nepodporuje listEntries");
+                return;
+              }
 
-              // 2️⃣ Aktualizuj store (Decap CMS používá Redux-like store)
+              // 1️⃣ Načti novou kolekci
+              const entries = await backend.listEntries(collection);
+
+              // 2️⃣ Aktualizuj store
               window.CMS.store.dispatch({
                 type: "ENTRIES_ADD",
                 payload: { collection, entries },
@@ -70,6 +77,12 @@
                 entries.length,
                 "záznamů"
               );
+
+              // 3️⃣ Vrať se do seznamu kolekce (bez otevírání konkrétního záznamu)
+              window.CMS.store.dispatch({
+                type: "NAVIGATE",
+                payload: { view: "collection", collection },
+              });
             } catch (err) {
               console.error("Chyba při obnovení kolekce:", err);
             }
