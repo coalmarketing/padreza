@@ -42,7 +42,7 @@ collections:
       - {
           label: "Komentář",
           name: "komentar",
-          widget: "markup",
+          widget: "markdown",
           required: false,
         }
 
@@ -124,7 +124,7 @@ collections:
       - {
           label: "Komentář",
           name: "komentar",
-          widget: "markup",
+          widget: "markdown",
           required: false,
         }
 
