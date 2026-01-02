@@ -17,7 +17,7 @@ collections:
   # KONTAKTY
   # =========================
   - name: "kontakty"
-    label: "Kontakty"
+    label: "1. Kontakty"
     summary: "👤 {{jmeno}} 📮 {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
@@ -50,7 +50,7 @@ collections:
   # NOVÉ POPTÁVKY
   # =========================
   - name: "poptavky_nove"
-    label: "Poptávky"
+    label: "2. Poptávky"
     summary: "👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} 🚚 {{doprava}} 🗓️ {{datum}} ⏰ {{cas}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
@@ -132,7 +132,7 @@ collections:
   # KONTAKTOVANÉ
   # =========================
   - name: "poptavky_kontaktovane"
-    label: "V řešení (kontaktováno)"
+    label: "3. V řešení (kontaktováno)"
     summary: "👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} 🚚 {{doprava}} 🗓️ {{datum}} ⏰ {{cas}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
@@ -149,7 +149,7 @@ collections:
   # VYŘÍZENÉ
   # =========================
   - name: "poptavky_vyrizene"
-    label: "Vyřízené"
+    label: "4. Vyřízené"
     summary: "👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} 🚚 {{doprava}} 🗓️ {{datum}} ⏰ {{cas}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
