@@ -18,7 +18,7 @@ collections:
   # =========================
   - name: "kontakty"
     label: "Kontakty"
-    summary: "👤 {{jmeno}} ✉️ {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
+    # summary: "👤 {{jmeno}} ✉️ {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
@@ -51,7 +51,7 @@ collections:
   # =========================
   - name: "poptavky"
     label: "Poptávky"
-    summary: "{{#if stav == 'nová poptávka'}}🪵{{/if}}{{#if stav == 'zákazník kontaktován'}}💬{{/if}}{{#if stav == 'vyřízeno'}}✅{{/if}} {{jmeno}} ✉️ {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
+    # summary: "{{#if stav == 'nová poptávka'}}🪵{{/if}}{{#if stav == 'zákazník kontaktován'}}💬{{/if}}{{#if stav == 'vyřízeno'}}✅{{/if}} {{jmeno}} ✉️ {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
