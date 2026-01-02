@@ -20,7 +20,9 @@ collections:
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
-
+    filter:
+      field: status
+      value: "kontakt"
     sortable_fields: ["date", "jmeno"]
     summary: "{{ikona}} {{jmeno}} ✉️ {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
     editor:
@@ -60,7 +62,7 @@ collections:
     delete: true
     filter:
       field: status
-      value: ["nová poptávka", "zákazník kontaktován", "vyřízeno"]
+      # value: ["nová poptávka", "zákazník kontaktován", "vyřízeno"]
     sortable_fields: ["date", "jmeno"]
     summary: "{{ikona}} {{jmeno}} 🪵 {{mnozstvi}} {{suchost}} {{drevo}} 🚛 {{doprava}} 🗓️ {{datum}} ⏰ {{cas}}"
     editor:
