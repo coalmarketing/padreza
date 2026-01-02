@@ -2,7 +2,6 @@ backend:
   name: git-gateway
   branch: main
 
-# Change url to a link to the image you want to use, no file paths, must be a URL
 logo:
   src: "https://padreza.netlify.app/assets/svgs/Padreza_logo.svg"
   show_in_header: false
@@ -18,7 +17,6 @@ collections:
   # =========================
   - name: "kontakty"
     label: "Kontakty"
-    summary: "👤 {{jmeno}} ✉️ {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
@@ -26,6 +24,7 @@ collections:
       field: status
       value: "kontakt"
     sortable_fields: ["date", "jmeno"]
+    summary: "{{ikona}} {{jmeno}} ✉️ {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
     editor:
       preview: true
     fields:
@@ -40,6 +39,13 @@ collections:
       - { label: "Telefon", name: "telefon", widget: "string", readonly: true }
       - { label: "E-mail", name: "mail", widget: "string", readonly: true }
       - {
+          label: "Ikona",
+          name: "ikona",
+          widget: "string",
+          required: false,
+          default: "👤",
+        }
+      - {
           label: "Komentář",
           name: "komentar",
           widget: "markdown",
@@ -47,11 +53,10 @@ collections:
         }
 
   # =========================
-  # NOVÉ POPTÁVKY
+  # POPTÁVKY
   # =========================
   - name: "poptavky"
     label: "Poptávky"
-    summary: "👤 {{jmeno}} 🪵 {{mnozstvi}} {{suchost}} {{drevo}} 🚛 {{doprava}} 🗓️ {{datum}} ⏰ {{cas}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
@@ -59,6 +64,7 @@ collections:
       field: status
       value: ["nová poptávka", "zákazník kontaktován", "vyřízeno"]
     sortable_fields: ["date", "jmeno"]
+    summary: "{{ikona}} {{jmeno}} 🪵 {{mnozstvi}} {{suchost}} {{drevo}} 🚛 {{doprava}} 🗓️ {{datum}} ⏰ {{cas}}"
     editor:
       preview: true
     fields:
@@ -72,6 +78,13 @@ collections:
       - { label: "Jméno", name: "jmeno", widget: "string", readonly: true }
       - { label: "Telefon", name: "telefon", widget: "string", readonly: true }
       - { label: "E-mail", name: "mail", widget: "string", readonly: true }
+      - {
+          label: "Ikona",
+          name: "ikona",
+          widget: "string",
+          required: false,
+          default: "🪵",
+        }
       - {
           label: "Délka",
           name: "delka",
