@@ -44,14 +44,12 @@
       CMS.registerPreviewStyle("/admin/decap-preview-styles.css");
 
       if (window.CMS) {
-        window.CMS.registerEventListener({
-          name: "preRender",
-          handler: () => {
-            const mediaNav = document.querySelector(
-              '.nc-nav-item[href="#/media-library"]'
-            );
-            if (mediaNav) mediaNav.style.display = "none";
-          },
+        document.addEventListener("DOMContentLoaded", () => {
+          // najde horní menu položku Media a skryje ji
+          const mediaNav = document.querySelector(
+            '.nc-nav-item[href="#/media-library"]'
+          );
+          if (mediaNav) mediaNav.style.display = "none";
         });
         window.CMS.registerEventListener({
           name: "postSave",
