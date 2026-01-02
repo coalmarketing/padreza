@@ -13,46 +13,6 @@ local_backend: true
 
 collections:
   # =========================
-  # KONTAKTY
-  # =========================
-  - name: "kontakty"
-    label: "Kontakty"
-    folder: "src/content/i18n/cs/poptavky"
-    create: false
-    delete: true
-    filter:
-      field: status
-      value: "kontakt"
-    sortable_fields: ["date", "jmeno"]
-    summary: "{{ikona}} {{jmeno}} ✉️ {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
-    editor:
-      preview: true
-    fields:
-      - {
-          label: "Stav",
-          name: "status",
-          widget: "select",
-          options:
-            ["kontakt", "nová poptávka", "zákazník kontaktován", "vyřízeno"],
-        }
-      - { label: "Jméno", name: "jmeno", widget: "string", readonly: true }
-      - { label: "Telefon", name: "telefon", widget: "string", readonly: true }
-      - { label: "E-mail", name: "mail", widget: "string", readonly: true }
-      - {
-          label: "Ikona",
-          name: "ikona",
-          widget: "string",
-          required: false,
-          default: "👤",
-        }
-      - {
-          label: "Komentář",
-          name: "komentar",
-          widget: "markdown",
-          required: false,
-        }
-
-  # =========================
   # POPTÁVKY
   # =========================
   - name: "poptavky"
@@ -132,6 +92,46 @@ collections:
           widget: "text",
           readonly: true,
           required: false,
+        }
+      - {
+          label: "Komentář",
+          name: "komentar",
+          widget: "markdown",
+          required: false,
+        }
+
+  # =========================
+  # KONTAKTY
+  # =========================
+  - name: "kontakty"
+    label: "Kontakty"
+    folder: "src/content/i18n/cs/poptavky"
+    create: false
+    delete: true
+    filter:
+      field: status
+      value: "kontakt"
+    sortable_fields: ["date", "jmeno"]
+    summary: "{{ikona}} {{jmeno}} ✉️ {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
+    editor:
+      preview: true
+    fields:
+      - {
+          label: "Stav",
+          name: "status",
+          widget: "select",
+          options:
+            ["kontakt", "nová poptávka", "zákazník kontaktován", "vyřízeno"],
+        }
+      - { label: "Jméno", name: "jmeno", widget: "string", readonly: true }
+      - { label: "Telefon", name: "telefon", widget: "string", readonly: true }
+      - { label: "E-mail", name: "mail", widget: "string", readonly: true }
+      - {
+          label: "Ikona",
+          name: "ikona",
+          widget: "string",
+          required: false,
+          default: "👤",
         }
       - {
           label: "Komentář",
