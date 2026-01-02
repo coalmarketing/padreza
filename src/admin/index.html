@@ -47,7 +47,6 @@
         window.CMS.registerEventListener({
           name: "postSave",
           handler: () => {
-            // Přidáme krátký delay, aby se CMS stihlo uložit a router reagoval
             setTimeout(() => {
               const hash = window.location.hash;
               const match = hash.match(
@@ -59,9 +58,14 @@
               const collection = match[1];
               const base = window.location.pathname.split("#")[0];
 
-              // Full reload na seznam kolekce → načte nová data
+              // 1️⃣ Přesměruj na seznam kolekce
               window.location.href = `${base}#/collections/${collection}`;
-            }, 200); // 200ms delay je obvykle plynulé
+
+              // 2️⃣ Po malém delay udělej full reload → načte nová data
+              setTimeout(() => {
+                window.location.reload();
+              }, 300); // 300ms delay je většinou dostatečné
+            }, 200); // 200ms delay po postSave, aby se CMS stihlo uložit
           },
         });
       }
