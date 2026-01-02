@@ -46,7 +46,7 @@
       if (window.CMS) {
         window.CMS.registerEventListener({
           name: "postSave",
-          handler: async () => {
+          handler: async ({ entry }) => {
             const hash = window.location.hash;
             const match = hash.match(
               /#\/collections\/([^/]+)\/entries\/([^/]+)/
@@ -57,34 +57,33 @@
             const entryId = match[2];
 
             try {
-              const backend = window.CMS.getBackend();
-              if (!backend || !backend.listEntries) {
-                console.warn("Backend nepodporuje listEntries");
-                return;
+              // 1️⃣ Najdi existující záznamy v store
+              const state = window.CMS.store.getState();
+              const currentEntries = state.entries?.[collection] || [];
+
+              // 2️⃣ Pokud nový záznam, přidej ho do store
+              const exists = currentEntries.some((e) => e.id === entryId);
+              if (!exists) {
+                window.CMS.store.dispatch({
+                  type: "ENTRIES_ADD",
+                  payload: {
+                    collection,
+                    entries: [entry],
+                  },
+                });
               }
 
-              // 1️⃣ Načti novou kolekci
-              const entries = await backend.listEntries(collection);
-
-              // 2️⃣ Aktualizuj store
-              window.CMS.store.dispatch({
-                type: "ENTRIES_ADD",
-                payload: { collection, entries },
-              });
-
-              console.log(
-                `Kolekce "${collection}" byla znovu načtena:`,
-                entries.length,
-                "záznamů"
-              );
-
-              // 3️⃣ Vrať se do seznamu kolekce (bez otevírání konkrétního záznamu)
+              // 3️⃣ Přepni UI zpět do seznamu kolekce
               window.CMS.store.dispatch({
                 type: "NAVIGATE",
                 payload: { view: "collection", collection },
               });
+
+              console.log(
+                `Po uložení byl návrat do seznamu kolekce "${collection}"`
+              );
             } catch (err) {
-              console.error("Chyba při obnovení kolekce:", err);
+              console.error("Chyba při návratu do seznamu kolekce:", err);
             }
           },
         });
