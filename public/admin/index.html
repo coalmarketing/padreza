@@ -46,45 +46,22 @@
       if (window.CMS) {
         window.CMS.registerEventListener({
           name: "postSave",
-          handler: async ({ entry }) => {
+          handler: ({ entry }) => {
+            // Zjistíme kolekci z URL
             const hash = window.location.hash;
             const match = hash.match(
               /#\/collections\/([^/]+)\/entries\/([^/]+)/
             );
+
             if (!match) return;
 
             const collection = match[1];
             const entryId = match[2];
 
-            try {
-              // 1️⃣ Najdi existující záznamy v store
-              const state = window.CMS.store.getState();
-              const currentEntries = state.entries?.[collection] || [];
-
-              // 2️⃣ Pokud nový záznam, přidej ho do store
-              const exists = currentEntries.some((e) => e.id === entryId);
-              if (!exists) {
-                window.CMS.store.dispatch({
-                  type: "ENTRIES_ADD",
-                  payload: {
-                    collection,
-                    entries: [entry],
-                  },
-                });
-              }
-
-              // 3️⃣ Přepni UI zpět do seznamu kolekce
-              window.CMS.store.dispatch({
-                type: "NAVIGATE",
-                payload: { view: "collection", collection },
-              });
-
-              console.log(
-                `Po uložení byl návrat do seznamu kolekce "${collection}"`
-              );
-            } catch (err) {
-              console.error("Chyba při návratu do seznamu kolekce:", err);
-            }
+            // Přesměrujeme uživatele zpět do seznamu kolekce
+            // Toto načte nová data a otevře list view
+            const base = window.location.pathname.split("#")[0];
+            window.location.href = `${base}#/collections/${collection}`;
           },
         });
       }
