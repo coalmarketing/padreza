@@ -44,6 +44,10 @@ collections:
           name: "komentar",
           widget: "markdown",
           required: false,
+          editor_components: - bold
+            - italic
+            - bulleted-list
+            - numbered-list,
         }
 
   # =========================
@@ -126,6 +130,10 @@ collections:
           name: "komentar",
           widget: "markdown",
           required: false,
+          editor_components: - bold
+            - italic
+            - bulleted-list
+            - numbered-list,
         }
 
   # =========================
