@@ -43,34 +43,26 @@
       // Register the styles for the "blog" collection
       CMS.registerPreviewStyle("/admin/decap-preview-styles.css");
 
-      (function () {
-        if (!window.CMS) return;
-
-        let lastCollection = null;
-
-        // 1️⃣ Uložíme si kolekci, ve které se zrovna nacházíme
-        window.CMS.registerEventListener({
-          name: "editor",
-          handler: ({ collection }) => {
-            if (collection) {
-              lastCollection = collection.get("name");
-            }
-          },
-        });
-
-        // 2️⃣ Po uložení přesměruj zpět na seznam této kolekce
+      if (window.CMS) {
         window.CMS.registerEventListener({
           name: "postSave",
           handler: () => {
-            if (!lastCollection) return;
-
             setTimeout(() => {
+              const hash = window.location.hash;
+
+              // očekává tvar: #/collections/NAZEV_KOLEKCE/...
+              const match = hash.match(/#\/collections\/([^/]+)/);
+
+              if (!match) return;
+
+              const collection = match[1];
               const base = window.location.pathname.split("#")[0];
-              window.location.href = `${base}#/collections/${lastCollection}`;
+
+              window.location.href = `${base}#/collections/${collection}`;
             }, 300);
           },
         });
-      })();
+      }
     </script>
   </body>
 </html>
