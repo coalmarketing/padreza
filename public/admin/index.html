@@ -46,24 +46,33 @@
       if (window.CMS) {
         window.CMS.registerEventListener({
           name: "postSave",
-          handler: () => {
-            setTimeout(() => {
-              const hash = window.location.hash;
-              const match = hash.match(/#\/collections\/([^/]+)/);
+          handler: async () => {
+            const hash = window.location.hash;
+            const match = hash.match(/#\/collections\/([^/]+)/);
+            if (!match) return;
 
-              if (!match) return;
+            const collection = match[1];
 
-              const collection = match[1];
-              const base = window.location.pathname.split("#")[0];
+            try {
+              // 1️⃣ Vymaž cache a načti novou kolekci
+              const entries = await window.CMS.api()
+                .entries(collection)
+                .fetch();
 
-              // 1️⃣ přesměruj pryč (donutí reload routeru)
-              window.location.href = `${base}#/`;
+              // 2️⃣ Aktualizuj store (Decap CMS používá Redux-like store)
+              window.CMS.store.dispatch({
+                type: "ENTRIES_ADD",
+                payload: { collection, entries },
+              });
 
-              // 2️⃣ vrať se zpět do kolekce
-              setTimeout(() => {
-                window.location.href = `${base}#/collections/${collection}`;
-              }, 150);
-            }, 300);
+              console.log(
+                `Kolekce "${collection}" byla znovu načtena:`,
+                entries.length,
+                "záznamů"
+              );
+            } catch (err) {
+              console.error("Chyba při obnovení kolekce:", err);
+            }
           },
         });
       }
