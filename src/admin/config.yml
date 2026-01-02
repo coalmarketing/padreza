@@ -11,7 +11,7 @@ logo:
 locale: "cs"
 media_folder: ""        # žádná složka pro soubory
 public_folder: ""       # žádná cesta pro veřejné odkazy
-local_backend: true
+local_backend: false
 
 collections:
   # =========================
