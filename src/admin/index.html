@@ -48,8 +48,18 @@
           name: "postSave",
           handler: () => {
             setTimeout(() => {
-              window.location.href = window.location.pathname;
-            }, 500);
+              const hash = window.location.hash;
+
+              // extrahuj kolekci z aktuální URL
+              const match = hash.match(/#\/collections\/([^/]+)/);
+
+              if (match && match[1]) {
+                window.location.href = `/admin/#/collections/${match[1]}`;
+              } else {
+                // fallback
+                window.location.href = "/admin/#/collections";
+              }
+            }, 300);
           },
         });
       }
