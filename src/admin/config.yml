@@ -14,11 +14,44 @@ local_backend: true
 
 collections:
   # =========================
+  # KONTAKTY
+  # =========================
+  - name: "kontakty"
+    label: "Kontakty"
+    summary: "👤 {{jmeno}} 📮 {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
+    folder: "src/content/i18n/cs/poptavky"
+    create: false
+    delete: true
+    filter:
+      field: status
+      value: "kontakt"
+    sortable_fields: ["datum", "jmeno"]
+    editor:
+      preview: true
+    fields:
+      - {
+          label: "Stav",
+          name: "status",
+          widget: "select",
+          options:
+            ["kontakt", "nová poptávka", "zákazník kontaktován", "vyřízeno"],
+        }
+      - { label: "Jméno", name: "jmeno", widget: "string", readonly: true }
+      - { label: "Telefon", name: "telefon", widget: "string", readonly: true }
+      - { label: "E-mail", name: "mail", widget: "string", readonly: true }
+      - {
+          label: "Komentář",
+          name: "komentar",
+          widget: "markup",
+          required: false,
+        }
+
+  # =========================
   # NOVÉ POPTÁVKY
   # =========================
   - name: "poptavky_nove"
-    label: "Poptávky – nové"
-    summary: "{{jmeno}} • {{mnozstvi}} • {{drevo}} • {{suchost}} • {{delka}} [{{date}}]"
+    label: "Poptávky"
+    summary: "👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} 🚚 {{doprava}} 🗓️ {{datum}} ⏰ {{cas}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
@@ -35,12 +68,7 @@ collections:
           name: "status",
           widget: "select",
           options:
-            [
-              "nový kontakt",
-              "nová poptávka",
-              "zákazník kontaktován",
-              "vyřízeno",
-            ],
+            ["kontakt", "nová poptávka", "zákazník kontaktován", "vyřízeno"],
         }
       - { label: "Jméno", name: "jmeno", widget: "string", readonly: true }
       - { label: "Telefon", name: "telefon", widget: "string", readonly: true }
@@ -81,7 +109,7 @@ collections:
           required: false,
         }
       - {
-          label: "Množství prms",
+          label: "Množství",
           name: "mnozstvi",
           widget: "string",
           readonly: true,
@@ -93,14 +121,19 @@ collections:
           readonly: true,
           required: false,
         }
-      - { label: "Komentář", name: "komentar", widget: "text", required: false }
+      - {
+          label: "Komentář",
+          name: "komentar",
+          widget: "markup",
+          required: false,
+        }
 
   # =========================
   # KONTAKTOVANÉ
   # =========================
   - name: "poptavky_kontaktovane"
-    label: "Poptávky – kontaktované"
-    summary: "{{jmeno}} • {{mnozstvi}} • {{drevo}} • {{delka}}"
+    label: "V řešení (kontaktováno)"
+    summary: "👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} 🚚 {{doprava}} 🗓️ {{datum}} ⏰ {{cas}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
@@ -116,31 +149,14 @@ collections:
   # VYŘÍZENÉ
   # =========================
   - name: "poptavky_vyrizene"
-    label: "Poptávky – vyřízené"
-    summary: "{{jmeno}} • {{mnozstvi}} • {{drevo}}"
+    label: "Vyřízené"
+    summary: "👤 {{jmeno}} 🪵 {{suchost}} {{drevo}} / {{mnozstvi}} 🚚 {{doprava}} 🗓️ {{datum}} ⏰ {{cas}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
     filter:
       field: status
       value: "vyřízeno"
-    sortable_fields: ["date", "jmeno"]
-    editor:
-      preview: true
-    fields: *poptavky_fields
-
-  # =========================
-  # VYŘÍZENÉ
-  # =========================
-  - name: "kontakty"
-    label: "Kontakty"
-    summary: "{{jmeno}} ✉️ {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
-    folder: "src/content/i18n/cs/poptavky"
-    create: false
-    delete: true
-    filter:
-      field: status
-      value: "nový kontakt"
     sortable_fields: ["date", "jmeno"]
     editor:
       preview: true

@@ -42,6 +42,17 @@
     <script>
       // Register the styles for the "blog" collection
       CMS.registerPreviewStyle("/admin/decap-preview-styles.css");
+
+      if (window.CMS) {
+        window.CMS.registerEventListener({
+          name: "postSave",
+          handler: () => {
+            setTimeout(() => {
+              window.location.href = window.location.pathname;
+            }, 500);
+          },
+        });
+      }
     </script>
   </body>
 </html>
