@@ -1,3 +1,4 @@
+# prettier-ignore
 backend:
   name: git-gateway
   branch: main
@@ -44,7 +45,8 @@ collections:
           name: "komentar",
           widget: "markdown",
           required: false,
-          editor_components: - bold
+          editor_components: 
+            - bold
             - italic
             - bulleted-list
             - numbered-list,
@@ -130,7 +132,8 @@ collections:
           name: "komentar",
           widget: "markdown",
           required: false,
-          editor_components: - bold
+          editor_components:
+            - bold
             - italic
             - bulleted-list
             - numbered-list,
