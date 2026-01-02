@@ -2,6 +2,7 @@ backend:
   name: git-gateway
   branch: main
 
+# Change url to a link to the image you want to use, no file paths, must be a URL
 logo:
   src: "https://padreza.netlify.app/assets/svgs/Padreza_logo.svg"
   show_in_header: false
@@ -13,21 +14,54 @@ local_backend: true
 
 collections:
   # =========================
-  # POPTÁVKY
+  # KONTAKTY
   # =========================
-  - name: "poptavky"
-    label: "Poptávky"
+  - name: "kontakty"
+    label: "Kontakty"
+    summary: "{{jmeno}} ✉️ {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
     filter:
       field: status
-      # value: ["nová poptávka", "zákazník kontaktován", "vyřízeno"]
+      value: ["nový kontakt", "kontakt"]
     sortable_fields: ["date", "jmeno"]
-    summary: "{{ikona}} {{jmeno}} 🪵 {{mnozstvi}} {{suchost}} {{drevo}} 🚛 {{doprava}} 🗓️ {{datum}} ⏰ {{cas}}"
     editor:
       preview: true
     fields:
+      - { label: "Datum", name: "date", widget: "datetime", readonly: true }
+      - {
+          label: "Stav",
+          name: "status",
+          widget: "select",
+          options:
+            [
+              "nový kontakt",
+              "nová poptávka",
+              "zákazník kontaktován",
+              "vyřízeno",
+            ],
+        }
+      - { label: "Jméno", name: "jmeno", widget: "string", readonly: true }
+      - { label: "Telefon", name: "telefon", widget: "string", readonly: true }
+      - { label: "E-mail", name: "mail", widget: "string", readonly: true }
+
+  # =========================
+  # NOVÉ POPTÁVKY
+  # =========================
+  - name: "poptavky_nove"
+    label: "Poptávky – nové"
+    summary: "{{jmeno}} • {{mnozstvi}} • {{drevo}} • {{suchost}} • {{delka}} [{{date}}]"
+    folder: "src/content/i18n/cs/poptavky"
+    create: false
+    delete: true
+    filter:
+      field: status
+      value: "nová poptávka"
+    sortable_fields: ["date", "jmeno"]
+    editor:
+      preview: true
+    fields: &poptavky_fields
       - { label: "Datum", name: "date", widget: "datetime", readonly: true }
       - {
           label: "Stav",
@@ -38,13 +72,6 @@ collections:
       - { label: "Jméno", name: "jmeno", widget: "string", readonly: true }
       - { label: "Telefon", name: "telefon", widget: "string", readonly: true }
       - { label: "E-mail", name: "mail", widget: "string", readonly: true }
-      - {
-          label: "Ikona",
-          name: "ikona",
-          widget: "string",
-          required: false,
-          default: "🪵",
-        }
       - {
           label: "Délka",
           name: "delka",
@@ -93,49 +120,38 @@ collections:
           readonly: true,
           required: false,
         }
-      - {
-          label: "Komentář",
-          name: "komentar",
-          widget: "markdown",
-          required: false,
-        }
+      - { label: "Komentář", name: "komentar", widget: "text", required: false }
 
   # =========================
-  # KONTAKTY
+  # KONTAKTOVANÉ
   # =========================
-  - name: "kontakty"
-    label: "Kontakty"
+  - name: "poptavky_kontaktovane"
+    label: "Poptávky – kontaktované"
+    summary: "{{jmeno}} • {{mnozstvi}} • {{drevo}} • {{delka}}"
     folder: "src/content/i18n/cs/poptavky"
     create: false
     delete: true
     filter:
       field: status
-      value: "kontakt"
+      value: "zákazník kontaktován"
     sortable_fields: ["date", "jmeno"]
-    summary: "{{ikona}} {{jmeno}} ✉️ {{mail}} 📞 {{telefon}} 🗓️ {{datum}} ⏰ {{cas}}"
     editor:
       preview: true
-    fields:
-      - {
-          label: "Stav",
-          name: "status",
-          widget: "select",
-          options:
-            ["kontakt", "nová poptávka", "zákazník kontaktován", "vyřízeno"],
-        }
-      - { label: "Jméno", name: "jmeno", widget: "string", readonly: true }
-      - { label: "Telefon", name: "telefon", widget: "string", readonly: true }
-      - { label: "E-mail", name: "mail", widget: "string", readonly: true }
-      - {
-          label: "Ikona",
-          name: "ikona",
-          widget: "string",
-          required: false,
-          default: "👤",
-        }
-      - {
-          label: "Komentář",
-          name: "komentar",
-          widget: "markdown",
-          required: false,
-        }
+    fields: *poptavky_fields
+
+  # =========================
+  # VYŘÍZENÉ
+  # =========================
+  - name: "poptavky_vyrizene"
+    label: "Poptávky – vyřízené"
+    summary: "{{jmeno}} • {{mnozstvi}} • {{drevo}}"
+    folder: "src/content/i18n/cs/poptavky"
+    create: false
+    delete: true
+    filter:
+      field: status
+      value: "vyřízeno"
+    sortable_fields: ["date", "jmeno"]
+    editor:
+      preview: true
+    fields: *poptavky_fields
