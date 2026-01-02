@@ -46,22 +46,22 @@
       if (window.CMS) {
         window.CMS.registerEventListener({
           name: "postSave",
-          handler: ({ entry }) => {
-            // Zjistíme kolekci z URL
-            const hash = window.location.hash;
-            const match = hash.match(
-              /#\/collections\/([^/]+)\/entries\/([^/]+)/
-            );
+          handler: () => {
+            // Přidáme krátký delay, aby se CMS stihlo uložit a router reagoval
+            setTimeout(() => {
+              const hash = window.location.hash;
+              const match = hash.match(
+                /#\/collections\/([^/]+)\/entries\/([^/]+)/
+              );
 
-            if (!match) return;
+              if (!match) return;
 
-            const collection = match[1];
-            const entryId = match[2];
+              const collection = match[1];
+              const base = window.location.pathname.split("#")[0];
 
-            // Přesměrujeme uživatele zpět do seznamu kolekce
-            // Toto načte nová data a otevře list view
-            const base = window.location.pathname.split("#")[0];
-            window.location.href = `${base}#/collections/${collection}`;
+              // Full reload na seznam kolekce → načte nová data
+              window.location.href = `${base}#/collections/${collection}`;
+            }, 200); // 200ms delay je obvykle plynulé
           },
         });
       }
