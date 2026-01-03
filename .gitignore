@@ -1,11 +1,10 @@
 .vscode
 .cache
 .env
+.netlify
 node_modules
 public
 planning
 Figma
-# Local Netlify folder
-.netlify
 
-netlify-clean-deploys.sh
+
