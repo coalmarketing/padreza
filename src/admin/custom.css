@@ -1,17 +1,19 @@
 /* admin/custom-header.css */
 
-/* skryje text */
-.AppHeaderSiteLink {
+/* skryje původní text odkazu */
+header > div > div > a {
   font-size: 0;
+  line-height: 0;
+  display: inline-flex;
+  align-items: center;
 }
 
 /* vloží logo */
-.AppHeaderSiteLink::before {
+header > div > div > a::before {
   content: "";
   display: inline-block;
   width: 140px;
   height: 32px;
-  background-image: url("/assets/svgs/Padreza_logo.svg");
-  background-repeat: no-repeat;
+  background: url("/assets/svgs/Padreza_logo.svg") no-repeat center;
   background-size: contain;
 }
