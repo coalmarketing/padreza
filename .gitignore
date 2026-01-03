@@ -1,8 +1,10 @@
 .vscode
 .cache
+.env
 node_modules
 public
 planning
 Figma
 # Local Netlify folder
 .netlify
+

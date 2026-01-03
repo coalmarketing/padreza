@@ -1,7 +1,14 @@
 # prettier-ignore
 backend:
-  name: git-gateway
+  name: github
+  repo: coalmarketing/padreza
   branch: main
+
+commit_messages:
+  create: "CMS: vytvořeno {{collection}}/{{slug}} ({{user.name}})"
+  update: "CMS: upraveno {{collection}}/{{slug}} ({{user.name}})"
+  delete: "CMS: smazáno {{collection}}/{{slug}} ({{user.name}})"
+  uploadMedia: "CMS: nahráno médium ({{user.name}})"
 
 # Change url to a link to the image you want to use, no file paths, must be a URL
 logo:
