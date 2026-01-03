@@ -20,18 +20,19 @@
       href="/assets/favicons/apple-touch-icon.png"
     />
     <link rel="manifest" href="/assets/favicons/site.webmanifest" />
-
-    <!-- Decap CMS -->
-    <script src="https://unpkg.com/decap-cms@^3.8.3/dist/decap-cms.js"></script>
   </head>
   <body>
-    <script src="preview.js"></script>
-
+    <!-- Decap CMS musí být načten první -->
+    <script
+      src="https://unpkg.com/decap-cms@^3.8.3/dist/decap-cms.js"
+      defer
+    ></script>
+    <!-- Preview a admin skripty až po CMS -->
+    <script src="preview.js" defer></script>
+    <script src="admin.js" defer></script>
     <script>
-      // Preview styles
+      // Preview style registrace
       CMS.registerPreviewStyle("/admin/decap-preview-styles.css");
     </script>
-
-    <script src="admin.js"></script>
   </body>
 </html>
