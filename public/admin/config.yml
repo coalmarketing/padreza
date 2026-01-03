@@ -1,7 +1,7 @@
 # prettier-ignore
 # Use DecapBridge classic auth (required)
 backend:
-  name: decap-bridge
+  name: git-gateway
   repo: coalmarketing/padreza
   branch: main
   identity_url: https://auth.decapbridge.com/sites/038b665b-a7fe-4f33-85bc-87c887c87c47
