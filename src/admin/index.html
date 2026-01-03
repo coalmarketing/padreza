@@ -20,15 +20,19 @@
     />
     <link rel="manifest" href="/assets/favicons/site.webmanifest" />
 
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="https://identity.decapbridge.com/client.js"></script>
     <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("logout", () => {
-          document.location.href = "/admin/";
-        });
-
-        window.netlifyIdentity.setLocale("cs");
-      }
+      window.CMS = window.CMS || {};
+      CMS.init({
+        backend: {
+          name: "git-gateway",
+          repo: "coalmarketing/padreza",
+          branch: "main",
+          identity_url:
+            "https://auth.decapbridge.com/sites/038b665b-a7fe-4f33-85bc-87c887c87c47",
+          gateway_url: "https://gateway.decapbridge.com",
+        },
+      });
     </script>
 
     <title>Správa obsahu</title>
