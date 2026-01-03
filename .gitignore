@@ -8,3 +8,4 @@ Figma
 # Local Netlify folder
 .netlify
 
+netlify-clean-deploys.sh
