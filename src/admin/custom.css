@@ -1,0 +1,17 @@
+/* admin/custom-header.css */
+
+/* skryje text */
+.AppHeaderSiteLink {
+  font-size: 0;
+}
+
+/* vloží logo */
+.AppHeaderSiteLink::before {
+  content: "";
+  display: inline-block;
+  width: 140px;
+  height: 32px;
+  background-image: url("/assets/svgs/Padreza_logo.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
