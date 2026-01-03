@@ -1,14 +1,23 @@
 # prettier-ignore
+# Use DecapBridge classic auth (required)
 backend:
-  name: github
+  name: git-gateway
   repo: coalmarketing/padreza
   branch: main
+  identity_url: https://auth.decapbridge.com/sites/038b665b-a7fe-4f33-85bc-87c887c87c47
+  gateway_url: https://gateway.decapbridge.com
 
-commit_messages:
-  create: "CMS: vytvořeno {{collection}}/{{slug}} ({{user.name}})"
-  update: "CMS: upraveno {{collection}}/{{slug}} ({{user.name}})"
-  delete: "CMS: smazáno {{collection}}/{{slug}} ({{user.name}})"
-  uploadMedia: "CMS: nahráno médium ({{user.name}})"
+  # See who did what (optional)
+  commit_messages:
+    create: Create {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    update: Update {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    delete: Delete {{collection}} “{{slug}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    uploadMedia: Upload “{{path}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    deleteMedia: Delete “{{path}}” - {{author-name}} <{{author-login}}> via DecapBridge
+    openAuthoring: Message {{message}} - {{author-name}} <{{author-login}}> via DecapBridge
+
+# Add site links in Decap CMS (optional)
+site_url: https://padreza.netlify.app
 
 # Change url to a link to the image you want to use, no file paths, must be a URL
 logo:
@@ -16,8 +25,8 @@ logo:
   show_in_header: false
 
 locale: "cs"
-media_folder: ""        # žádná složka pro soubory
-public_folder: ""       # žádná cesta pro veřejné odkazy
+media_folder: "" # žádná složka pro soubory
+public_folder: "" # žádná cesta pro veřejné odkazy
 local_backend: false
 
 collections:
@@ -37,7 +46,13 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: "Stav", name: "status", widget: "select", options: ["kontakt", "nová poptávka", "zákazník kontaktován", "vyřízeno"] }
+      - {
+          label: "Stav",
+          name: "status",
+          widget: "select",
+          options:
+            ["kontakt", "nová poptávka", "zákazník kontaktován", "vyřízeno"],
+        }
       - { label: "Jméno", name: "jmeno", widget: "string", required: true }
       - { label: "Telefon", name: "telefon", widget: "string", required: true }
       - { label: "E-mail", name: "mail", widget: "string", required: true }
@@ -59,16 +74,51 @@ collections:
     editor:
       preview: true
     fields: &poptavky_fields
-      - { label: "Stav", name: "status", widget: "select", options: ["kontakt", "nová poptávka", "zákazník kontaktován", "vyřízeno"] }
+      - {
+          label: "Stav",
+          name: "status",
+          widget: "select",
+          options:
+            ["kontakt", "nová poptávka", "zákazník kontaktován", "vyřízeno"],
+        }
       - { label: "Jméno", name: "jmeno", widget: "string", required: true }
       - { label: "Telefon", name: "telefon", widget: "string", required: true }
       - { label: "E-mail", name: "mail", widget: "string", required: true }
-      - { label: "Délka", name: "delka", widget: "select", options: ["25 cm", "33 cm", "40 cm", "50 cm"], required: false }
-      - { label: "Dřevo", name: "drevo", widget: "select", options: ["měkké", "polotvrdé", "tvrdé"], required: false }
-      - { label: "Suchost", name: "suchost", widget: "select", options: ["suché", "čerstvé"], required: false }
-      - { label: "Doprava", name: "doprava", widget: "select", options: ["vlastní", "smluvní dopravce"], required: false }
+      - {
+          label: "Délka",
+          name: "delka",
+          widget: "select",
+          options: ["25 cm", "33 cm", "40 cm", "50 cm"],
+          required: false,
+        }
+      - {
+          label: "Dřevo",
+          name: "drevo",
+          widget: "select",
+          options: ["měkké", "polotvrdé", "tvrdé"],
+          required: false,
+        }
+      - {
+          label: "Suchost",
+          name: "suchost",
+          widget: "select",
+          options: ["suché", "čerstvé"],
+          required: false,
+        }
+      - {
+          label: "Doprava",
+          name: "doprava",
+          widget: "select",
+          options: ["vlastní", "smluvní dopravce"],
+          required: false,
+        }
       - { label: "Adresa", name: "adresa", widget: "string", required: false }
-      - { label: "Množství (prms)", name: "mnozstvi", widget: "string", required: false }
+      - {
+          label: "Množství (prms)",
+          name: "mnozstvi",
+          widget: "string",
+          required: false,
+        }
       - { label: "Poznámka", name: "poznamka", widget: "text", required: false }
 
   # =========================
