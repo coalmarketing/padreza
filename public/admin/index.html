@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="cs">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,19 +20,26 @@
       href="/assets/favicons/apple-touch-icon.png"
     />
     <link rel="manifest" href="/assets/favicons/site.webmanifest" />
-  </head>
-  <body>
-    <!-- Decap CMS musí být načten první -->
+
+    <!-- Decap CMS (musí být načteno první) -->
     <script
       src="https://unpkg.com/decap-cms@^3.8.3/dist/decap-cms.js"
       defer
     ></script>
-    <!-- Preview a admin skripty až po CMS -->
+    <!-- Preview a admin skripty (defer zajistí správné pořadí) -->
     <script src="preview.js" defer></script>
     <script src="admin.js" defer></script>
-    <script>
-      // Preview style registrace
-      CMS.registerPreviewStyle("/admin/decap-preview-styles.css");
+  </head>
+  <body>
+    <!-- Registrace preview stylů po načtení CMS -->
+    <script defer>
+      document.addEventListener("DOMContentLoaded", () => {
+        if (window.CMS) {
+          CMS.registerPreviewStyle("/admin/decap-preview-styles.css");
+        } else {
+          console.error("CMS není dostupné!");
+        }
+      });
     </script>
   </body>
 </html>
