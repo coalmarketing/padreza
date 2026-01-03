@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administrace Padřeza</title>
 
     <!-- Favicons -->
     <link
@@ -20,31 +21,14 @@
     />
     <link rel="manifest" href="/assets/favicons/site.webmanifest" />
 
-    <script src="https://identity.decapbridge.com/client.js"></script>
-    <script>
-      window.CMS = window.CMS || {};
-      CMS.init({
-        backend: {
-          name: "git-gateway",
-          repo: "coalmarketing/padreza",
-          branch: "main",
-          identity_url:
-            "https://auth.decapbridge.com/sites/038b665b-a7fe-4f33-85bc-87c887c87c47",
-          gateway_url: "https://gateway.decapbridge.com",
-        },
-      });
-    </script>
-
-    <title>Správa obsahu</title>
+    <!-- Decap CMS -->
+    <script src="https://unpkg.com/decap-cms@^3.8.3/dist/decap-cms.js"></script>
   </head>
   <body>
-    <!-- Include the script that builds the page and powers Decap CMS -->
-    <script src="https://unpkg.com/decap-cms@^3.8.3/dist/decap-cms.js"></script>
     <script src="preview.js"></script>
 
-    <!-- Documentation: https://decapcms.org/docs/customization/ -->
     <script>
-      // Register the styles for the "blog" collection
+      // Preview styles
       CMS.registerPreviewStyle("/admin/decap-preview-styles.css");
     </script>
 
