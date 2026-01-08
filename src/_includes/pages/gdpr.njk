@@ -16,13 +16,13 @@
         </h3>
         {% endif -%} {%- if item.text %}
         <p class="text-base mb-2">
-          {{ item.text }}
+          {{ item.text | markdown | safe }}
         </p>
         {% endif -%} {%- if item.subitems %}
         <ul class="list-disc text-base max-w-2xl space-y-1 ml-8">
           {% for subitem in item.subitems %}
           <li>
-            {{ subitem.text }}
+            {{ subitem.text | markdown | safe }}
           </li>
           {% endfor %}
         </ul>

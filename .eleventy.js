@@ -18,6 +18,7 @@ const configI18n = require("./src/config/plugins/i18n");
 const javascript = require("./src/config/processors/javascript");
 
 // 🛠️ Utilities
+const markdownIt = require("markdown-it");
 const filterPostDate = require("./src/config/filters/postDate");
 const filterIsoDate = require("./src/config/filters/isoDate");
 const isProduction = process.env.ELEVENTY_ENV === "PROD";
@@ -161,6 +162,21 @@ module.exports = function (eleventyConfig) {
      * Updates automatically with each build
      */
     eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
+
+    // ─────────────────────────────────────────────────────────────────────────────
+    // MARKDOWN FILTER
+    // ─────────────────────────────────────────────────────────────────────────────
+
+    const md = markdownIt({
+        html: true,
+        breaks: true,
+        linkify: true,
+    });
+
+    eleventyConfig.addFilter("markdown", (content) => {
+        if (!content) return "";
+        return md.renderInline(content);
+    });
 
     // ═════════════════════════════════════════════════════════════════════════
     // BUILD CONFIGURATION
