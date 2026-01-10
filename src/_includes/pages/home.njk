@@ -315,7 +315,7 @@
       </h3>
       <div class="flex flex-col md:flex-row mt-28 text-xl">
         <div class="flex-auto">
-          <a href="tel:{{ client.phoneForTel }}" class="block">
+          <a href="tel:{{ client.phoneServiceForTel }}" class="block relative">
             <img
               alt="Telefon"
               decoding="async"
@@ -323,8 +323,25 @@
               src="/assets/svgs/Phone_icon.svg"
               class="inline-block mr-4 w-12 h-12"
             />
-            {{ client.phoneFormatted }}</a
-          >
+            {{ client.phoneServiceFormatted }}
+            <span class="absolute bottom-0 left-16 text-sm">
+              &nbsp;(zákaznický servis)</span
+            >
+          </a>
+          <br />
+          <a href="tel:{{ client.phoneForTel }}" class="block relative">
+            <img
+              alt="Telefon"
+              decoding="async"
+              loading="eager"
+              src="/assets/svgs/Phone_icon.svg"
+              class="inline-block mr-4 w-12 h-12"
+            />
+            {{ client.phoneFormatted }}
+            <span class="absolute bottom-0 left-16 text-sm">
+              &nbsp;(jednatel)</span
+            >
+          </a>
           <br />
           <a href="mailto:{{ client.email }}" class="block">
             <img
