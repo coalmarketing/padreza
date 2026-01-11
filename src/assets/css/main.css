@@ -1185,6 +1185,10 @@ nav ul a:hover {
   left: 50%;
 }
 
+.left-16 {
+  left: 4rem;
+}
+
 .left-\[30px\] {
   left: 30px;
 }
@@ -1207,46 +1211,6 @@ nav ul a:hover {
 
 .top-14 {
   top: 3.5rem;
-}
-
-.right-0 {
-  right: 0px;
-}
-
-.left-20 {
-  left: 5rem;
-}
-
-.left-8 {
-  left: 2rem;
-}
-
-.left-12 {
-  left: 3rem;
-}
-
-.right-1\/2 {
-  right: 50%;
-}
-
-.right-0\.5 {
-  right: 0.125rem;
-}
-
-.left-24 {
-  left: 6rem;
-}
-
-.left-28 {
-  left: 7rem;
-}
-
-.left-32 {
-  left: 8rem;
-}
-
-.left-16 {
-  left: 4rem;
 }
 
 .z-10 {
@@ -1631,10 +1595,6 @@ nav ul a:hover {
   align-items: center;
 }
 
-.justify-end {
-  justify-content: flex-end;
-}
-
 .justify-center {
   justify-content: center;
 }
@@ -1879,6 +1839,11 @@ nav ul a:hover {
   line-height: 1.75rem;
 }
 
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
@@ -1887,11 +1852,6 @@ nav ul a:hover {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
 
 .font-bold {
